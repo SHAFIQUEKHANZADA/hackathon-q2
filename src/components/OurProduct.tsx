@@ -11,7 +11,7 @@ const OurProduct = () => {
   return (
     <div className={`${poppins.className} px-5 flex flex-col gap-10 py-10`}>
       <h1 className="text-[40px] font-bold text-center py-5 text-[#3A3A3A]">Our Products</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-[45px]">
+      <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 md:px-[45px]">
         {Products.map((product) => {
           // Calculate discount percentage
           const discountPercentage =
@@ -21,7 +21,7 @@ const OurProduct = () => {
 
           return (
             <Link key={product.id} href={`/product/${product.slug}`} passHref>
-              <div key={product.id} className="relative bg-[#F4F5F7] flex flex-col justify-between w-[285px] h-[446px] group">
+              <div key={product.id} className="relative bg-[#F4F5F7] flex flex-col justify-between md:w-[285px] md:h-[446px] h-[340px] group">
                 {/* New Arrival Badge */}
                 {product.newArrival && (
                   <div className="absolute top-4 right-4 h-[48px] w-[48px] bg-[#2EC1AC] flex justify-center items-center text-white text-[16px] font-medium px-2 py-1 rounded-full">
@@ -37,7 +37,7 @@ const OurProduct = () => {
                 )}
 
                 {/* Product Image */}
-                <div className="w-[285px] h-[145px]">
+                <div className="md:w-[285px] h-[145px]">
                   <Image
                     src={product.image}
                     alt={product.title}
@@ -47,7 +47,7 @@ const OurProduct = () => {
                   />
                 </div>
 
-                <div className="my-4 px-4">
+                <div className="md:my-4 my-1 px-4">
                   {/* Product Title */}
                   <h1 className="text-[#3A3A3A] font-semibold text-[24px] mb-2">{product.title}</h1>
 

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BsStarFill } from 'react-icons/bs';
+import { PiGreaterThanBold } from 'react-icons/pi';
  
 import { useDispatch } from 'react-redux';
 
@@ -65,26 +66,27 @@ const ProductPage = ({ params }: { params: { slug: string }; }) => {
     const relatedProducts = [...relatedProductsFromProducts, ...relatedProductsFromBestSelling];
 
     return (
-        <div className={`${poppins.className} md:px-[70px] px-5 md:my-10 my-6 flex flex-col gap-5`}>
-            <div>
+        <div className={`${poppins.className} flex flex-col gap-5 md:mt-0 mt-10`}>
+            <div className='md:h-[100px] h-[50px] bg-[#F9F1E7] flex items-center md:px-[70px] px-5'>
                 <ul className="flex items-center space-x-1 md:space-x-3">
                     <li>
-                        <Link href="/" className="text-[14px] text-black opacity-[50%]">
+                        <Link href="/" className="text-[16px] text-black opacity-[50%]">
                             Home
                         </Link>
                     </li>
-                    <li className="text-[14px] text-black opacity-[50%]">/</li>
+                    <li className="text-[16px] text-black"><PiGreaterThanBold /></li>
                     <li>
-                        <Link href="/products" className="text-[14px] text-black opacity-[50%]">
-                            Product
+                        <Link href="/shop" className="text-[14px] text-black opacity-[50%]">
+                            Shop
                         </Link>
                     </li>
-                    <li className="text-[14px] text-black opacity-[50%]">/</li>
-                    <li className="text-black text-[14px]">{product.title}</li>
+                    <li className="text-[16px] text-black "><PiGreaterThanBold /></li>
+                    <li className="  text-black opacity-[50%] text-[24px] font-extralight">|</li>
+                    <li className="text-black text-[16px]">{product.title}</li>
                 </ul>
             </div>
 
-            <div className="flex flex-col md:flex-row md:gap-0 gap-10 justify-evenly md:mt-16 mt-5">
+            <div className="flex flex-col md:flex-row md:gap-0 gap-10 justify-evenly md:mt-16 mt-5   md:px-[70px] px-5 ">
                 <div className='sm:w-[500px] sm:h-[600px]'>
                     <Image
                         src={product.image}
