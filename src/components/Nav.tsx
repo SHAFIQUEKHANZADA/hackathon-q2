@@ -73,7 +73,7 @@ const Navbar = () => {
 
 
       {/* Desktop Icons */}
-      <div className="hidden md:flex gap-10">
+      <div className="hidden md:flex gap-8">
         <Link href={"/"}>
           <BsPersonExclamation className="text-[24px]" />
         </Link>
