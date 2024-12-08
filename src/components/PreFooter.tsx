@@ -6,7 +6,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
 const PreFooter = () => {
   return (
-    <div className={`${poppins.className} h-[270px] flex justify-center items-center bg-[#FAF3EA] mt-20 md:mt-10`}>
+    <div className={`${poppins.className} md:h-[270px] md:py-0 py-10 flex justify-center items-center bg-[#FAF3EA] mt-20 md:mt-10`}>
 
       <div className="max-w-screen-xl mx-auto md:px-0 px-5">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
