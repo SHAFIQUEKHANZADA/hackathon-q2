@@ -12,7 +12,7 @@ const Furniture = () => {
             </div>
 
             <div className='mx-2   flex flex-col gap-10'>
-                <div className='w-[100%] mx-auto grid grid-cols-5 md:gap-4 gap-1'>
+                <div className='w-[100%] mx-auto grid grid-cols-5 md:gap-4 gap-1y'>
                     {/* 1st div spanning 2 columns */}
                     <div className='relative w-full  bg-slate-500  row-span-2 overflow-hidden group'>
                         <Image

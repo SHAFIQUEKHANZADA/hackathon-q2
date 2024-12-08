@@ -32,13 +32,6 @@ const CheckoutPage = () => {
         }));
     };
 
-    const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setBillingDetails((prev) => ({
-            ...prev,
-            saveInfo: e.target.checked,
-        }));
-    };
-
     const handlePlaceOrder = () => {
         // Process order logic here
         console.log('Order placed:', { cartItems, billingDetails });

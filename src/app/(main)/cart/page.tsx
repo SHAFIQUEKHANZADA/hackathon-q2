@@ -2,7 +2,7 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/store/store';
-import { removeFromCart, clearCart, updateCartQuantity } from '@/app/store/cartSlice';
+import { removeFromCart, updateCartQuantity } from '@/app/store/cartSlice';
 import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -20,9 +20,7 @@ const CartPage = () => {
         dispatch(removeFromCart(id));
     };
 
-    const handleClearCart = () => {
-        dispatch(clearCart());
-    };
+  
 
     const handleQuantityChange = (id: string, quantity: number) => {
         dispatch(updateCartQuantity({ id, quantity }));

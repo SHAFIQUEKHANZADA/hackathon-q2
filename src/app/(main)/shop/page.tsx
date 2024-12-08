@@ -12,10 +12,10 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 const ShopPage = () => {
     // Example state for pagination
-    const [currentPage, setCurrentPage] = React.useState(1);
+    const [currentPage] = React.useState(1);
     const itemsPerPage = 16;
     const totalItems = Products.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+ 
 
     // Calculate displayed products
     const displayedProducts = Products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
