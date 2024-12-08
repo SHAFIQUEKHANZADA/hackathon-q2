@@ -17,11 +17,11 @@ const PreFooter = () => {
               alt="High Quality"
               width={50}
               height={50}
-              className="w-[50px] h-[50px] object-contain"
+              className="md:w-[50px] md:h-[50px] w-[40px] h-[40px] object-contain"
             />
             <div>
-              <h1 className="text-[22px] font-semibold text-[#242424]">High Quality</h1>
-              <p className="text-[16px] font-medium text-[#898989]">
+              <h1 className="md:text-[22px] text-[18px] font-semibold text-[#242424]">High Quality</h1>
+              <p className="md:text-[16px] text-[12px] font-medium text-[#898989]">
                 Crafted from top materials
               </p>
             </div>
@@ -34,13 +34,13 @@ const PreFooter = () => {
               alt="Warranty Protection"
               width={50}
               height={50}
-              className="w-[50px] h-[50px] object-contain"
+              className="md:w-[50px] md:h-[50px] w-[40px] h-[40px] object-contain"
             />
             <div>
-              <h1 className="text-[22px] font-semibold text-[#242424]">
+              <h1 className="md:text-[22px] text-[18px] font-semibold text-[#242424]">
                 Warranty Protection
               </h1>
-              <p className="text-[16px] font-medium text-[#898989]">Over 2 years</p>
+              <p className="md:text-[16px] text-[12px] font-medium text-[#898989]">Over 2 years</p>
             </div>
           </div>
 
@@ -51,11 +51,11 @@ const PreFooter = () => {
               alt="Free Shipping"
               width={50}
               height={50}
-              className="w-[50px] h-[50px] object-contain"
+              className="md:w-[50px] md:h-[50px] w-[40px] h-[40px] object-contain"
             />
             <div>
-              <h1 className="text-[22px] font-semibold text-[#242424]">Free Shipping</h1>
-              <p className="text-[16px] font-medium text-[#898989]">
+              <h1 className="md:text-[22px] text-[18px] font-semibold text-[#242424]">Free Shipping</h1>
+              <p className="md:text-[16px] text-[12px] font-medium text-[#898989]">
                 Order over $150
               </p>
             </div>
@@ -68,11 +68,11 @@ const PreFooter = () => {
               alt="24 / 7 Support"
               width={50}
               height={50}
-              className="w-[50px] h-[50px] object-contain"
+              className="md:w-[50px] md:h-[50px] w-[40px] h-[40px] object-contain"
             />
             <div>
-              <h1 className="text-[22px] font-semibold text-[#242424]">24 / 7 Support</h1>
-              <p className="text-[16px] font-medium text-[#898989]">
+              <h1 className="md:text-[22px] text-[18px] font-semibold text-[#242424]">24 / 7 Support</h1>
+              <p className="md:text-[16px] text-[12px] font-medium text-[#898989]">
                 Dedicated support
               </p>
             </div>

@@ -52,7 +52,7 @@ const OurProduct = () => {
                   <h1 className="text-[#3A3A3A] font-semibold text-[24px] mb-2">{product.title}</h1>
 
                   {/* Product Slogan */}
-                  <p className="text-[#898989] font-medium text-[16px]">{product.slogn}</p>
+                  <p className="text-[#898989] font-medium text-[16px] line-clamp-1">{product.slogn}</p>
 
                   {/* Product Price */}
                   <div className="flex items-center gap-2 mt-4">
@@ -61,7 +61,7 @@ const OurProduct = () => {
                         <span className="text-[#3A3A3A] font-semibold text-[20px]">
                           ${product.salePrice.toFixed(2)}
                         </span>
-                        <span className="line-through text-[#B0B0B0] text-[16px]">
+                        <span className="line-through text-[#B0B0B0] text-[16px] md:block hidden">
                           ${product.originalPrice.toFixed(2)}
                         </span>
                       </>
@@ -73,7 +73,7 @@ const OurProduct = () => {
                   </div>
                 </div>
                 {/* "Add to Cart" Button on Hover */}
-                <div className="absolute flex flex-col space-y-4 justify-center items-center bg-black/50 w-[285px] h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute md:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 w-[285px] h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <button className="bg-white text-[#C19C49] w-[202px] h-[48px]">Add to Cart</button>
                   <div className="flex items-center gap-3 text-white text-[16px] font-medium">
                     <span className="flex items-center gap-1"><IoMdShare /> Share</span>

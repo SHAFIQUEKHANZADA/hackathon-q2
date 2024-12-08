@@ -53,10 +53,10 @@ const Navbar = () => {
             </span>
           </li>
         </Link>
-        <Link href='/about'>
+        <Link href='/blog'>
           <li className="relative cursor-pointer group">
             <span className="group-hover:text-orange-500 transition-all duration-300 inline-block relative">
-              About
+              Blog
               <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-orange-500 transition-all duration-300"></div>
             </span>
           </li>

@@ -9,7 +9,7 @@ const Range = () => {
         <h1 className='text-[32px] font-bold text-[#333333]'>Browse The Range</h1>
         <p className='md:text-[20px] text-[16px] font-extralight text-[#666666]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </div>
-      <div className="flex md:flex-row flex-col justify-center md:gap-5 gap-10">
+      <div className="flex md:flex-row flex-col justify-center items-center w-full mx-auto md:gap-5 gap-10">
         <div className="flex flex-col gap-5 text-center">
           <div className="overflow-hidden rounded-lg">
             <Image
