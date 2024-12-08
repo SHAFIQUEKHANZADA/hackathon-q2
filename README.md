@@ -1,4 +1,4 @@
-# Hackathon Project: 
+# Hackathon Project: [https://hackathon-three-delta.vercel.app/]
 
 Completed a 24-hour hackathon focusing on UI/UX design, ensuring a seamless user experience across devices. Prioritized responsiveness to create a dynamic and adaptive interface. Utilized the map array method to handle data dynamically, making the app scalable and flexible. Employed Redux Toolkit for effective state management, enhancing the app's performance and maintainability. The project was developed with an emphasis on rapid iteration and adaptability to changing requirements.
 
