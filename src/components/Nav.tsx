@@ -87,9 +87,13 @@ const Navbar = () => {
           <PiShoppingCart className="text-[24px]" />
         </Link>
       </div>
+      
 
       {/* Mobile Menu Toggle */}
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center gap-4">
+      <Link href="/" onClick={() => setIsMenuOpen(false)}>
+              <PiShoppingCart className="text-[24px]" />
+            </Link>
         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (
             <HiX className="text-[28px]" />
@@ -97,6 +101,7 @@ const Navbar = () => {
             <RiMenu3Fill className="text-[30px]" />
           )}
         </button>
+       
       </div>
 
       {/* Mobile Menu */}
@@ -139,9 +144,6 @@ const Navbar = () => {
             </Link>
             <Link href="/" onClick={() => setIsMenuOpen(false)}>
               <FiHeart className="text-[24px]" />
-            </Link>
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <PiShoppingCart className="text-[24px]" />
             </Link>
           </div>
         </div>

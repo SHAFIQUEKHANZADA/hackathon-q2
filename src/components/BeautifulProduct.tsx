@@ -16,7 +16,7 @@ const Cards = [
     },
     {
  
-        image: '/images/c2.png',
+        image: '/images/s4.png',
         
     },
 ];

@@ -26,12 +26,12 @@ const Furniture = () => {
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
                             <p className='text-white sm:text-lg text-[10px]'>Chicago, USA</p>
                             <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
                     {/* 2nd div next to the 1st */}
-                    <div className='relative w-full h-[20vw] bg-slate-500 overflow-hidden group'>
+                    <div className='relative w-full h-[20vw] bg-slate-500 overflow-hidden group mt-10'>
                         <Image
                             src={"/images/s2.png"}
                             alt='chicago'
@@ -41,14 +41,13 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Madrid, Span</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $300 per day</p>
+                  
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $300</p>
                         </div>
                     </div>
 
                     {/* 3rd div spanning 2 rows */}
-                    <div className='relative bg-slate-500 row-span-2 col-span-2 overflow-hidden group'>
+                    <div className='relative bg-slate-500 row-span-2 col-span-2 overflow-hidden group mt-28'>
                         <Image
                             src={"/images/s6.png"}
                             alt='dubai'
@@ -58,9 +57,8 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Dubai, UAE</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                    
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -75,9 +73,7 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -94,7 +90,7 @@ const Furniture = () => {
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
                             <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
                             <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -109,9 +105,7 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -126,9 +120,7 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -143,9 +135,8 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Dehli, India</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+    
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
 
@@ -160,9 +151,8 @@ const Furniture = () => {
                         />
                         {/* Overlay */}
                         <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100 per day</p>
+        
+                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
                         </div>
                     </div>
                 </div>

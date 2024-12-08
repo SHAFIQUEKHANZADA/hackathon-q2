@@ -54,7 +54,7 @@ const ShopPage = () => {
             </div>
 
             {/* Filter and Pagination Section */}
-            <div className="flex justify-between items-center mb-8 md:px-[45px] h-[100px] bg-[#F9F1E7]">
+            <div className="flex justify-between items-center mb-8 md:px-[45px] px-5 h-[100px] bg-[#F9F1E7]">
                 <div className="text-[16px]">
                     Showing {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} results
                 </div>

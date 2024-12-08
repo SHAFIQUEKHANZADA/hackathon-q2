@@ -28,7 +28,7 @@ const ComparePage = () => {
     ];
 
     return (
-        <div className={`${poppins.className} px-5`}>
+        <div className={`${poppins.className}`}>
             {/* Main Banner */}
             <div className="relative">
                 <div className="w-full">
