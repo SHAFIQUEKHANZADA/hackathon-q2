@@ -5,162 +5,64 @@ import Image from 'next/image';
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 const Furniture = () => {
     return (
-        <div className={`${poppins.className} flex flex-col gap-10 py-14`}>
+        <div className={`${poppins.className} flex flex-col py-14`}>
             <div className='flex flex-col items-center text-center'>
                 <h1 className='text-[20px] font-semibold text-[#616161]'>Share your setup with</h1>
                 <h1 className='text-[40px] font-bold text-[#3A3A3A]'>#FuniroFurniture</h1>
             </div>
 
-            <div className='mx-2   flex flex-col gap-10'>
-                <div className='w-[100%] mx-auto grid grid-cols-5 md:gap-4 gap-1y'>
-                    {/* 1st div spanning 2 columns */}
-                    <div className='relative w-full  bg-slate-500  row-span-2 overflow-hidden group'>
-                        <Image
-                            src={"/images/s1.png"}
-                            alt='chicago'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Chicago, USA</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
+            <div className="flex md:flex-row flex-col justify-between items-center w-full md:px-0 px-3">
+                {/* Left Grid */}
+                <div className="flex flex-col gap-2 w-full">
+
+                    <div className='flex items-end gap-2'>
+                        <div className="">
+                            <Image src="/images/s1.png" alt="" width={78} height={382}  />
+                        </div>
+                        <div className="">
+                            <Image src="/images/s2.png" alt="" width={451} height={312}  />
                         </div>
                     </div>
 
-                    {/* 2nd div next to the 1st */}
-                    <div className='relative w-full h-[20vw] bg-slate-500 overflow-hidden group mt-10'>
-                        <Image
-                            src={"/images/s2.png"}
-                            alt='chicago'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                  
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $300</p>
+                    <div className='flex justify-start gap-2'>
+                        <div className='md:mt-2'>
+                            <Image src="/images/s3.png" alt="" width={185} height={310}  />
+                        </div>
+                        <div className=''>
+                            <Image src="/images/s7.png" alt="" width={344} height={242} className='object-cover md:w-[344px] w-full h-[242px]'/>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Center Main Image */}
+                <div className="flex p-2 md:pt-10">
+                    <div className="w-[295px]">
+                        <Image src="/images/s6.png" alt="main" width={295} height={392}  />
+                    </div>
+                </div>
+
+                {/* Right Grid */}
+                <div className="flex flex-col gap-2 w-full">
+                    <div className='flex items-end gap-2'>
+                        <div className="w-full">
+                            <Image src="/images/s5.png" alt="" width={290} height={348}  />
+                        </div>
+                        <div className="w-full">
+                            <Image src="/images/s4.png" alt="" width={262} height={433}  />
                         </div>
                     </div>
 
-                    {/* 3rd div spanning 2 rows */}
-                    <div className='relative bg-slate-500 row-span-2 col-span-2 overflow-hidden group mt-28'>
-                        <Image
-                            src={"/images/s6.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                    
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
+                    <div className='flex justify-start gap-2'>
+                        <div className="w- ">
+                            <Image src="/images/s8.png" alt="" width={178} height={242}  />
                         </div>
-                    </div>
-
-                    {/* 4th div filling the space below the 2nd */}
-                    <div className='relative w-full  row-span-2 bg-slate-500 overflow-hidden group'>
-                        <Image
-                            src={"/images/s4.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
-                        </div>
-                    </div>
-
-                    {/* 5th div */}
-                    <div className='relative w-full h-[20vw] bg-slate-500 overflow-hidden group'>
-                        <Image
-                            src={"/images/s7.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>City, Country</p>
-                            <h2 className='text-white font-bold sm:text-lg text-[10px]'>Hotel Name</h2>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
-                        </div>
-                    </div>
-
-                    {/* 6th div */}
-                    <div className='w-full h-[20vw] bg-slate-500 col-span-2 relative overflow-hidden group'>
-                        <Image
-                            src={"/images/s9.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
-                        </div>
-                    </div>
-
-                    {/* 7th div */}
-                    <div className='relative overflow-hidden w-full h-[20vw] bg-slate-500 group'>
-                        <Image
-                            src={"/images/s3.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
-                        </div>
-                    </div>
-
-                    {/* 8th div */}
-                    <div className='w-full h-[20vw] bg-slate-500 relative overflow-hidden group'>
-                        <Image
-                            src={"/images/s7.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-    
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
-                        </div>
-                    </div>
-
-                    {/* 9th div */}
-                    <div className='w-full h-[20vw] bg-slate-500 relative overflow-hidden group'>
-                        <Image
-                            src={"/images/s6.png"}
-                            alt='dubai'
-                            fill // Replaces layout='fill'
-                            style={{ objectFit: 'cover' }}
-                            className='absolute inset-0'
-                        />
-                        {/* Overlay */}
-                        <div className='absolute inset-0 bg-orange-500 bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4'>
-        
-                            <p className='text-white sm:text-lg text-[10px]'>Price: $100</p>
+                        <div>
+                            <Image src="/images/s9.png" alt="" width={258} height={196}  />
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     )
 }
 

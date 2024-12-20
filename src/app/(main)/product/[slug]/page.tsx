@@ -10,8 +10,7 @@ import { AiFillTwitterCircle } from 'react-icons/ai';
 import { BsStarFill } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa6';
 import { PiGreaterThanBold } from 'react-icons/pi';
-import { shuffle } from 'lodash'; // Importing lodash for shuffling
-
+import { shuffle } from 'lodash';  
 import { useDispatch } from 'react-redux';
 import { IoMdHeartEmpty, IoMdShare } from 'react-icons/io';
 import { FaExchangeAlt } from 'react-icons/fa';
@@ -64,7 +63,7 @@ const ProductPage = ({ params }: { params: { slug: string }; }) => {
     // Filter related products, shuffle, and pick 4 random ones
     const relatedProducts = shuffle(
         Products.filter((p) => p.category === product.category && p.slug !== product.slug)
-    ).slice(0, 4); // Get 4 random products from the same category, excluding the current product
+    ).slice(0, 4); 
 
 
     return (
@@ -78,7 +77,7 @@ const ProductPage = ({ params }: { params: { slug: string }; }) => {
                     </li>
                     <li className="text-[16px] text-black"><PiGreaterThanBold /></li>
                     <li>
-                        <Link href="/shop" className="text-[14px] text-black opacity-[50%]">
+                        <Link href="/product" className="text-[14px] text-black opacity-[50%]">
                             Shop
                         </Link>
                     </li>
@@ -150,12 +149,13 @@ const ProductPage = ({ params }: { params: { slug: string }; }) => {
                             Add to Cart
                         </button>
 
+                        <Link href={"/product-comparison"}>
                         <button
-                            onClick={handleAddToCartAndRedirect}
                             className="mt-4 text-black border border-black rounded-[15px] py-2 px-4 flex gap-4 text-center justify-center items-center text-[20px] w-full md:w-fit"
                         >
                             <span>+</span> Compare
                         </button>
+                        </Link>
 
                     </div>
 
@@ -195,10 +195,10 @@ const ProductPage = ({ params }: { params: { slug: string }; }) => {
             <div className="bg-[#D9D9D9] h-[1px] my-8" />
 
             <div className='md:px-[48px] px-5 md:space-y-12 space-y-6'>
-                <div className='flex gap-5 justify-center'>
-                    <h1 className='text-[24px] font-medium text-black'>Description</h1>
-                    <h1 className='text-[24px] font-medium text-[#9F9F9F]'>Additional Information</h1>
-                    <h1 className='text-[24px] font-medium text-[#9F9F9F]'>Reviews [5]</h1>
+                <div className='flex md:gap-5 gap-2 justify-center'>
+                    <h1 className='md:text-[24px] text-[13px] font-medium text-black'>Description</h1>
+                    <h1 className='md:text-[24px] text-[13px] font-medium text-[#9F9F9F]'>Additional Information</h1>
+                    <h1 className='md:text-[24px] text-[13px] font-medium text-[#9F9F9F]'>Reviews [5]</h1>
                 </div>
 
                 <div className='text-[16px] text-[#9F9F9F] flex flex-col gap-3 md:w-[80%] mx-auto'>

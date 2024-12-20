@@ -30,7 +30,7 @@ const BeautifulProduct = () => {
             <h1 className='text-[40px] font-bold text-[#3A3A3A]'>50+ Beautiful rooms 
             inspiration</h1>
             <p className='text-[16px] font-medium text-[#616161]'>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
-            <button className='text-[16px] font-semibold  px-[44px] py-[12px] mt-5 bg-[#B88E2F]  text-white'>Explore More</button>
+            <button className='text-[16px] font-semibold  px-[44px] py-[12px] mt-5 bg-[#B88E2F]  text-white hover:text-[#B88E2F] hover:bg-transparent border duration-300 hover:border hover:border-[#B88E2F]'>Explore More</button>
          </div>
 
          <div className='md:w-[404px] md:h-[582px]  relative overflow-hidden'>

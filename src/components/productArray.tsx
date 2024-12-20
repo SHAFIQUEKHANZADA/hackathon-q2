@@ -132,5 +132,5 @@ export const Products: Product[] = [
       color: ["Black", "Red"],
       newArrival: true,
     },
-  ];
+];
   

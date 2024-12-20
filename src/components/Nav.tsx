@@ -2,13 +2,13 @@
 import Image from "next/image";
 import { Montserrat, Poppins } from "next/font/google";
 import Link from "next/link";
-import { PiShoppingCart } from "react-icons/pi";
 import { FiHeart } from "react-icons/fi";
 import { BsPersonExclamation } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
-import {  HiX } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
 import { useState } from "react";
 import { RiMenu3Fill } from "react-icons/ri";
+import CartPopup from "./CartPopup";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
@@ -73,7 +73,7 @@ const Navbar = () => {
 
 
       {/* Desktop Icons */}
-      <div className="hidden md:flex gap-10">
+      <div className="hidden md:flex gap-8">
         <Link href={"/"}>
           <BsPersonExclamation className="text-[24px]" />
         </Link>
@@ -83,17 +83,15 @@ const Navbar = () => {
         <Link href={"/"}>
           <FiHeart className="text-[24px]" />
         </Link>
-        <Link href={"/"}>
-          <PiShoppingCart className="text-[24px]" />
-        </Link>
+           <CartPopup/>
       </div>
-      
+
 
       {/* Mobile Menu Toggle */}
       <div className="md:hidden flex items-center gap-4">
-      <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <PiShoppingCart className="text-[24px]" />
-            </Link>
+        <Link href="/" onClick={() => setIsMenuOpen(false)}>
+        <CartPopup/>
+        </Link>
         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? (
             <HiX className="text-[28px]" />
@@ -101,7 +99,7 @@ const Navbar = () => {
             <RiMenu3Fill className="text-[30px]" />
           )}
         </button>
-       
+
       </div>
 
       {/* Mobile Menu */}
@@ -110,28 +108,28 @@ const Navbar = () => {
           <Link
             href="/"
             className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
+            onClick={() => setIsMenuOpen(false)}  
           >
             Home
           </Link>
           <Link
             href="/shop"
             className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
+            onClick={() => setIsMenuOpen(false)}  
           >
             Shop
           </Link>
           <Link
             href="/about"
             className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
+            onClick={() => setIsMenuOpen(false)} 
           >
             About
           </Link>
           <Link
             href="/contact"
             className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
+            onClick={() => setIsMenuOpen(false)}  
           >
             Contact
           </Link>

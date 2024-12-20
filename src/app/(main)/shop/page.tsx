@@ -11,13 +11,12 @@ import { IoMdHeartEmpty, IoMdShare } from 'react-icons/io'
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 const ShopPage = () => {
-    // Example state for pagination
     const [currentPage] = React.useState(1);
     const itemsPerPage = 16;
     const totalItems = Products.length;
  
 
-    // Calculate displayed products
+    
     const displayedProducts = Products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
@@ -64,7 +63,7 @@ const ShopPage = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 md:px-[45px] px-5 mt-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px] px-5 mt-20">
                 {displayedProducts.map((product) => {
                     // Calculate discount percentage
                     const discountPercentage =
@@ -74,7 +73,7 @@ const ShopPage = () => {
 
                     return (
                         <Link key={product.id} href={`/product/${product.slug}`} passHref>
-                            <div className="relative bg-[#F4F5F7] flex flex-col justify-between md:w-[285px] md:h-[446px] h-[350px] group">
+                            <div className="relative bg-[#F4F5F7] flex flex-col justify-between  lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[70vw] group">
                                 {/* New Arrival Badge */}
                                 {product.newArrival && (
                                     <div className="absolute top-4 right-4 h-[48px] w-[48px] bg-[#2EC1AC] flex justify-center items-center text-white text-[16px] font-medium px-2 py-1 rounded-full">
@@ -90,7 +89,7 @@ const ShopPage = () => {
                                 )}
 
                                 {/* Product Image */}
-                                <div className="md:w-[285px] h-[145px]">
+                                <div className="lg:w-[285px] h-[145px]">
                                     <Image
                                         src={product.image}
                                         alt={product.title}
@@ -100,40 +99,40 @@ const ShopPage = () => {
                                     />
                                 </div>
 
-                                <div className="my-4 md:px-4 px-2">
-                                    {/* Product Title */}
-                                    <h1 className="text-[#3A3A3A] font-semibold text-[24px] mb-2">{product.title}</h1>
+                                <div className="md:my-4 my-3 sm:px-4 px-2">
+                  {/* Product Title */}
+                  <h1 className="text-[#3A3A3A] font-semibold sm:text-[24px] text-[18px] lg:mb-2">{product.title}</h1>
 
-                                    {/* Product Slogan */}
-                                    <p className="text-[#898989] font-medium text-[16px]">{product.slogn}</p>
+                  {/* Product Slogan */}
+                  <p className="text-[#898989] font-medium md:text-[16px] text-[14px] line-clamp-1">{product.slogn}</p>
 
-                                    {/* Product Price */}
-                                    <div className="flex items-center gap-2 mt-4">
-                                        {product.salePrice > 0 ? (
-                                            <>
-                                                <span className="text-[#3A3A3A] font-semibold md:text-[20px] text-[16px]">
-                                                    ${product.salePrice.toFixed(2)}
-                                                </span>
-                                                <span className="line-through text-[#B0B0B0] text-[16px]">
-                                                    ${product.originalPrice.toFixed(2)}
-                                                </span>
-                                            </>
-                                        ) : (
-                                            <span className="text-[#3A3A3A] font-semibold text-[20px]">
-                                                ${product.originalPrice.toFixed(2)}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                                {/* "Add to Cart" Button on Hover */}
-                                <div className="absolute flex flex-col space-y-4 justify-center items-center bg-black/50 md:w-[285px] md:h-[446px] h-[350px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <button className="bg-white text-[#C19C49] md:w-[202px] w-[180px] h-[48px]">Add to Cart</button>
-                                    <div className="flex items-center md:gap-3 gap-1 text-white md:text-[16px] text-[12px] font-medium">
-                                        <span className="flex items-center gap-1"><IoMdShare /> Share</span>
-                                        <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
-                                        <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
-                                    </div>
-                                </div>
+                  {/* Product Price */}
+                  <div className="flex items-center gap-2 lg:mt-4">
+                    {product.salePrice > 0 ? (
+                      <>
+                        <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
+                          ${product.salePrice.toFixed(2)}
+                        </span>
+                        <span className="line-through text-[#B0B0B0] sm:text-[16px] text-[12px]">
+                          ${product.originalPrice.toFixed(2)}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
+                        ${product.originalPrice.toFixed(2)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                {/* "Add to Cart" Button on Hover */}
+                <div className="absolute flex  flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]">Add to Cart</button>
+                  <div className="flex md:flex-row flex-col items-center gap-3 text-white text-[16px] font-medium">
+                    <span className="flex items-center gap-1"><IoMdShare /> Share</span>
+                    <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
+                    <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                  </div>
+                </div>
                             </div>
                         </Link>
                     );
