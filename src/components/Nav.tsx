@@ -1,21 +1,17 @@
-"use client"
 import Image from "next/image";
 import { Montserrat, Poppins } from "next/font/google";
 import Link from "next/link";
 import { FiHeart } from "react-icons/fi";
 import { BsPersonExclamation } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
-import { HiX } from "react-icons/hi";
-import { useState } from "react";
-import { RiMenu3Fill } from "react-icons/ri";
 import CartPopup from "./CartPopup";
+import MobileMenuBar from "./navLink";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+ 
   return (
     <nav
       className={`${poppins.className} md:h-[100px] h-[60px] bg-maincolor flex items-center justify-between md:px-[65px] px-3`}
@@ -83,69 +79,11 @@ const Navbar = () => {
         <Link href={"/"}>
           <FiHeart className="text-[24px]" />
         </Link>
-           <CartPopup/>
+        <CartPopup />
       </div>
 
 
-      {/* Mobile Menu Toggle */}
-      <div className="md:hidden flex items-center gap-4">
-        <Link href="/" onClick={() => setIsMenuOpen(false)}>
-        <CartPopup/>
-        </Link>
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? (
-            <HiX className="text-[28px]" />
-          ) : (
-            <RiMenu3Fill className="text-[30px]" />
-          )}
-        </button>
-
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="absolute top-[60px] left-0 w-full h-screen bg-maincolor flex flex-col items-start px-5 py-3 space-y-5 shadow-lg z-50 md:hidden">
-          <Link
-            href="/"
-            className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)}  
-          >
-            Home
-          </Link>
-          <Link
-            href="/shop"
-            className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)}  
-          >
-            Shop
-          </Link>
-          <Link
-            href="/about"
-            className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)} 
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="text-[16px] font-medium"
-            onClick={() => setIsMenuOpen(false)}  
-          >
-            Contact
-          </Link>
-          <div className="flex gap-5 mt-5">
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <BsPersonExclamation className="text-[24px]" />
-            </Link>
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <CiSearch className="text-[28px]" />
-            </Link>
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <FiHeart className="text-[24px]" />
-            </Link>
-          </div>
-        </div>
-      )}
+      <MobileMenuBar />
     </nav>
   );
 };

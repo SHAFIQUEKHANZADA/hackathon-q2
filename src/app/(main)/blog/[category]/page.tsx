@@ -21,32 +21,40 @@ function urlFor(source: { asset: { _ref: string } }) {
     return builder.image(source);
 }
 
-const BlogPage = () => {
-    const [blogs, setBlogs] = useState<Blogtypes[]>([]);
+const BlogCategory = ({ params }: { params: { category: string } }) => {
+    const [blogs, setBlogs] = useState<Blogtypes[]>([]);  
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        console.log("Fetching blogs...");
-        async function fetchBlogs() {
+        const fetchData = async () => {
             try {
-                const res = await fetch("/api/blog");
+                const res = await fetch(`/api/blog/${params.category}`, { cache: "no-store" });
                 if (!res.ok) {
-                    throw new Error(`Failed to fetch blogs: ${res.statusText}`);
+                    throw new Error("Failed to fetch the blog data");
                 }
                 const data = await res.json();
-                setBlogs(data.blogs);
-            } catch (error) {
-                setError("Failed to load blogs.");
-                console.error("Error fetching blogs:", error);
+                if (data.blogs && data.blogs.length > 0) {   
+                    setBlogs(data.blogs);
+                } else {
+                    setError("No blogs found for this category.");
+                }
+            } catch (err) {
+                setError("An error occurred.");
+                console.log(err)
             } finally {
                 setLoading(false);
             }
-        }
+        };
 
-        fetchBlogs();
-    }, []);
-    
+        fetchData();
+    }, [params.category]);
+
+
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     return (
         <div className={`${poppins.className}`}>
@@ -77,6 +85,17 @@ const BlogPage = () => {
                         </Link>
                         <Image src={"/images/grater.png"} alt="grate" width={8} height={8} />
                         <h1 className="text-[16px] font-light">Blog</h1>
+
+                        <Image src={"/images/grater.png"} alt="grate" width={8} height={8} />
+                        {blogs ? (
+                            <>
+                                <h1 className="font-light">
+                                    {params.category || "Uncategorized"}
+                                </h1>
+                            </>
+                        ) : (
+                            <p>Loading blog...</p>
+                        )}
                     </div>
                 </div>
             </div>
@@ -304,4 +323,4 @@ const BlogPage = () => {
     )
 }
 
-export default BlogPage
+export default BlogCategory

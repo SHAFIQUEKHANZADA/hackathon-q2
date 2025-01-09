@@ -1,4 +1,5 @@
 "use client";
+
 import { addToCart } from '@/app/store/cartSlice';
 import { Products } from '@/components/productArray';
 import QuantitySelector from '@/components/Qty';
@@ -17,10 +18,10 @@ import { FaExchangeAlt } from 'react-icons/fa';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
-const ProductPage = ({ params }: { params: { slug: string }; }) => {
+const ProductPage = ({ params }: { params: { product: string }; }) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const product = Products.find((p) => p.slug === params.slug);
+    const product = Products.find((p) => p.slug === params.product);
 
     if (!product) {
         return <div>Product not found.</div>;
