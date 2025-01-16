@@ -42,7 +42,7 @@ const OurProduct = () => {
               : null;
 
           return (
-            <Link key={product.id} href={`/product/${product.slug}`} passHref>
+            <Link key={product.id} href={`/product/category/${product.slug}`} passHref>
               <div className="relative bg-[#F4F5F7] flex flex-col justify-between lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[70vw] group">
                 {product.newArrival && (
                   <div className="absolute top-4 right-4 h-[48px] w-[48px] bg-[#2EC1AC] flex justify-center items-center text-white text-[16px] font-medium px-2 py-1 rounded-full">
