@@ -32,7 +32,7 @@ const OurProduct = () => {
   };
 
   return (
-    <div className={`${poppins.className} px-5 flex flex-col gap-10 py-10`}>
+    <div className={`${poppins.className} px-5 flex flex-col gap-10 py-10 bg-white`}>
       <h1 className="text-[40px] font-bold text-center py-5 text-[#3A3A3A]">Our Products</h1>
       <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px]">
         {Products.map((product) => {

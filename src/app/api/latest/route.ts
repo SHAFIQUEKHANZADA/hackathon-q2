@@ -3,29 +3,12 @@ import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
 import { ProductType } from "@/components/types";
 
-// interface Product {
-//   title: string;
-//   price: number;
-//   salePrice: number;
-//   images: {
-//     asset: {
-//       _ref: string;
-//     };
-//   };
-//   slug: string;
-//   productDetails: string[];
-//   tags: string[];
-//   stock: string;
-//   subCategory: string;
-// }
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const tag = searchParams.get("specialTag");
 
   console.log(`Selected tag: ${tag}`);   
-
-  // Check if the tag parameter is valid
+ 
   if (!tag || !["newarrival", "bestSeller", "featured", "specialoffer"].includes(tag)) {
     return NextResponse.json(
       { error: "Invalid or missing tag parameter." },

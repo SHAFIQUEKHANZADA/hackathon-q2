@@ -18,7 +18,7 @@ const Hero = () => {
 
             {/* Content Box */}
             <div className="h-[443px] md:w-[643px] w-[90vw] mx-auto flex flex-col justify-between bg-[#FFF3E3] md:p-10 p-6 rounded-[10px] ml-4 md:ml-0 absolute top-1/2 md:right-10 transform -translate-y-1/2">
-                <p className="text-[16px] font-semibold">New Arrival</p>
+                <p className="text-[16px] font-semibold text-black">New Arrival</p>
                 <h1 className="md:text-[52px] text-[39px] font-bold text-[#B88E2F]">
                     Discover Our <br />
                     New Collection

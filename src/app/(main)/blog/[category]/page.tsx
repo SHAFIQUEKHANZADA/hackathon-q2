@@ -21,10 +21,15 @@ function urlFor(source: { asset: { _ref: string } }) {
     return builder.image(source);
 }
 
+type CategoryCounts = {
+    [key: string]: number;
+};
+
 const BlogCategory = ({ params }: { params: { category: string } }) => {
-    const [blogs, setBlogs] = useState<Blogtypes[]>([]);  
+    const [blogs, setBlogs] = useState<Blogtypes[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [categoryCounts, setCategoryCounts] = useState<CategoryCounts>({});
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,7 +39,7 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                     throw new Error("Failed to fetch the blog data");
                 }
                 const data = await res.json();
-                if (data.blogs && data.blogs.length > 0) {   
+                if (data.blogs && data.blogs.length > 0) {
                     setBlogs(data.blogs);
                 } else {
                     setError("No blogs found for this category.");
@@ -50,6 +55,21 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
         fetchData();
     }, [params.category]);
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await fetch("/api/blog");
+                const data = await res.json();
+                setCategoryCounts(data.blogLength);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching categories:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchCategories();
+    }, []);
 
 
     if (error) {
@@ -103,7 +123,6 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
             <div className='flex md:flex-row flex-col min-h-screen lg:px-[50px] md:px-6 px-5 py-10 md:gap-[4vw] gap-10'>
 
                 <div className='md:w-[70%] space-y-10'>
-
                     {loading ? (
                         <div className="flex flex-col justify-center items-center flex-1 space-y-4">
                             {/* Skeleton loader */}
@@ -182,130 +201,129 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                             ))}
                         </div>
                     )}
-
-
                 </div>
 
                 <div className='md:w-[30%]'>
                     <div className="relative">
                         <input
                             type="text"
-                            className="border border-gray-600 rounded-[10px] pl-4 lg:pr-10 py-2"
+                            className="border border-gray-600 rounded-[10px] pl-4 pr-10 py-2 w-full focus:outline-none"
                         />
                         <FiSearch
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none"
                         />
                     </div>
 
-                    <div>
-                        <h1 className='text-[24px] font-medium py-7'>Categories</h1>
 
-                        <div className='flex flex-col gap-6'>
-                            <div className='flex items-center justify-between text-[16px] text-[#9F9F9F]'>Crafts<span>2</span></div>
-                            <div className='flex items-center justify-between text-[16px] text-[#9F9F9F]'>Design<span>8</span></div>
-                            <div className='flex items-center justify-between text-[16px] text-[#9F9F9F]'>Handmade<span>7</span></div>
-                            <div className='flex items-center justify-between text-[16px] text-[#9F9F9F]'>Interior<span>1</span></div>
-                            <div className='flex items-center justify-between text-[16px] text-[#9F9F9F]'>Wood<span>6</span></div>
-                        </div>
+                    <div>
+                        <h1 className="text-[24px] font-medium py-7">Categories</h1>
+                        {loading ? (
+                            <div className="flex flex-col space-y-4">
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : error ? (
+                            <p>{error}</p>
+                        ) : (
+                            <div className="flex flex-col gap-6">
+                                {Object.entries(categoryCounts).map(([category, count]) => (
+                                    <Link key={category} href={`/blog/${category}`}>
+                                        <div className="flex items-center justify-between text-[16px] text-[#9F9F9F]">
+                                            <span>{category}</span>
+                                            <span>{count}</span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     <div>
                         <h1 className='text-[24px] font-medium py-5'>Recent Posts</h1>
-                        <div className='space-y-4'>
-                            <div className="flex gap-3 items-center">
-                                <div className="flex items-center h-[80px] w-[80px]">
-                                    <div className="relative h-full w-full">
-                                        <Image
-                                            src="/images/s3.png"
-                                            alt="blog"
-                                            fill
-                                            className="rounded-lg object-cover"
-                                        />
+                        {loading ? (
+                            <div className="flex flex-col space-y-4">
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className="bg-gray-200 animate-pulse rounded-[10px] h-[80px] w-[80px]"></div>
+                                    <div className='space-y-2 w-full'>
+                                        <div className="w-full h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[50%] h-3 bg-gray-200 animate-pulse rounded"></div>
                                     </div>
+
                                 </div>
-                                <div>
-                                    <h1 className="text-[14px]">Going all-in with millennial design</h1>
-                                    <p className="text-[12px] text-[#9F9F9F]">03 Aug 2022</p>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className="bg-gray-200 animate-pulse rounded-[10px] h-[80px] w-[80px]"></div>
+                                    <div className='space-y-2 w-full'>
+                                        <div className="w-full h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[50%] h-3 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className="bg-gray-200 animate-pulse rounded-[10px] h-[80px] w-[80px]"></div>
+                                    <div className='space-y-2 w-full'>
+                                        <div className="w-full h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[50%] h-3 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+
                                 </div>
                             </div>
-
-                            <div className='flex gap-3 items-center'>
-                                <div className="flex items-center h-[80px] w-[80px]">
-                                    {/* Make the container `relative` */}
-                                    <div className="">
-                                        <Image
-                                            src={"/images/s8.png"}
-                                            alt={"blog"}
-                                            width={100}
-                                            height={100}
-                                            className=" rounded-lg object-cover mr-2  h-[80px] w-[80px]"
-                                        />
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <h1 className='text-[14px]'>Exploring new ways of decorating</h1>
-                                    <p className='text-[12px] text-[#9F9F9F]'>03 Aug 2022</p>
-                                </div>
+                        ) : error ? (
+                            <p>{error}</p>
+                        ) : (
+                            <div className="space-y-4">
+                                {blogs.map((post, index) => (
+                                    <Link key={index} href={`/blog/${post.category}/${post.slug.current}`}>
+                                        <div className="flex gap-3 items-center">
+                                            <div className="flex sm:items-center mb-4">
+                                                <div className="sm:h-[80px] sm:w-[80px] w-[70px] h-[70px]">
+                                                    <Image
+                                                        src={urlFor(post.mainImage).url()}
+                                                        alt={post.mainImage.alt || "Main image"}
+                                                        width={100}
+                                                        height={100}
+                                                        className="rounded-lg object-cover h-full w-full"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h1 className="text-[14px]">{post.title}</h1>
+                                                <p className="text-[12px] text-[#9F9F9F]">{new Date(post.publishingDate).toLocaleDateString()}</p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                ))}
                             </div>
-                            <div className='flex gap-3 items-center'>
-                                <div className="flex items-center h-[80px] w-[80px]">
-                                    {/* Make the container `relative` */}
-                                    <div className="">
-                                        <Image
-                                            src={"/images/s3.png"}
-                                            alt={"blog"}
-                                            width={100}
-                                            height={100}
-                                            className=" rounded-lg object-cover mr-2  h-[80px] w-[80px]"
-                                        />
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <h1 className='text-[14px]'>Handmade pieces that took time to make</h1>
-                                    <p className='text-[12px] text-[#9F9F9F]'>03 Aug 2022</p>
-                                </div>
-                            </div>
-                            <div className='flex gap-3 items-center'>
-                                <div className="flex items-center h-[80px] w-[80px]">
-                                    {/* Make the container `relative` */}
-                                    <div className="">
-                                        <Image
-                                            src={"/images/s2.png"}
-                                            alt={"blog"}
-                                            width={100}
-                                            height={100}
-                                            className=" rounded-lg object-cover mr-2  h-[80px] w-[80px]"
-                                        />
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <h1 className='text-[14px]'>Going all-in with millennial design</h1>
-                                    <p className='text-[12px] text-[#9F9F9F]'>03 Aug 2022</p>
-                                </div>
-                            </div>
-                            <div className='flex gap-3 items-center'>
-                                <div className="flex items-center h-[80px] w-[80px]">
-                                    {/* Make the container `relative` */}
-                                    <div className="">
-                                        <Image
-                                            src={"/images/s9.png"}
-                                            alt={"blog"}
-                                            width={100}
-                                            height={100}
-                                            className=" rounded-lg object-cover mr-2  h-[80px] w-[80px]"
-                                        />
-
-                                    </div>
-                                </div>
-                                <div>
-                                    <h1 className='text-[14px]'>Going all-in with millennial design</h1>
-                                    <p className='text-[12px] text-[#9F9F9F]'>03 Aug 2022</p>
-                                </div>
-                            </div>
-                        </div>
+                        )}
                     </div>
 
                 </div>

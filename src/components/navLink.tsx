@@ -6,6 +6,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { SlMenu } from "react-icons/sl";
 import Image from "next/image";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 const MobileMenuBar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +27,7 @@ const MobileMenuBar = () => {
     };
 
     return (
-        <div className="md:hidden">
+        <div className={`${montserrat.className} md:hidden`}>
             {/* Menu Button / Close Button */}
             <div onClick={toggleMenu} className="cursor-pointer">
                 {isMenuOpen ? (
@@ -89,7 +92,7 @@ const MobileMenuBar = () => {
                             className="flex items-center justify-between w-full"
                         >
                             <Link href="#" className="text-[16px] font-medium py-[10px]">
-                                ABOUT ROBIZ
+                                ABOUT FURNIRO
                             </Link>
                             <Image
                                 src="/svg/arrow-right.svg"
@@ -159,7 +162,7 @@ const MobileMenuBar = () => {
                         )}
                         {activeSubMenu === "ABOUT_ROBIZ" && (
                             <>
-                                <h1 className="py-4 text-[19px] font-semibold uppercase">ABOUT ROBIZ</h1>
+                                <h1 className="py-4 text-[19px] font-semibold uppercase">ABOUT FURNIRO</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/press" className="text-[16px] font-medium  py-2">
                                     PRESS
@@ -173,7 +176,7 @@ const MobileMenuBar = () => {
                                     ABOUT US
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/contact-us" className="text-[16px] font-medium  py-2">
+                                <Link href="/contact" className="text-[16px] font-medium  py-2">
                                     CONTACT US
                                 </Link>
                             </>

@@ -14,9 +14,9 @@ const ShopPage = () => {
     const [currentPage] = React.useState(1);
     const itemsPerPage = 16;
     const totalItems = Products.length;
- 
 
-    
+
+
     const displayedProducts = Products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
@@ -53,17 +53,55 @@ const ShopPage = () => {
             </div>
 
             {/* Filter and Pagination Section */}
-            <div className="flex justify-between items-center mb-8 md:px-[45px] px-5 h-[100px] bg-[#F9F1E7]">
-                <div className="text-[16px]">
-                    Showing {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} results
+            <div className="flex justify-between items-center mb-8 lg:px-12 px-5 sm:h-[100px] h-[70px] bg-[#F9F1E7]">
+                <div className="text-[16px] flex items-center lg:gap-5 gap-3">
+
+                    <div className='flex items-center gap-2'>
+                        <div className='w-[20px] h-[20px]'><Image src={"/svg/filter.svg"} alt='filter' width={100} height={100} /></div>
+                        <h1 className='lg:text-[20px] text-[14px]'>Filter</h1>
+                    </div>
+
+                    <div className='w-[17px] h-[17px]'><Image src={"/svg/grid.svg"} alt='filter' width={100} height={100} /></div>
+
+                    <div className='w-[19px] h-[17px]'><Image src={"/svg/acc.svg"} alt='filter' width={100} height={100} /></div>
+
+                    <div className='h-10 w-[2px] bg-[#9F9F9F] sm:block hidden'></div>
+
+                    <div className='lg:text-[16px] text-[14px] sm:block hidden'>Showing {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} results</div>
                 </div>
-                <div className="flex items-center gap-4">
-                    <span>Show 16</span>
-                    {/* Add a dropdown or select for "Show X results" here */}
+
+
+                <div className="flex items-center lg:gap-5 gap-3">
+                    <label className="sm:flex hidden items-center gap-[10px]">
+                        <span className='lg:text-[20px] text-[14px]'>Show</span>
+                        <input
+                            type="number"
+                            className="w-16 sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            defaultValue={16}
+                            min={1}
+                        />
+                    </label>
+
+                    <label className="flex items-center gap-[10px]">
+                        <span className='lg:text-[20px] text-[14px]'>Short by</span>
+                        <select
+                            className="sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-[20px] text-[14px]"
+                            defaultValue="default"
+                        >
+                            <option value="default" disabled>
+                                Default
+                            </option>
+                            <option value="name">Name</option>
+                            <option value="price">Price</option>
+                            <option value="popularity">Popularity</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </label>
                 </div>
+
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px] px-5 mt-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px] px-5 sm:mt-20 mt-10">
                 {displayedProducts.map((product) => {
                     // Calculate discount percentage
                     const discountPercentage =
@@ -100,39 +138,39 @@ const ShopPage = () => {
                                 </div>
 
                                 <div className="md:my-4 my-3 sm:px-4 px-2">
-                  {/* Product Title */}
-                  <h1 className="text-[#3A3A3A] font-semibold sm:text-[24px] text-[18px] lg:mb-2">{product.title}</h1>
+                                    {/* Product Title */}
+                                    <h1 className="text-[#3A3A3A] font-semibold sm:text-[24px] text-[18px] lg:mb-2">{product.title}</h1>
 
-                  {/* Product Slogan */}
-                  <p className="text-[#898989] font-medium md:text-[16px] text-[14px] line-clamp-1">{product.slogn}</p>
+                                    {/* Product Slogan */}
+                                    <p className="text-[#898989] font-medium md:text-[16px] text-[14px] line-clamp-1">{product.slogn}</p>
 
-                  {/* Product Price */}
-                  <div className="flex items-center gap-2 lg:mt-4">
-                    {product.salePrice > 0 ? (
-                      <>
-                        <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
-                          ${product.salePrice.toFixed(2)}
-                        </span>
-                        <span className="line-through text-[#B0B0B0] sm:text-[16px] text-[12px]">
-                          ${product.originalPrice.toFixed(2)}
-                        </span>
-                      </>
-                    ) : (
-                      <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
-                        ${product.originalPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                {/* "Add to Cart" Button on Hover */}
-                <div className="absolute flex  flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]">Add to Cart</button>
-                  <div className="flex md:flex-row flex-col items-center gap-3 text-white text-[16px] font-medium">
-                    <span className="flex items-center gap-1"><IoMdShare /> Share</span>
-                    <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
-                    <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
-                  </div>
-                </div>
+                                    {/* Product Price */}
+                                    <div className="flex items-center gap-2 lg:mt-4">
+                                        {product.salePrice > 0 ? (
+                                            <>
+                                                <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
+                                                    ${product.salePrice.toFixed(2)}
+                                                </span>
+                                                <span className="line-through text-[#B0B0B0] sm:text-[16px] text-[12px]">
+                                                    ${product.originalPrice.toFixed(2)}
+                                                </span>
+                                            </>
+                                        ) : (
+                                            <span className="text-[#3A3A3A] font-semibold sm:text-[20px] text-[12px]">
+                                                ${product.originalPrice.toFixed(2)}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+                                {/* "Add to Cart" Button on Hover */}
+                                <div className="absolute flex  flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <button className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]">Add to Cart</button>
+                                    <div className="flex md:flex-row flex-col items-center gap-3 text-white text-[16px] font-medium">
+                                        <span className="flex items-center gap-1"><IoMdShare /> Share</span>
+                                        <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
+                                        <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                                    </div>
+                                </div>
                             </div>
                         </Link>
                     );
@@ -146,7 +184,7 @@ const ShopPage = () => {
                 <div className='md:w-[98px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>Next</div>
             </div>
 
-            <PreFooter/>
+            <PreFooter />
         </div>
     )
 }

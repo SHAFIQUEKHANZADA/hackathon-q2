@@ -5,7 +5,7 @@ import Image from 'next/image';
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 const Furniture = () => {
     return (
-        <div className={`${poppins.className} flex flex-col py-14`}>
+        <div className={`${poppins.className} flex flex-col py-14 bg-white`}>
             <div className='flex flex-col items-center text-center'>
                 <h1 className='text-[20px] font-semibold text-[#616161]'>Share your setup with</h1>
                 <h1 className='text-[40px] font-bold text-[#3A3A3A]'>#FuniroFurniture</h1>
@@ -36,8 +36,8 @@ const Furniture = () => {
 
                 {/* Center Main Image */}
                 <div className="flex p-2 md:pt-10">
-                    <div className="w-[295px]">
-                        <Image src="/images/s6.png" alt="main" width={295} height={392}  />
+                    <div className="sm:w-[295px] w-[90vw] h-full">
+                        <Image src="/images/s6.png" alt="main" width={295} height={392}  className='w-full h-full'/>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@ const Furniture = () => {
                     </div>
 
                     <div className='flex justify-start gap-2'>
-                        <div className="w- ">
+                        <div className="">
                             <Image src="/images/s8.png" alt="" width={178} height={242}  />
                         </div>
                         <div>

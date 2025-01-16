@@ -4,7 +4,7 @@ import Image from "next/image";
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 const Range = () => {
   return (
-    <div className={`${poppins.className} flex flex-col gap-10 my-14 px-5`}>
+    <div className={`${poppins.className} flex flex-col gap-10 my-14 px-5 bg-white`}>
       <div className="text-center">
         <h1 className='text-[32px] font-bold text-[#333333]'>Browse The Range</h1>
         <p className='md:text-[20px] text-[16px] font-extralight text-[#666666]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

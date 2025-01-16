@@ -11,21 +11,50 @@ import { AiFillTwitterCircle } from 'react-icons/ai';
 import { BsStarFill } from 'react-icons/bs';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa6';
 import { PiGreaterThanBold } from 'react-icons/pi';
-import { shuffle } from 'lodash';  
-import { useDispatch } from 'react-redux';
+import { shuffle } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoMdHeartEmpty, IoMdShare } from 'react-icons/io';
 import { FaExchangeAlt } from 'react-icons/fa';
+import { addToLikes, removeFromLikes } from '@/app/store/likedProductSlice';
+import { RootState } from '@/app/store/store';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
+
+
+type LikedProduct = {
+  id: string;
+  name: string;
+  price: number;
+  image: string;
+};
 
 const ProductPage = ({ params }: { params: { product: string }; }) => {
     const router = useRouter();
     const dispatch = useDispatch();
+ 
+    const likedProducts = useSelector((state: RootState) => state.likedProducts.likedItems);
+    
     const product = Products.find((p) => p.slug === params.product);
 
     if (!product) {
         return <div>Product not found.</div>;
     }
+
+    const isLiked = likedProducts.some((item) => item.id === product.id.toString());  
+
+    const handleLikeToggle = () => {
+        if (isLiked) {
+            dispatch(removeFromLikes(product.id.toString()));
+        } else {
+            const likedProduct: LikedProduct = {
+                id: product.id.toString(), 
+                name: product.title, 
+                price: product.originalPrice,
+                image: product.image,
+            };
+            dispatch(addToLikes(likedProduct));
+        }
+    };
 
     const handleAddToCartAndRedirect = () => {
         if (product) {
@@ -39,7 +68,6 @@ const ProductPage = ({ params }: { params: { product: string }; }) => {
                 })
             );
 
-            // Navigate to cart page
             router.push('/cart');
         } else {
             // Handle the case where the product is undefined
@@ -58,14 +86,10 @@ const ProductPage = ({ params }: { params: { product: string }; }) => {
                 />
             ));
     };
-
-
-
-    // Filter related products, shuffle, and pick 4 random ones
+ 
     const relatedProducts = shuffle(
         Products.filter((p) => p.category === product.category && p.slug !== product.slug)
-    ).slice(0, 4); 
-
+    ).slice(0, 4);
 
     return (
         <div className={`${poppins.className} flex flex-col gap-5 md:mt-0 mt-10`}>
@@ -88,7 +112,7 @@ const ProductPage = ({ params }: { params: { product: string }; }) => {
                 </ul>
             </div>
 
-            <div className="flex flex-col md:flex-row md:gap-36 gap-10 justify-evenly md:mt-16 mt-5 md:px-[70px] px-5 ">
+            <div className="flex flex-col md:flex-row lg:gap-36 gap-10 justify-evenly md:mt-16 mt-5 lg:px-[70px] px-5">
                 <div className='sm:w-[500px] sm:h-[600px] md:ml-5 ml-0'>
                     <Image
                         src={product.image}
@@ -141,23 +165,34 @@ const ProductPage = ({ params }: { params: { product: string }; }) => {
 
 
 
-                    <div className='flex md:flex-row flex-col gap-3 md:items-center'>
+                    <div className='flex md:flex-row flex-col gap-3 items-end'>
                         <QuantitySelector />
-                        <button
-                            onClick={handleAddToCartAndRedirect}
-                            className="mt-4 text-black border border-black rounded-[15px] py-2 px-4 text-[20px] w-full md:w-fit"
-                        >
-                            Add to Cart
-                        </button>
 
-                        <Link href={"/product-comparison"}>
-                        <button
-                            className="mt-4 text-black border border-black rounded-[15px] py-2 px-4 flex gap-4 text-center justify-center items-center text-[20px] w-full md:w-fit"
-                        >
-                            <span>+</span> Compare
-                        </button>
-                        </Link>
+                        <div className='flex items-end justify-between gap-2'>
+                            <button
+                                onClick={handleAddToCartAndRedirect}
+                                className="mt-4 text-black border border-black rounded-[15px] py-2 px-4 lg:text-[20px] w-fit"
+                            >
+                                Add to Cart
+                            </button>
 
+                            <Link href={"/product-comparison"}>
+                                <button
+                                    className="mt-4 text-black border border-black rounded-[15px] py-2 px-4 flex gap-4 text-center justify-center items-center lg:text-[20px] w-fit"
+                                >
+                                    <span>+</span> Compare
+                                </button>
+                            </Link>
+
+                            <button
+                                onClick={handleLikeToggle}
+                                className={`p-2 rounded-full mb-1 sm:mb-2 ${isLiked ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-500'
+                                    }`}
+                            >
+                                <IoMdHeartEmpty />
+                            </button>
+
+                        </div>
                     </div>
 
                     <div className="bg-[#D9D9D9] h-[1px] my-8" />
