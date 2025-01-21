@@ -63,7 +63,7 @@ const CartPopup = () => {
                             cartItems.map((item) => (
                                 <div key={item.id} className="flex items-center mb-4">
                                     <Image
-                                        src={item.image}
+                                        src={item.image && item.image.length > 0 ? item.image[0] : "/placeholder.png"}
                                         alt={item.name}
                                         width={100}
                                         height={100}

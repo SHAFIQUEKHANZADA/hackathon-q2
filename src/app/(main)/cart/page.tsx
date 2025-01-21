@@ -8,8 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import PreFooter from '@/components/PreFooter';
 import { AiFillDelete } from 'react-icons/ai';
-
-
+ 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 const CartPage = () => {
@@ -85,7 +84,7 @@ const CartPage = () => {
                                             {/* Make the container `relative` */}
                                             <div className="">
                                                 <Image
-                                                    src={item.image}
+                                                    src={item.image && item.image.length > 0 ? item.image[0] : "/placeholder.png"}
                                                     alt={item.name}
                                                     width={100}
                                                     height={100}

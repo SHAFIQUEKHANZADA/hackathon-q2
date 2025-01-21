@@ -15,7 +15,7 @@ const VerifyEmail = () => {
     useEffect(() => {
         const verifyUserEmail = async () => {
             try {
-                await axios.post("/api/users/verifyemail", { token })
+                await axios.post("/api/users/verifyemail")
                 setVerified(true)
             } catch (error) {
                 setError(true)
@@ -27,13 +27,13 @@ const VerifyEmail = () => {
             setError(false)
             verifyUserEmail()
         }
-    }, [token])   
+    }, [token])
 
     useEffect(() => {
         setError(false)
         const urlToken = window.location.search.split("=")[1]
         setToken(urlToken || "")
-    }, [])  
+    }, [])
 
     return (
         <div>
@@ -67,9 +67,6 @@ const VerifyEmail = () => {
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     )
 }

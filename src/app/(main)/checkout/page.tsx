@@ -266,7 +266,7 @@ const CheckoutPage = () => {
                                             <div className="flex items-center gap-4 flex-1">
                                                 {/* Product Image */}
                                                 <Image
-                                                    src={item.image}
+                                                    src={item.image && item.image.length > 0 ? item.image[0] : "/placeholder.png"}
                                                     alt={item.name}
                                                     width={50}
                                                     height={50}

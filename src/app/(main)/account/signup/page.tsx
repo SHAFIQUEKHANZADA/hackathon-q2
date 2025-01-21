@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from 'next/navigation';
+import { Poppins } from 'next/font/google';
 
+const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
 type User = {
   username: string;
@@ -88,7 +90,7 @@ const SignUpPage = () => {
   }, [user]);
 
   return (
-    <div>
+    <div className={`${poppins.className}`}>
       {/* Main Banner */}
       <div className="relative">
         <div className="w-full">
@@ -120,87 +122,96 @@ const SignUpPage = () => {
         </div>
       </div>
 
-      <form onSubmit={onSignup}>
-        {/* Username */}
-        <div className="mb-4">
-          <label htmlFor="username" className="block text-[16px] font-medium text-black mb-3">
-            Username
-          </label>
-          <input
-            type="text"
-            id="username"
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
-            placeholder="Enter Username"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
-        </div>
+      <div className='flex flex-col items-center sm:max-w-lg mx-auto justify-center my-10 gap-4'>
+        <form onSubmit={onSignup} className='w-full sm:p-0 p-5'>
+          {/* Username */}
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-[16px] font-medium text-black mb-3">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
+              placeholder="Enter Username"
+              className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+            />
+            {errors.username && <p className="text-red-500 text-sm">{errors.username}</p>}
+          </div>
 
-        {/* Email */}
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-[16px] font-medium text-black mb-3">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-            placeholder="Enter your email"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-        </div>
+          {/* Email */}
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-[16px] font-medium text-black mb-3">
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              placeholder="Enter your email"
+              className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+            />
+            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+          </div>
 
-        {/* Password */}
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-[16px] font-medium text-black mb-3">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-            placeholder="Enter your password"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
-        </div>
+          {/* Password */}
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-[16px] font-medium text-black mb-3">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+              placeholder="Enter your password"
+              className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+            />
+            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+          </div>
 
-        {/* Confirm Password */}
-        <div className="mb-4">
-          <label htmlFor="confirmPassword" className="block text-[16px] font-medium text-black mb-3">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={user.confirmPassword}
-            onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
-            placeholder="Confirm your password"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
-        </div>
+          {/* Confirm Password */}
+          <div className="mb-4">
+            <label htmlFor="confirmPassword" className="block text-[16px] font-medium text-black mb-3">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              value={user.confirmPassword}
+              onChange={(e) => setUser({ ...user, confirmPassword: e.target.value })}
+              placeholder="Confirm your password"
+              className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+            />
+            {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
+          </div>
 
-        <button
-          type="submit"
-          className={`bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px] ${buttonDisabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          disabled={buttonDisabled || loading}
-        >
-          {loading ? "Signing up..." : "Sign up"}
-        </button>
+          <button
+            type="submit"
+            className={`bg-white text-[#B88E2F] my-4 border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px] ${buttonDisabled ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            disabled={buttonDisabled || loading}
+          >
+            {loading ? "Signing up..." : "Sign up"}
+          </button>
 
-        <div>
-          Already have an account?{" "}
-          <span className="underline">
-            <Link href={"/account/login"}>Log in</Link>
-          </span>
+          <div>
+            Already have an account?{" "}
+            <span className="underline">
+              <Link href={"/account/login"}>Log in</Link>
+            </span>
+          </div>
+        </form>
+
+        <div className="flex flex-1 flex-col justify-center text-center px-5 gap-3 mt-10">
+          <h1 className="text-[36px] font-semibold text-black">Join Us Now</h1>
+          <p className="text-[#9F9F9F] text-[16px]">
+            Sign up today and enjoy a seamless shopping experience like never before! Get exclusive access to the best deals and a wide variety of products tailored just for you
+          </p>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

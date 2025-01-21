@@ -25,7 +25,11 @@ export type ProductType = {
   colors: string[];
   averageRating: number;
   totalReviews: number;
-  reviews: Review[];
+  productReviews: {  
+    averageRating: number; 
+    totalReviews: number;  
+    reviews: Review[];  
+  };
   specialTag?: string[];
   subcategory: { current: string };
   category: { current: string };

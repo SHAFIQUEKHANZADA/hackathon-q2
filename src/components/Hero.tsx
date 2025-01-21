@@ -24,7 +24,7 @@ const Hero = () => {
                     New Collection
                 </h1>
                 <p className="text-[18px] font-medium text-[#333333]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.
+                Explore the finest trends of the season with our exclusive collection, designed to bring elegance to your wardrobe.
                 </p>
 
                 <button className="text-[16px] font-bold bg-[#B88E2F] text-white px-[72px] w-fit py-[25px]">

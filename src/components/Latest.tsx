@@ -15,6 +15,7 @@ import "swiper/css/scrollbar";
 import Image from "next/image";
 import Link from "next/link";
 import { IoMdHeartEmpty, IoMdShare } from "react-icons/io";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -26,7 +27,13 @@ const Latest = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   // const [windowWidth, setWindowWidth] = useState<number | null>(null);  
-  // const router = useRouter();
+  const router = useRouter();
+
+  const handleShowMore = () => {
+    if (selectedTag) {
+      router.push(`/${selectedTag}`);  
+    }
+  };
 
   console.log(activeIndex)
 
@@ -126,7 +133,7 @@ const Latest = () => {
            {([...Array(itemsToShow)]).map((_, index) => (
              <div
                key={index}
-               className="mb-10 lg:w-[22vw] lg:h-[456px] md:h-[36vw] sm:h-[40vw] h-[70vw] w-[45vw] flex flex-col bg-white overflow-hidden group relative animate-pulse"
+               className="mb-10 lg:w-[22vw] lg:h-[456px] md:h-[36vw] h-[70vw] sm:h-[40vw] flex flex-col bg-white overflow-hidden group relative animate-pulse"
              >
                {/* Product Image Loader */}
                <div className="relative h-[300px] w-full overflow-hidden">
@@ -187,7 +194,7 @@ const Latest = () => {
                         />
                       )}
                       {product.salePrice && product.price && (
-                        <span className="absolute top-4 right-4 h-[48px] w-[48px] text-[12px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
+                        <span className="absolute top-4 right-4 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] sm:text-[12px] text-[9px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
                           Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
                         </span>
                       )}
@@ -235,6 +242,7 @@ const Latest = () => {
 
       <div className="flex justify-center py-10">
         <button
+          onClick={handleShowMore}
           className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px]">
           Show More
         </button>

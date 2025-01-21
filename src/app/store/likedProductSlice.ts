@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface LikedProduct {
-    id: string;
-    name: string;
-    price: number;
-    image: string;
+    id: string;  
+    name: string; 
+    price: number;  
+    quantity: number; 
+    image: string[];  
 }
 
 interface LikedProductsState {
@@ -16,18 +17,21 @@ const initialState: LikedProductsState = {
 };
 
 const likedProductsSlice = createSlice({
-    name: 'likedProducts',
+    name: "likedProducts",
     initialState,
     reducers: {
         addToLikes: (state, action: PayloadAction<LikedProduct>) => {
-            // Check if the product is already in the liked list to avoid duplicates
-            const exists = state.likedItems.some(item => item.id === action.payload.id);
+            const exists = state.likedItems.some(
+                (item) => item.id === action.payload.id
+            );
             if (!exists) {
                 state.likedItems.push(action.payload);
             }
         },
         removeFromLikes: (state, action: PayloadAction<string>) => {
-            state.likedItems = state.likedItems.filter(item => item.id !== action.payload);
+            state.likedItems = state.likedItems.filter(
+                (item) => item.id !== action.payload
+            );
         },
         clearLikes: (state) => {
             state.likedItems = [];
@@ -35,5 +39,6 @@ const likedProductsSlice = createSlice({
     },
 });
 
-export const { addToLikes, removeFromLikes, clearLikes } = likedProductsSlice.actions;
+export const { addToLikes, removeFromLikes, clearLikes } =
+    likedProductsSlice.actions;
 export default likedProductsSlice.reducer;

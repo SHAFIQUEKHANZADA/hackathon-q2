@@ -27,9 +27,9 @@ const CardCarousel = ({ Cards }: CardsCarouselProps) => {
   };
 
   return (
-    <div className="relative md:w-[500px] flex flex-col items-center justify-between">
+    <div className="relative lg:w-[500px] md:w-[300px] flex flex-col items-center justify-between">
       {/* Carousel Container */}
-      <div className="relative md:w-[472px] w-[95vw] h-[542px] overflow-hidden">
+      <div className="relative lg:w-[472px] md:w-[272px] w-[95vw] h-[542px] overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{

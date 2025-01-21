@@ -20,10 +20,10 @@ const QuantitySelector = () => {
     };
 
     return (
-        <div className="flex lg:w-[165px] sm:w-[100px] w-[165px] h-[44px] border border-gray-300 rounded">
+        <div className="flex lg:w-[125px] sm:w-[100px] w-[165px] h-[48px] border border-[#9F9F9F] rounded-[10px]">
             {/* Decrease Button */}
             <div
-                className={`grid border border-gray-300 lg:text-[25px] text-[20px] justify-center items-center cursor-pointer 
+                className={`grid rounded-[10px] lg:text-[25px] text-[20px] justify-center items-center cursor-pointer 
                     ${clicked === 'decrease' ? 'bg-red-500 text-white' : 'bg-white'}`}
                 style={{ width: '25%' }}
                 onClick={handleDecrease}
@@ -33,7 +33,7 @@ const QuantitySelector = () => {
 
             {/* Quantity Display */}
             <div
-                className="grid border border-gray-300 justify-center items-center lg:text-[20px] text-[16px] font-medium"
+                className="grid rounded-[10px] justify-center items-center lg:text-[20px] text-[16px] font-medium"
                 style={{ width: '50%' }}
             >
                 {quantity}
@@ -41,7 +41,7 @@ const QuantitySelector = () => {
 
             {/* Increase Button */}
             <div
-                className={`grid border border-gray-300 lg:text-[25px] text-[20px] justify-center items-center cursor-pointer 
+                className={`grid rounded-[10px] lg:text-[25px] text-[20px] justify-center items-center cursor-pointer 
                     ${clicked === 'increase' ? 'bg-green-500 text-white' : 'bg-white'}`}
                 style={{ width: '25%' }}
                 onClick={handleIncrease}

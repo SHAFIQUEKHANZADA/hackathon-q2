@@ -1,11 +1,14 @@
 "use client";
 
 import axios from "axios";
+import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
+const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
 interface ErrorResponse {
   error: string;
@@ -88,7 +91,7 @@ const LogInPage = () => {
   }, [user]);
 
   return (
-    <div>
+    <div className={poppins.className}>
       {/* Main Banner */}
       <div className="relative">
         <div className="w-full">
@@ -120,57 +123,68 @@ const LogInPage = () => {
         </div>
       </div>
 
-      <form onSubmit={onLogin}>
-        {/* Email */}
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-[16px] font-medium text-black mb-3">
-            Email Address
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={user.email}
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
-            placeholder="Enter your email"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+      <div className="flex sm:flex-row flex-col-reverse sm:mx-[4vw] p-5 sm:gap-0 gap-4">
+        <div className="flex flex-1 flex-col justify-center px-5 gap-3 mt-10">
+          <h1 className="text-[36px] font-semibold text-black">Welcome Back!</h1>
+          <p className="text-[#9F9F9F] text-[16px]">
+            Log in to access your personalized shopping experience, track your orders, and enjoy exclusive offers. We&lsquo;re excited to have you back!
+          </p>
         </div>
 
-        {/* Password */}
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-[16px] font-medium text-black mb-3">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
-            placeholder="Enter your password"
-            className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
-          />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+        <div className="flex-1 flex justify-center">
+          <form onSubmit={onLogin} className="sm:max-w-lg">
+            {/* Email */}
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-[16px] font-medium text-black mb-3">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                placeholder="Enter your email"
+                className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+              />
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+            </div>
 
-          <p><Link href={"/account/verifyemail"}>Forgot password?</Link></p>
+            {/* Password */}
+            <div className="mb-4">
+              <label htmlFor="password" className="block text-[16px] font-medium text-black mb-3">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                placeholder="Enter your password"
+                className="w-full p-5 border border-gray-400 rounded-[10px] focus:outline-none focus:ring focus:ring-blue-200"
+              />
+              {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+
+              <p className="text-[14px] hover:text-[#B88E2F] text-gray-600 duration-300"><Link href={"/account/verifyemail"}>Forgot password?</Link></p>
+            </div>
+
+            <button
+              type="submit"
+              className={`bg-white text-[#B88E2F] my-3 border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px] ${buttonDisabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              disabled={buttonDisabled || loading}
+            >
+              {loading ? "Logging in..." : "Log in"}
+            </button>
+
+            <div>
+              Don’t have an account?{" "}
+              <span className="underline">
+                <Link href={"/account/signup"}>Create Account</Link>
+              </span>
+            </div>
+          </form>
         </div>
-
-        <button
-          type="submit"
-          className={`bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px] ${buttonDisabled ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          disabled={buttonDisabled || loading}
-        >
-          {loading ? "Logging in..." : "Log in"}
-        </button>
-
-        <div>
-          Don’t have an account?{" "}
-          <span className="underline">
-            <Link href={"/account/signup"}>Create Account</Link>
-          </span>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

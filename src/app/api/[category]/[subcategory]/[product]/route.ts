@@ -12,7 +12,7 @@ export async function GET(req: Request, { params }: { params: { category: string
         console.log(`Fetching product for category: ${category} and slug: ${productSlug}`);
 
         const query = groq`
-      *[_type == "${category}"  ${subcategory} && slug.current == "${productSlug}"][0]{
+      *[_type == "${category}" && subcategory == "${subcategory}" && slug.current == "${productSlug}"][0]{
         title,
         slug,
         sku,
@@ -31,14 +31,15 @@ export async function GET(req: Request, { params }: { params: { category: string
         stockStatus,
         sizes,
         colors,
-        productReviews : {
+        totalReviews,
+        productReviews {
         averageRating,
         totalReviews,
-        reviews[]{
-          reviewername,
-          rating,
-          comment
-        }
+        reviews[] {
+        reviewername,
+        rating,
+        comment
+       }
     },
         specialTag,
         subcategory,
