@@ -96,14 +96,14 @@ const Navbar = () => {
       <Link href={"/"}>
         <div className="flex items-center gap-1">
           <Image
-            src={"/images/logo.png"}
+            src={"/svg/svgLogo.svg"}
             alt="Main Logo"
             width={100}
             height={22}
             className="w-[52px] h-[30px]"
           />
           <h1
-            className={`${montserrat.className} text-black text-[34px] font-bold`}
+            className={`${montserrat.className} text-black sm:text-[34px] text-[30px] font-bold`}
           >
             Furniro
           </h1>
@@ -113,9 +113,9 @@ const Navbar = () => {
       <ul className={`${poppins.className} text-[16px] font-medium hidden lg:gap-[48px] gap-6 md:flex`}>
         <Link href='/'>
           <li className="relative cursor-pointer group">
-            <span className="group-hover:text-orange-500 transition-all duration-300 inline-block relative">
+            <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
               Home
-              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-orange-500 transition-all duration-300"></div>
+              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
         </Link>
@@ -163,17 +163,17 @@ const Navbar = () => {
 
         <Link href='/blog'>
           <li className="relative cursor-pointer group">
-            <span className="group-hover:text-orange-500 transition-all duration-300 inline-block relative">
+            <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
               Blog
-              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-orange-500 transition-all duration-300"></div>
+              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
         </Link>
         <Link href='/contact'>
           <li className="relative cursor-pointer group">
-            <span className="group-hover:text-orange-500 transition-all duration-300 inline-block relative">
+            <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
               Contact
-              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-orange-500 transition-all duration-300"></div>
+              <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
         </Link>

@@ -150,7 +150,7 @@ export default function Chat() {
           >
             <Card className='border-2'>
               <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
-                <CardTitle className='text-lg font-bold'>
+                <CardTitle className='text-lg font-bold text-[#3A3A3A]'>
                   Chat with Furniro AI
                 </CardTitle>
                 <Button onClick={toggleChat} size={"sm"} variant={"ghost"} className='px-2 py-0'>
@@ -161,9 +161,9 @@ export default function Chat() {
               <CardContent>
                 <ScrollArea className='h-[300px] pr-4'>
                   {messages?.length === 0 && (
-                    <div className='flex flex-col items-center justify-betweet w-full gap-3 text-gray-500'>
+                    <div className='flex flex-col items-center justify-between w-full h-[300px] gap-3 text-gray-500'>
                       <div className='mt-12'>No message yet.</div>
-                      <div className="mt-4 flex flex-wrap gap-2">
+                      <div className="mt-4 flex flex-wrap gap-2 mb-2">
                         {suggestions.map((suggestion, index) => (
                           <Button
                             key={index}
@@ -231,7 +231,7 @@ export default function Chat() {
                       {message.role === "user" && (
                         <div className="flex-shrink-0 ml-2">
                           <Avatar>
-                            <AvatarFallback>You</AvatarFallback>
+                            <AvatarFallback className='p-1 text-[12px]'>You</AvatarFallback>
                           </Avatar>
                         </div>
                       )}
@@ -253,11 +253,8 @@ export default function Chat() {
                         <div className="dot animate-bounce delay-200">.</div>
                         <div className="dot animate-bounce delay-300">.</div>
                       </div>
-
                     </div>
                   )}
-
-
 
                   {error && (
                     <div className='w-full items-center flex justify-center gap-3'>

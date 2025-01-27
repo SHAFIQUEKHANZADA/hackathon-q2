@@ -128,7 +128,7 @@ const Search = () => {
                                             key={index}
                                             className="hover:underline cursor-pointer"
                                         >
-                                            <Link href={`/product/${suggestion.slug.current}`}>
+                                            <Link href={`/${suggestion.category}/${suggestion.subcategory}/${suggestion.slug.current}`}>
                                                 <span className="flex items-center gap-3 text-[16px] space-y-3">
                                                     <div>
                                                         <div className="w-[50px] h-[50px]">

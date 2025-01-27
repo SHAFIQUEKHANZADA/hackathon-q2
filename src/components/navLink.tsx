@@ -20,7 +20,7 @@ const MobileMenuBar = () => {
     useEffect(() => {
         AOS.init({
             once: true,
-            offset: 400,
+            offset: 200,
         });
     }, []);
 

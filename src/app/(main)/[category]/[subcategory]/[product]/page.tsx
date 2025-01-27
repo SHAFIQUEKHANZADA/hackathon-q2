@@ -22,6 +22,8 @@ import RelatedProducts from "@/components/RelatedProducts";
 import Reviews from "@/components/Reviews";
 import { useRouter } from "next/navigation";
 import { addToCompare } from "@/app/store/compareProduct";
+import { toast, ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
@@ -84,7 +86,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
     };
 
     if (loading) return <div className="h-screen w-full flex justify-center items-center skeleton-loader">
-        <Image src={"/images/logo.png"} alt="logo" width={150} height={150} className="md:w-[150px] w-[100px] pt-10" />
+        <Image src={"/svg/svgLogo.svg"} alt="logo" width={150} height={150} className="md:w-[150px] w-[100px] pt-10" />
     </div>;
     if (error) return <div>{error}</div>;
     if (!productDetails) return <div>Product not found</div>;
@@ -107,8 +109,23 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 quantity: 1,
                 image: [imageUrl],
             };
-
             dispatch(addToLikes(likedProduct));
+
+            const audio = new Audio('/sounds/liked.mp3');
+            audio.play();
+            audio.volume = 0.6;
+
+            toast.success('Product added to Wishlist', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Zoom,
+            });
         }
     };
 
@@ -129,29 +146,44 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             };
 
             dispatch(addToCart(cartItem));
+            const audio = new Audio('/sounds/success.mp3');
+            audio.play();
+            audio.volume = 0.6;
+
+            toast.success('Product added to cart', {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                transition: Zoom,
+            });
         }
     };
 
     const handleCompareClick = () => {
         if (productDetails) {
-            const imageUrl = productDetails.images?.[0]?.asset?.url || 
-                "/default-image.png"; 
+            const imageUrl = productDetails.images?.[0]?.asset?.url ||
+                "/default-image.png";
 
             const compareItem = {
-                id: productDetails.slug.current,  
-                name: productDetails.title, 
-                price: productDetails.price || 0,  
-                salePrice: productDetails.salePrice || undefined,  
-                averageRating: productDetails.averageRating || 0,  
-                totalReviews: productDetails.totalReviews || 0,  
-                image: [imageUrl], 
+                id: productDetails.slug.current,
+                name: productDetails.title,
+                price: productDetails.price || 0,
+                salePrice: productDetails.salePrice || undefined,
+                averageRating: productDetails.averageRating || 0,
+                totalReviews: productDetails.totalReviews || 0,
+                image: [imageUrl],
             };
 
             dispatch(addToCompare(compareItem));
             router.push("/comparison");
         }
     };
-    
+
     const renderStars = (rating: number) => {
         return Array(5)
             .fill(0)
@@ -177,7 +209,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                     </li>
                     <li className="sm:text-[16px] text-[12px] text-black"><PiGreaterThanBold /></li>
                     <li>
-                        <Link href={`/${category}`} className="text-[10px] text-black opacity-[50%]">
+                        <Link href={`/${category}`} className="sm:text-[16px] text-[12px] text-black opacity-[50%]">
                             {category}
                         </Link>
                     </li>
@@ -355,6 +387,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                                     className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 lg:text-[20px] w-fit">
                                     Add to Cart
                                 </button>
+                                <ToastContainer />
 
                                 <button
                                     onClick={handleCompareClick}
