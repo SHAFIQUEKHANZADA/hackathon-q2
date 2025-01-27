@@ -85,7 +85,7 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
     }
   };
 
-  if (loading) return <p>Loading...</p>;
+ 
 
   if (error) return <p>Error: {error}</p>;
   return (
@@ -181,19 +181,22 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
         onSortChange={(value) => console.log('Sort by:', value)}
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px] px-5 sm:mt-20 mt-10">
+      <div className="w-full sm:mt-20 mt-10 px-5">
         {loading ? (
-          <div className="flex gap-2 justify-center">
-            {([...Array(8)]).map((_, index) => (
-              <div
-                key={index}
-                className="mb-10 justify-between w-[185px] h-[346px]  flex flex-col bg-white overflow-hidden group relative animate-pulse"
-              >
+          <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px] w-full">
+            {Array(8).fill(null).map((_, index) => (
+              <div key={index} className="lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[67vw] flex flex-col bg-white overflow-hidden group relative animate-pulse">
                 {/* Product Image Loader */}
-                <div className="relative h-[300px] w-[300px] overflow-hidden">
+                <div className="relative lg:w-[285px] h-[75%] w-full overflow-hidden">
                   <div className="bg-gray-200 animate-pulse w-full h-full absolute flex justify-center items-center">
                     <div>
-                      <Image src={"/images/logo.png"} alt="logo" width={100} height={100} className="sm:w-[60px] w-[50px] h-full" />
+                      <Image
+                        src={"/images/logo.png"}
+                        alt="logo"
+                        width={100}
+                        height={100}
+                        className="sm:w-[60px] w-[50px] h-full"
+                      />
                     </div>
                   </div>
                 </div>
@@ -207,57 +210,43 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
             ))}
           </div>
         ) : (
-          products.map((product, id) => (
-            <Link key={id} href={`/${product.category}/${product.subcategory}/${product.slug.current}`}>
-              <div className="relative bg-[#F4F5F7] flex flex-col justify-between  lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[70vw] group">
-                {/* New Arrival Badge */}
-                {product.specialTag && product.specialTag.includes("newarrival") && (
-                  <div className="absolute top-4 right-4 h-[48px] w-[48px] bg-[#2EC1AC] flex justify-center items-center text-white text-[16px] font-medium px-2 py-1 rounded-full">
-                    New
+          <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px]">
+            {products.map((product, id) => (
+              <Link key={id} href={`/${product.category}/${product.subcategory}/${product.slug.current}`}>
+                <div className="relative bg-[#F4F5F7] flex flex-col justify-between lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[67vw] group">
+                  <div className="relative lg:w-[285px] h-[75%]">
+                    {product.images.length > 0 && (
+                      <Image
+                        src={urlFor(product.images[0]).url()}
+                        alt={product.title}
+                        width={300}
+                        height={300}
+                        className="object-cover w-full h-full absolute"
+                      />
+                    )}
+                    {product.images.length > 1 && (
+                      <Image
+                        src={urlFor(product.images[1]).url()}
+                        alt={product.title}
+                        width={300}
+                        height={300}
+                        className="object-cover opacity-0 group-hover:opacity-100 w-full absolute duration-500 h-full"
+                      />
+                    )}
+                    {product.specialTag && product.specialTag.includes("newarrival") && (
+                      <div className="absolute sm:top-4 top-2 sm:right-4 right-2 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] bg-[#2EC1AC] flex justify-center items-center text-white sm:text-[12px] text-[9px] font-medium px-2 py-1 rounded-full">
+                        New
+                      </div>
+                    )}
+                    {product.salePrice && product.price && (
+                      <span className="absolute sm:top-4 top-2 sm:right-4 right-2 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] sm:text-[12px] text-[9px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
+                        Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
+                      </span>
+                    )}
                   </div>
-                )}
-
-                {/* Discount Percentage */}
-                {product.salePrice && product.price && (
-                  <span className="absolute top-4 right-4 h-[48px] w-[48px] text-[12px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
-                    Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
-                  </span>
-                )}
-
-                {/* Product Image */}
-                <div className="relative lg:w-[285px] h-[75%] overflow-hidden">
-                  {product.images.length > 0 && (
-                    <Image
-                      src={urlFor(product.images[0]).url()}
-                      alt={product.title}
-                      width={300}
-                      height={300}
-                      className="object-cover w-full h-full absolute"
-                    />
-                  )}
-                  {product.images.length > 1 && (
-                    <Image
-                      src={urlFor(product.images[1]).url()}
-                      alt={product.title}
-                      width={300}
-                      height={300}
-                      className="object-cover opacity-0 group-hover:opacity-100 w-full absolute duration-500 h-full"
-                    />
-                  )}
-                  {product.salePrice && product.price && (
-                    <span className="absolute top-4 right-4 h-[48px] w-[48px] text-[12px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
-                      Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
-                    </span>
-                  )}
-                </div>
-
-                <div className="md:my-4 my-3 sm:px-4 px-2">
-                  {/* Product Title */}
-                  <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.8vw] lg:mb-2 line-clamp-2">{product.title}</h1>
-
-
-                  {/* Product Price */}
-                  <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px]">
+                  <div className="md:my-4 my-3 sm:px-4 px-2">
+                    <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.8vw] lg:mb-2 line-clamp-2">{product.title}</h1>
+                    <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px]">
                       {product.salePrice ? (
                         <>
                           <span className="line-through text-[#B0B0B0] font-light text-[11px] lg:text-[16px]">
@@ -270,12 +259,9 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
                         `$${product.price.toFixed(2)}`
                       )}
                     </div>
-                </div>
-                {/* "Add to Cart" Button on Hover */}
-                <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={() => handleAddToCart(product)}
-                      className="bg-white text-[#C19C49] lg:w-[202px] lg:px-0 px-2 h-[48px]">
+                  </div>
+                  <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button onClick={() => handleAddToCart(product)} className="bg-white text-[#C19C49] lg:w-[202px] lg:px-0 px-2 h-[48px]">
                       Add to Cart
                     </button>
                     <div className="flex lg:flex-row flex-col items-center lg:gap-3 md:gap-1 gap-3 text-white text-[16px] font-medium">
@@ -284,11 +270,13 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
                       <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
                     </div>
                   </div>
-              </div>
-            </Link>
-          ))
+                </div>
+              </Link>
+            ))}
+          </div>
         )}
       </div>
+
 
       <div className='flex md:gap-10 gap-4 justify-center my-14'>
         <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#B88E2F] text-white flex justify-center items-center'>1</div>

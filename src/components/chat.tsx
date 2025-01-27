@@ -14,20 +14,20 @@ import {
 } from "@/components/ui/card"
 import { motion, AnimatePresence } from "framer-motion"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-
 import { Send, X } from 'lucide-react'
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import Image from 'next/image'
 import { Poppins } from 'next/font/google'
 import { RiChatSmileAiFill } from "react-icons/ri";
+import { IoStop } from 'react-icons/io5'
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 type CodeProps = {
-  inline?: boolean;  
-  children?: ReactNode;  
-  className?: string;  
+  inline?: boolean;
+  children?: ReactNode;
+  className?: string;
 };
 
 export default function Chat() {
@@ -39,6 +39,7 @@ export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit, isLoading, stop, reload, error } = useChat({ api: "/api/gemini" })
 
   const suggestions = ["What is Furniro?", "Tell me about Furniro's features", "How can Furniro help me?"];
+  const typingSound = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -68,28 +69,50 @@ export default function Chat() {
     }
   }, [messages])
 
+  useEffect(() => {
+    typingSound.current = new Audio("/sounds/typing.mpeg");
+
+    return () => {
+      if (typingSound.current) {
+        typingSound.current.pause();
+        typingSound.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isLoading && typingSound.current) {
+      typingSound.current.loop = true;
+      typingSound.current.play().catch((err) => console.error("Audio playback error:", err));
+    } else if (typingSound.current) {
+      typingSound.current.pause();
+      typingSound.current.currentTime = 0;
+    }
+  }, [isLoading]);
+
+
   type MockEvent = {
     preventDefault: () => void;
     target: { value: string };
   };
-  
+
   const sendMessage = async (message: string) => {
     const mockEvent: MockEvent = {
-      preventDefault: () => {},
+      preventDefault: () => { },
       target: { value: message },
     };
-  
+
     handleSubmit(mockEvent);
   };
-  
+
 
   const handleSuggestionClick = (suggestion: string) => {
-    sendMessage(suggestion);  // Send the message directly when a suggestion is clicked
+    sendMessage(suggestion);
   };
 
 
   return (
-    <div className={`${poppins.className} flex flex-col min-h-screen z-50`}>
+    <div className={`${poppins.className}`}>
       {/* Animated Chat Icon */}
       <AnimatePresence>
         {showChatIcon && (
@@ -98,12 +121,12 @@ export default function Chat() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-6 right-6"
+            className="fixed bottom-6 right-6 z-20"
           >
             <Button
               ref={chatIconRef}
               onClick={toggleChat}
-              className="rounded-full bg-[#B88E2F] hover:bg-[#b18623] p-1 sm:w-16 sm:h-16 w-14 h-14 flex justify-center items-center [&_svg]:w-3/5 [&_svg]:h-3/5"
+              className="rounded-full bg-[#B88E2F] hover:bg-[#b18623] p-1 sm:w-[60px] sm:h-[60px] w-14 h-14 flex justify-center items-center [&_svg]:w-3/5 [&_svg]:h-3/5"
             >
               {!isChatOpen ? (
                 <RiChatSmileAiFill />
@@ -123,7 +146,7 @@ export default function Chat() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 sm:right-6 w-[95%] sm:ml-0 ml-[2.5vw] mx-auto sm:w-[400px]"
+            className="fixed bottom-24 sm:right-6 w-[95%] sm:ml-0 ml-[2.5vw] mx-auto sm:w-[400px] z-20"
           >
             <Card className='border-2'>
               <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-3'>
@@ -152,8 +175,6 @@ export default function Chat() {
                           </Button>
                         ))}
                       </div>
-
-
                     </div>
                   )}
                   {messages?.map((message, index) => (
@@ -217,17 +238,25 @@ export default function Chat() {
                     </div>
                   ))}
                   {isLoading && (
-                    <div className="w-full flex justify-center items-center gap-2">
-                      <div className="flex items-center bg-[#B88E2F]">
-                        <div className="dot animate-wave delay-100">.</div>
-                        <div className="dot animate-wave delay-200">.</div>
-                        <div className="dot animate-wave delay-300">.</div>
+                    <div className="w-full flex justify-start items-center gap-2">
+                      <div className="flex-shrink-0 mr-2">
+                        <Image
+                          src="/images/logo.png"
+                          alt="AI"
+                          width={100}
+                          height={100}
+                          className="w-10 h-6 rounded-full"
+                        />
                       </div>
-                      <button className="underline" type="button" onClick={() => stop()}>
-                        abort
-                      </button>
+                      <div className="flex items-center">
+                        <div className="dot animate-bounce delay-100">.</div>
+                        <div className="dot animate-bounce delay-200">.</div>
+                        <div className="dot animate-bounce delay-300">.</div>
+                      </div>
+
                     </div>
                   )}
+
 
 
                   {error && (
@@ -249,8 +278,22 @@ export default function Chat() {
                     placeholder='Type your message here...'
                     className='flex-1'
                   />
-                  <Button type='submit' className='size-9 group bg-[#B88E2F] hover:bg-transparent border border-transparent hover:border-[#b18623]' disabled={isLoading} size={"icon"}>
-                    <Send className='size-4 text-white group-hover:text-[#B88E2F]' />
+                  <Button
+                    type="submit"
+                    className="size-9 group bg-[#B88E2F] hover:bg-transparent border border-transparent hover:border-[#b18623]"
+                    size="icon"
+                  >
+                    {isLoading ? (
+                      <button
+                        className="text-[10px] group"
+                        type="button"
+                        onClick={stop}
+                      >
+                        <IoStop className='text-white group-hover:text-[#B88E2F]' />
+                      </button>
+                    ) : (
+                      <Send className="size-4 text-white group-hover:text-[#B88E2F]" />
+                    )}
                   </Button>
                 </form>
               </CardFooter>

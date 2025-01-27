@@ -171,19 +171,19 @@ const Search = () => {
 
                                         <div className="sm:m-3 sm:mt-0 mt-3 space-y-3">
                                             <div className="flex sm:gap-2 gap-1">
-                                                <Link href={"/"}>
+                                                <Link href={"/home_furniture/sofa"}>
                                                     <button
                                                         className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[12px] font-semibold sm:px-[20px] px-[12px] py-[7px] sm:py-[10px] rounded-3xl">
                                                         Sofa
                                                     </button>
                                                 </Link>
-                                                <Link href={"/"}>
+                                                <Link href={"/home_furniture/bed"}>
                                                     <button
                                                         className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[12px] font-semibold sm:px-[20px] px-[12px] py-[7px] sm:py-[10px] rounded-3xl">
                                                         Bed
                                                     </button>
                                                 </Link>
-                                                <Link href={"/"}>
+                                                <Link href={"/office/bookshelves"}>
                                                     <button
                                                         className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[12px] font-semibold sm:px-[20px] px-[12px] py-[7px] sm:py-[10px] rounded-3xl">
                                                         Bookshelves
@@ -191,13 +191,13 @@ const Search = () => {
                                                 </Link>
                                             </div>
                                             <div className="flex gap-2">
-                                                <Link href={"/"}>
+                                                <Link href={"/office/office_chair"}>
                                                     <button
                                                         className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[12px] font-semibold sm:px-[20px] px-[12px] py-[7px] sm:py-[10px] rounded-3xl">
                                                         Office Chair
                                                     </button>
                                                 </Link>
-                                                <Link href={"/"}>
+                                                <Link href={"/home_furniture/dining_table"}>
                                                     <button
                                                         className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[12px] font-semibold sm:px-[20px] px-[12px] py-[7px] sm:py-[10px] rounded-3xl">
                                                         Dinning Table

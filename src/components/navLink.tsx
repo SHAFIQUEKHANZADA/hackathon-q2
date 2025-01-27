@@ -29,6 +29,11 @@ const MobileMenuBar = () => {
         if (!isMenuOpen) setActiveSubMenu(null);
     };
 
+    const handleLinkClick = () => {
+        setIsMenuOpen(false);  
+        setActiveSubMenu(null);  
+    };
+
     return (
         <div className={`${montserrat.className} md:hidden`}>
             {/* Menu Button / Close Button */}
@@ -145,15 +150,15 @@ const MobileMenuBar = () => {
                             <>
                                 <h1 className="py-4 text-[19px] font-semibold uppercase">SHOP</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/home_furniture" className="text-[16px] font-medium  py-2">
+                                <Link href="/home_furniture" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     Home Furniture
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/office" className="text-[16px] font-medium  py-2">
+                                <Link href="/office" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     Office
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/outdoor" className="text-[16px] font-medium  py-2">
+                                <Link href="/outdoor" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     Outdoor
                                 </Link>
                             </>
@@ -163,44 +168,44 @@ const MobileMenuBar = () => {
                                 {/* <h1 className="py-4 text-[19px] font-semibold uppercase">CATEGORY</h1> */}
 
                                 <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Home Furniture</h3>
-                                <Link href={"/home_furniture/bed"} className="text-[16px] font-medium py-2">
+                                <Link href={"/home_furniture/bed"} className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     Bed
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/home_furniture/sofa"} className="text-[16px] font-medium py-3">
+                                <Link href={"/home_furniture/sofa"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Sofa
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/home_furniture/dining_table"} className="text-[16px] font-medium py-3">
+                                <Link href={"/home_furniture/dining_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Dinning Table
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
 
                                 <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Office</h3>
-                                <Link href={"/office/office_chair"} className="text-[16px] font-medium  py-3">
+                                <Link href={"/office/office_chair"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Office Chair
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/office/meeting_table"} className="text-[16px] font-medium  py-3">
+                                <Link href={"/office/meeting_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Meeting Table
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/office/bookshelves"} className="text-[16px] font-medium py-3">
+                                <Link href={"/office/bookshelves"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Bookshelves
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
 
                                 <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Outdoor</h3>
 
-                                <Link href={"/outdoor/outdoor_chair"} className="text-[16px] font-medium py-3">
+                                <Link href={"/outdoor/outdoor_chair"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Outdoor Chair
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/outdoor/coffe_table"} className="text-[16px] font-medium py-3">
+                                <Link href={"/outdoor/coffe_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Coffe Table
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
-                                <Link href={"/outdoor/swings"} className="text-[16px] font-medium py-3">
+                                <Link href={"/outdoor/swings"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
                                     Swings
                                 </Link>
                             </div>
@@ -209,15 +214,15 @@ const MobileMenuBar = () => {
                             <>
                                 <h1 className="py-4 text-[19px] font-semibold uppercase">ACCOUNT</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/account/login" className="text-[16px] font-medium flex items-center gap-1 py-2">
+                                <Link href="/account/login" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
                                     <CiLogin /> Login
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/account/signup" className="text-[16px] font-medium flex items-center gap-1 py-2">
+                                <Link href="/account/signup" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
                                     <FiUser /> Signup
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/account/profile" className="text-[16px] font-medium flex items-center gap-1 py-2">
+                                <Link href="/account/profile" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
                                     <HiOutlineUserCircle /> Your Profile
                                 </Link>
 
@@ -227,23 +232,23 @@ const MobileMenuBar = () => {
                             <>
                                 <h1 className="py-4 text-[19px] font-semibold uppercase">ABOUT FURNIRO</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/press" className="text-[16px] font-medium  py-2">
-                                    PRESS
+                                <Link href="/blog" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
+                                    Our Blogs
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/lookbook" className="text-[16px] font-medium  py-2">
+                                <Link href="/lookbook" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     LOOKBOOK
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/about" className="text-[16px] font-medium  py-2">
+                                <Link href="/about" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
                                     ABOUT US
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/contact" className="text-[16px] font-medium  py-2">
-                                    CONTACT US
+                                <Link href="/contact" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
+                                    Contact Us
                                 </Link>
                             </>
-                        )}
+                        )} 
 
                     </div>
                 </div>

@@ -140,18 +140,30 @@ body {
 
 
  
+/* Base style for each dot */
 .dot {
-  font-size: 2rem; /* Adjust the size of the dots */
-  color: white;  
-  animation: wave 1.4s ease-in-out infinite; /* Apply the swing animation */
+  font-size: 2rem; /* You can adjust the size */
+  color: #B88E2F; /* Your color */
+  animation: bounce 1.5s infinite ease-in-out;
 }
 
-/* Create the swinging wave animation */
-@keyframes wave {
+/* Delay the bounce for each dot to create the wave effect */
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+/* Bounce animation */
+@keyframes bounce {
   0%, 100% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   50% {
-    transform: translateX(10px); /* Move to the right */
+    transform: translateY(-10px);  
   }
 }
