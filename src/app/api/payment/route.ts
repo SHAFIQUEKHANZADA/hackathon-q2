@@ -56,8 +56,8 @@ export const POST = async (req: NextRequest) => {
         const checkoutSession = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             mode: "payment",
-            success_url: `http://localhost:3000/order-confirmation?token=${customer.id}`,
-            cancel_url: `http://localhost:3000/cancel?token=${customer.id}`,
+            success_url: `${process.env.DOMAIN}/order-confirmation?token=${customer.id}`,
+            cancel_url: `${process.env.DOMAIN}/cancel?token=${customer.id}`,
             line_items: lineItems,
         });
 
