@@ -10,6 +10,8 @@ import { IoMdHeartEmpty, IoMdShare } from 'react-icons/io';
 import Image from 'next/image';
 import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/store/cartSlice";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -18,6 +20,7 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [view, setView] = useState<'grid' | 'list'>('grid');
+  const dispatch = useDispatch();
   console.log(view)
   // const [currentPage, setCurrentPage] = useState(1);
   // const itemsPerPage = 16;
@@ -62,6 +65,25 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
 
     fetchCategoryProducts();
   }, [category, subcategory]);
+
+  const handleAddToCart = (product: ProductType) => {
+    if (product) {
+      const imageUrl = product.images?.[0]?.asset?.url ||
+        "/default-image.png";
+
+      console.log("Generated Image URL:", imageUrl);
+
+      const cartItem = {
+        id: product.slug.current,
+        name: product.title,
+        price: product.salePrice || product.price,
+        quantity: 1,
+        image: [imageUrl],
+      };
+
+      dispatch(addToCart(cartItem));
+    }
+  };
 
   if (loading) return <p>Loading...</p>;
 
@@ -231,33 +253,37 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
 
                 <div className="md:my-4 my-3 sm:px-4 px-2">
                   {/* Product Title */}
-                  <h1 className="text-[#3A3A3A] font-semibold sm:text-[22px] text-[16px] lg:mb-2">{product.title}</h1>
+                  <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.8vw] lg:mb-2 line-clamp-2">{product.title}</h1>
 
 
                   {/* Product Price */}
-                  <div className="flex items-center gap-2 lg:mt-4">
-                    {product.salePrice ? (
-                      <>
-                        <span className="line-through text-[#B0B0B0] font-light text-[11px] sm:text-[16px]">
-                          ${product.price.toFixed(2)}
-                        </span>{" "}
-                        <br />
-                        <span>${product.salePrice.toFixed(2)}</span>
-                      </>
-                    ) : (
-                      `$${product.price.toFixed(2)}`
-                    )}
-                  </div>
+                  <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px]">
+                      {product.salePrice ? (
+                        <>
+                          <span className="line-through text-[#B0B0B0] font-light text-[11px] lg:text-[16px]">
+                            ${product.price.toFixed(2)}
+                          </span>{" "}
+                          <br />
+                          <span className="text-[11px] lg:text-[16px]">${product.salePrice.toFixed(2)}</span>
+                        </>
+                      ) : (
+                        `$${product.price.toFixed(2)}`
+                      )}
+                    </div>
                 </div>
                 {/* "Add to Cart" Button on Hover */}
-                <div className="absolute flex  flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px]  left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <button className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]">Add to Cart</button>
-                  <div className="flex md:flex-row flex-col items-center gap-3 text-white text-[16px] font-medium">
-                    <span className="flex items-center gap-1"><IoMdShare /> Share</span>
-                    <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
-                    <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-white text-[#C19C49] lg:w-[202px] lg:px-0 px-2 h-[48px]">
+                      Add to Cart
+                    </button>
+                    <div className="flex lg:flex-row flex-col items-center lg:gap-3 md:gap-1 gap-3 text-white text-[16px] font-medium">
+                      <span className="flex items-center gap-1"><IoMdShare /> Share</span>
+                      <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
+                      <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                    </div>
                   </div>
-                </div>
               </div>
             </Link>
           ))

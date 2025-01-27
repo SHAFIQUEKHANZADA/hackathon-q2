@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/components/ReduxProvider";
+import Chat from "@/components/chat";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,9 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-        <Navbar/>
-        {children}
-        <Footer/>
+          <Navbar />
+          {children}
+          <Chat />
+          <Footer />
         </ReduxProvider>
       </body>
     </html>

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import PreFooter from '@/components/PreFooter';
 import { AiFillDelete } from 'react-icons/ai';
- 
+
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 const CartPage = () => {
@@ -18,8 +18,6 @@ const CartPage = () => {
     const handleRemove = (id: string) => {
         dispatch(removeFromCart(id));
     };
-
-  
 
     const handleQuantityChange = (id: string, quantity: number) => {
         dispatch(updateCartQuantity({ id, quantity }));
@@ -78,11 +76,12 @@ const CartPage = () => {
                                 {cartItems.map((item) => (
                                     <li
                                         key={item.id}
-                                        className="flex md:flex-row flex-col justify-between md:p-0 p-5 md:items-center items-start my-5  md:px-14"
+                                        className="flex md:flex-row flex-col space-y-1 justify-between md:p-0 border-b border-[#E8E8E8] pb-5 md:items-center items-start my-5 md:px-14"
                                     >
-                                        <div className="flex items-center flex-1 relative lg:w-[105px] md:h-[105px] w-[160px] h-full mr-4 gap-3">
+                                        <div className="flex items-center flex-1 mb-2 relative lg:w-[105px] md:h-[105px] w-full h-full sm:mr-4 gap-3">
                                             {/* Make the container `relative` */}
-                                            <div className="">
+                                            <div>
+                                            <div className="w-16 h-16">
                                                 <Image
                                                     src={item.image && item.image.length > 0 ? item.image[0] : "/placeholder.png"}
                                                     alt={item.name}
@@ -91,6 +90,7 @@ const CartPage = () => {
                                                     className=" rounded-lg object-cover mr-4"
                                                 />
 
+                                            </div>
                                             </div>
                                             <div>
                                                 <h2 className="font-medium">{item.name}</h2>
@@ -121,11 +121,11 @@ const CartPage = () => {
                                             </p>
 
                                             <button
-                                            className="mx-5 md:hidden block text-[#B88E2F]"
-                                            onClick={() => handleRemove(item.id)}
-                                        >
-                                            <AiFillDelete className='text-[20px]' />
-                                        </button>
+                                                className="mx-5 md:hidden block text-[#B88E2F]"
+                                                onClick={() => handleRemove(item.id)}
+                                            >
+                                                <AiFillDelete className='text-[20px]' />
+                                            </button>
                                         </div>
 
                                         <button
@@ -175,7 +175,6 @@ const CartPage = () => {
                     </div>
                 </div>
             </div>
-
 
             <PreFooter />
 

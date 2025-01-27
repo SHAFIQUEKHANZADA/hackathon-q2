@@ -220,7 +220,7 @@ const Latest = () => {
                       </p>
                     </div>
 
-                    <div className="absolute flex flex-col space-y-4 justify-center items-center bg-black/50 w-full h-full left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 w-full h-full left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <button
                         className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]"
                       >

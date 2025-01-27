@@ -137,3 +137,21 @@ body {
   background-color: white; /* Customize track color */
   border-radius: 4px; /* Round the edges */
 }
+
+
+ 
+.dot {
+  font-size: 2rem; /* Adjust the size of the dots */
+  color: white;  
+  animation: wave 1.4s ease-in-out infinite; /* Apply the swing animation */
+}
+
+/* Create the swinging wave animation */
+@keyframes wave {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px); /* Move to the right */
+  }
+}

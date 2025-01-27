@@ -7,24 +7,31 @@ import { Poppins } from 'next/font/google';
 import Link from 'next/link';
 import Image from 'next/image';
 import PreFooter from '@/components/PreFooter';
+import axios from 'axios';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 
 
 const CheckoutPage = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
+    const [paymentMethod, setPaymentMethod] = useState('credit-card');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [billingDetails, setBillingDetails] = useState({
         firstName: '',
+        lastName: '',
         companyName: '',
         streetAddress: '',
         apartment: '',
+        province: '',
         city: '',
+        country: '',
         phone: '',
         email: '',
         saveInfo: false,
     });
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         setBillingDetails((prev) => ({
             ...prev,
@@ -32,14 +39,48 @@ const CheckoutPage = () => {
         }));
     };
 
-    const handlePlaceOrder = () => {
-        // Process order logic here
-        console.log('Order placed:', { cartItems, billingDetails });
+    const validateBillingDetails = () => {
+        const { firstName, lastName, streetAddress, city, phone, email } = billingDetails;
+
+        if (!firstName || !lastName || !streetAddress || !city || !phone || !email) {
+            alert("Please fill out all required fields.");
+            return false;
+        }
+        return true;
     };
 
     const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    const shipping = 10; // Flat shipping rate
+    const shipping = 10;
     const total = subtotal + shipping;
+
+    const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPaymentMethod(e.target.value);
+    };
+
+    const handlePlaceOrder = async () => {
+        setIsSubmitting(true);
+        const lineItems = cartItems.map(item => ({
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            image: item.image[0],
+        }));
+
+        try {
+            const response = await axios.post("/api/payment", {
+                items: lineItems,
+                billingDetails,
+            });
+
+            if (response.data.url) {
+                window.location.href = response.data.url;
+            }
+        } catch (error) {
+            console.error("Error placing the order", error);
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className={`${poppins.className} flex flex-col gap-10`}>
@@ -75,12 +116,11 @@ const CheckoutPage = () => {
                 </div>
             </div>
 
-
             <div className='px-5 md:px-[44px]'>
                 <h2 className="text-[36px] font-semibold my-8 md:ml-10">Billing details</h2>
                 <div className="flex flex-col md:flex-row justify-between lg:px-10">
                     {/* Billing Details */}
-                    <div className=" flex flex-col justify-between  md:w-[470px]">
+                    <div className=" flex flex-col justify-between md:w-[470px]">
                         <form className="md:space-y-10 space-y-5">
                             <div className='flex gap-3'>
                                 <div>
@@ -103,9 +143,9 @@ const CheckoutPage = () => {
                                     </label>
                                     <input
                                         type="text"
-                                        id="firstName"
-                                        name="firstName"
-                                        value={billingDetails.firstName}
+                                        id="lastName"
+                                        name="lastName"
+                                        value={billingDetails.lastName}
                                         onChange={handleInputChange}
                                         className="w-full border border-gray-400  rounded-[10px] p-3"
                                         required
@@ -135,8 +175,10 @@ const CheckoutPage = () => {
                                 <select
                                     id="country"
                                     name="country"
+                                    value={billingDetails.country}
+                                    onChange={handleInputChange}
                                     className="w-full border border-gray-400 rounded-[10px] p-3 bg-white"
-                                  
+
                                 >
                                     <option value="" disabled>
                                         Select your country/region
@@ -187,7 +229,7 @@ const CheckoutPage = () => {
                                 <select
                                     id="province"
                                     name="province"
-
+                                    value={billingDetails.province}
                                     className="w-full border border-gray-400 rounded-[10px] p-3  bg-white"
                                     required
                                 >
@@ -230,8 +272,7 @@ const CheckoutPage = () => {
                                 />
                             </div>
 
-                            <div >
-
+                            <div>
                                 <input
                                     type="text"
                                     id="email"
@@ -246,7 +287,7 @@ const CheckoutPage = () => {
                     </div>
 
                     {/* Product Details */}
-                    <div className="md:w-[628px] h-[769px] md:px-10">
+                    <div className="md:w-[628px] sm:h-[769px] md:px-10">
                         <div className=" space-y-5">
                             <div className='flex flex-col gap-4'>
                                 <div className="py-4">
@@ -320,15 +361,16 @@ const CheckoutPage = () => {
                                 </h1>
 
                                 <div className='flex items-center'>
-                                    <input type="radio" id="bank" name="payment" value="bank" className='w-[20px] h-[20px] accent-[#9F9F9F]' />
+                                    <input type="radio" id="bank" name="payment" className='w-[20px] h-[20px] accent-[#9F9F9F]' value="credit-card" checked={paymentMethod === 'credit-card'} onChange={handlePaymentChange} />
                                     <label htmlFor="bank" className="ml-2 text-[#9F9F9F] text-[16px]">
-                                        Direct Bank Transfer
+                                        Credit Card
                                     </label>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" id="bank" name="payment" value="bank" className='w-[20px] h-[20px] accent-[#9F9F9F]' />
+                                    <input type="radio" id="bank" name="payment" value="cod" className='w-[20px] h-[20px] accent-[#9F9F9F]' checked={paymentMethod === 'cod'}
+                                        onChange={handlePaymentChange} />
                                     <label htmlFor="bank" className="ml-2 text-[#9F9F9F] text-[16px]">
-                                        Direct Bank Transfer
+                                        Cash on Delivery
                                     </label>
                                 </div>
 
@@ -338,17 +380,21 @@ const CheckoutPage = () => {
                             </div>
 
                             <button
-                                className="md:w-[318px] flex justify-center w-full bg-transparent text-black border border-black  text-[20px] px-[78px] font-medium py-[16px] rounded-[15px] mt-4"
-                                onClick={handlePlaceOrder}
+                                className="md:w-[318px] flex justify-center w-full bg-transparent text-black border border-black text-[20px] px-[78px] font-medium py-[16px] rounded-[15px] mt-4"
+                                onClick={() => {
+                                    if (validateBillingDetails()) {
+                                        handlePlaceOrder();  
+                                    }
+                                }}
+                                disabled={isSubmitting}
                             >
                                 Place Order
                             </button>
+
                         </div>
                     </div>
                 </div>
             </div>
-
-
             <PreFooter />
         </div>
     );

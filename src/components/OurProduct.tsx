@@ -161,13 +161,13 @@ const OurProduct = () => {
                     </div>
                   </div>
 
-                  <div className="absolute flex flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button
                       onClick={() => handleAddToCart(product)}
-                      className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]">
+                      className="bg-white text-[#C19C49] lg:w-[202px] lg:px-0 px-2 h-[48px]">
                       Add to Cart
                     </button>
-                    <div className="flex md:flex-row flex-col items-center lg:gap-3 md:gap-1 gap-3 text-white text-[16px] font-medium">
+                    <div className="flex lg:flex-row flex-col items-center lg:gap-3 md:gap-1 gap-3 text-white text-[16px] font-medium">
                       <span className="flex items-center gap-1"><IoMdShare /> Share</span>
                       <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
                       <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>

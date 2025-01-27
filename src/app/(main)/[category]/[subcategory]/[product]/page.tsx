@@ -20,6 +20,8 @@ import { PiGreaterThanBold } from "react-icons/pi";
 import ShareButton from "@/components/Share";
 import RelatedProducts from "@/components/RelatedProducts";
 import Reviews from "@/components/Reviews";
+import { useRouter } from "next/navigation";
+import { addToCompare } from "@/app/store/compareProduct";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
@@ -44,7 +46,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
     const swiperRef = useRef<SwiperRef>(null);
 
     const dispatch = useDispatch();
-
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -130,6 +132,26 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
         }
     };
 
+    const handleCompareClick = () => {
+        if (productDetails) {
+            const imageUrl = productDetails.images?.[0]?.asset?.url || 
+                "/default-image.png"; 
+
+            const compareItem = {
+                id: productDetails.slug.current,  
+                name: productDetails.title, 
+                price: productDetails.price || 0,  
+                salePrice: productDetails.salePrice || undefined,  
+                averageRating: productDetails.averageRating || 0,  
+                totalReviews: productDetails.totalReviews || 0,  
+                image: [imageUrl], 
+            };
+
+            dispatch(addToCompare(compareItem));
+            router.push("/comparison");
+        }
+    };
+    
     const renderStars = (rating: number) => {
         return Array(5)
             .fill(0)
@@ -149,19 +171,19 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             <div className='md:h-[100px] h-[50px] bg-[#F9F1E7] flex items-center md:px-[70px] px-5'>
                 <ul className="flex items-center space-x-1 md:space-x-3">
                     <li>
-                        <Link href="/" className="text-[16px] text-black opacity-[50%]">
+                        <Link href="/" className="sm:text-[16px] text-[12px] text-black opacity-[50%]">
                             Home
                         </Link>
                     </li>
-                    <li className="text-[16px] text-black"><PiGreaterThanBold /></li>
+                    <li className="sm:text-[16px] text-[12px] text-black"><PiGreaterThanBold /></li>
                     <li>
-                        <Link href={`/${category}`} className="text-[14px] text-black opacity-[50%]">
+                        <Link href={`/${category}`} className="text-[10px] text-black opacity-[50%]">
                             {category}
                         </Link>
                     </li>
-                    <li className="text-[16px] text-black"><PiGreaterThanBold /></li>
+                    <li className="sm:text-[16px] text-[12px] text-black"><PiGreaterThanBold /></li>
                     <li className="  text-black opacity-[50%] text-[24px] font-extralight">|</li>
-                    <li className="text-black text-[16px] overflow-hidden whitespace-nowrap text-ellipsis max-w-[150px] md:max-w-full">{title}</li>
+                    <li className="text-black sm:text-[16px] text-[12px] overflow-hidden whitespace-nowrap text-ellipsis max-w-[150px] md:max-w-full">{title}</li>
                 </ul>
             </div>
 
@@ -327,19 +349,20 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                             </div>
 
                         ) : (
-                            <div className="flex gap-3">
+                            <div className="flex sm:gap-3 gap-1">
                                 <button
                                     onClick={handleAddToCart}
                                     className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 lg:text-[20px] w-fit">
                                     Add to Cart
                                 </button>
-                                <Link href={"/comparison"}>
-                                    <button
-                                        className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 flex gap-4 text-center justify-center items-center lg:text-[20px] w-fit"
-                                    >
-                                        <span>+</span> Compare
-                                    </button>
-                                </Link>
+
+                                <button
+                                    onClick={handleCompareClick}
+                                    className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 flex sm:gap-4 gap-1 text-center justify-center items-center lg:text-[20px] w-fit"
+                                >
+                                    <span>+</span> Compare
+                                </button>
+
 
                                 <button
                                     onClick={() => handleLike(productDetails)}
@@ -416,7 +439,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
 
                     {/* Tab Content */}
                     {selectedTab === "description" && (
-                        <div className="text-[16px] text-[#9F9F9F] flex flex-col gap-3 md:w-[80%] mx-auto">
+                        <div className="sm:text-[16px] text-[14px] text-[#9F9F9F] flex flex-col gap-3 md:w-[80%] mx-auto">
                             <h1>
                                 <div className="rich-text">
                                     <PortableText value={productdetails} />
@@ -426,7 +449,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                     )}
 
                     {selectedTab === "additionalInfo" && (
-                        <div className="text-[16px] text-[#9F9F9F] md:w-[80%] mx-auto">
+                        <div className="sm:text-[16px] text-[14px] text-[#9F9F9F] md:w-[80%] mx-auto">
                             <div className="rich-text">
                                 <PortableText value={additionalInformation} />
                             </div>
@@ -434,7 +457,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                     )}
 
                     {selectedTab === "reviews" && (
-                        <div className="text-[16px] text-[#9F9F9F] md:w-[80%] mx-auto">
+                        <div className="sm:text-[16px] text-[14px] text-[#9F9F9F] md:w-[80%] mx-auto">
                             <div>
                                 <div>
                                     {productReviews.reviews.map((review, index) => (

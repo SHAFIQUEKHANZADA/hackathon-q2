@@ -60,7 +60,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {products.map((product, id) => (
                     <Link key={id} href={`/${product.category?.current || category}/${product.subcategory?.current || subcategory}/${product.slug.current}`}>
-                        <div className="relative bg-[#F4F5F7] flex flex-col md:w-[285px] md:h-[446px] h-[300px] group">
+                        <div className="relative bg-[#F4F5F7] flex flex-col md:w-[285px] md:h-[446px] h-[70vw] group">
                             {product.specialTag && product.specialTag.includes("newarrival") && (
                                 <div className="absolute sm:top-4 top-2 sm:right-4 right-2 h-[48px] w-[48px] bg-[#2EC1AC] flex justify-center items-center text-white text-[16px] font-medium px-2 py-1 rounded-full">
                                     New
@@ -98,12 +98,12 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                                     </span>
                                 )}
                             </div>
-                            <div className="p-2">
-                                <h3 className="text-[#3A3A3A] font-semibold sm:text-[18px] text-[14px] lg:mb-2 mb-1">{product.title}</h3>
-                                <p className="text-[#3A3A3A] font-semibold text-[14px] sm:text-[18px] flex flex-row-reverse items-center justify-end sm:gap-2 gap-1">
+                            <div className="p-2 sapce-y-2">
+                                <h3 className="text-[#3A3A3A] font-semibold sm:text-[18px] text-[4vw] lg:mb-2 mb-1 line-clamp-2">{product.title}</h3>
+                                <p className="text-[#3A3A3A] font-semibold text-[3.4vw] sm:text-[18px] flex flex-row-reverse items-center justify-end sm:gap-2 gap-1">
                                     {product.salePrice ? (
                                         <>
-                                            <span className="line-through text-[#B0B0B0] font-light text-[11px] sm:text-[16px]">
+                                            <span className="line-through text-[#B0B0B0] font-light text-[3vw] sm:text-[16px]">
                                                 ${product.price.toFixed(2)}
                                             </span>{" "}
                                             <br />

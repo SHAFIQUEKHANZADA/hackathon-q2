@@ -7,16 +7,87 @@ import CartPopup from "./CartPopup";
 import MobileMenuBar from "./navLink";
 import Search from "./Search";
 import LikedProducts from "./LikedProduct";
-import { FaChevronDown } from "react-icons/fa6";
-import { useState } from "react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
+const categories = [
+  {
+    title: "Home Furniture",
+    href: "/home_furniture",
+    description: "Comfortable and stylish furniture for your home.",
+    subcategories: [
+      {
+        title: "Bed",
+        href: "/home_furniture/bed",
+        description: "Find the perfect bed for a restful sleep.",
+      },
+      {
+        title: "Sofa",
+        href: "/home_furniture/sofa",
+        description: "Cozy and modern sofas for your living space.",
+      },
+      {
+        title: "Dining Table",
+        href: "/home_furniture/dining_table",
+        description: "Elegant dining tables for every home.",
+      },
+    ],
+  },
+  {
+    title: "Office",
+    href: "/office",
+    description: "Efficient and ergonomic furniture for your workspace.",
+    subcategories: [
+      {
+        title: "Office Chair",
+        href: "/office/office_chair",
+        description: "Chairs designed for comfort and productivity.",
+      },
+      {
+        title: "Meeting Table",
+        href: "/office/meeting_table",
+        description: "Tables to foster collaboration and discussion.",
+      },
+      {
+        title: "Bookshelves",
+        href: "/office/bookshelves",
+        description: "Organize your books and files stylishly.",
+      },
+    ],
+  },
+  {
+    title: "Outdoor",
+    href: "/outdoor",
+    description: "Durable and stylish furniture for your outdoor spaces.",
+    subcategories: [
+      {
+        title: "Outdoor Chair",
+        href: "/outdoor/outdoor_chair",
+        description: "Comfortable seating for your garden or patio.",
+      },
+      {
+        title: "Coffee Table",
+        href: "/outdoor/coffee_table",
+        description: "Perfect tables for outdoor gatherings.",
+      },
+      {
+        title: "Swings",
+        href: "/outdoor/swings",
+        description: "Relax and unwind with our sturdy swings.",
+      },
+    ],
+  },
+];
 const Navbar = () => {
-
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <nav
       className={`${poppins.className} overflow md:h-[100px] h-[60px] bg-maincolor text-black flex items-center justify-between lg:px-[65px] md:px-[3vw] px-3`}
@@ -48,96 +119,47 @@ const Navbar = () => {
             </span>
           </li>
         </Link>
-        <div className="relative z-50">
-          {/* Main Category */}
-          <button
-            className="flex items-center gap-[6px]"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onClick={() => setIsHovered((prev) => !prev)}
-          >
-            Category
-            <FaChevronDown
-              className={`font-light text-[10px] transform transition-transform duration-300 ${isHovered ? "rotate-180" : "rotate-0"
-                }`}
-            />
-          </button>
 
-          {/* Dropdown Menu */}
-          <div
-            className={`absolute left-0 mt-1 px-5 lg:w-[470px] flex justify-between bg-white shadow-lg border border-gray-200 transform transition-all duration-300 pointer-events-none ${isHovered ? "scale-100 opacity-100 pointer-events-auto" : "scale-95 opacity-0"
-              }`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Home Furniture */}
-            <div className="p-4">
-              <Link href={"/home_furniture"}><h3 className="font-semibold text-black">Home Furniture</h3></Link>
-              <div className="mt-2 space-y-1 flex flex-col">
-                <Link href={"/home_furniture/bed"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Bed
-                  </span>
-                </Link>
-                <Link href={"/home_furniture/sofa"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Sofa
-                  </span>
-                </Link>
-                <Link href={"/home_furniture/dining_table"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Dinning Table
-                  </span>
-                </Link>
-              </div>
-            </div>
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger className="p-0 font-medium text-[16px]">Categories</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <div className="flex p-6 gap-5 max-h-[80vh] w-[45vw] overflow-hidden">
+                  {categories.map((category) => (
+                    <div key={category.title} className="flex-1 space-y-1">
+                      {/* Main Category */}
+                      <Link href={category.href}>
+                        <h3 className="text-lg font-semibold text-black hover:underline">
+                          {category.title}
+                        </h3>
+                      </Link>
+                      <p className="text-[12px] text-gray-400">{category.description}</p>
+                      {/* Subcategories */}
+                      <ul className="space-y-2 mt-10">
+                        {category.subcategories.map((subcategory) => (
+                          <li key={subcategory.title}>
+                            <Link href={subcategory.href}>
+                              <div className="block space-y-1 rounded-md p-2 leading-none no-underline hover:bg-gray-100">
+                                <div className="text-sm font-medium text-black">
+                                  {subcategory.title}
+                                </div>
+                                <p className="text-[10px] text-gray-400">
+                                  {subcategory.description}
+                                </p>
+                              </div>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
 
-            {/* Office */}
-            <div className="p-4">
-              <Link href={"/office"}><h3 className="font-semibold text-black">Office</h3></Link>
-              <div className="mt-2 space-y-1 flex flex-col">
-                <Link href={"/office/office_chair"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Office Chair
-                  </span>
-                </Link>
-                <Link href={"/office/meeting_table"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Meeting Table
-                  </span>
-                </Link>
-                <Link href={"/office/bookshelves"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Bookshelves
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Outdoor */}
-            <div className="p-4">
-              <Link href={"/outdoor"}><h3 className="font-semibold text-black">Outdoor</h3></Link>
-              <div className="mt-2 space-y-1 flex flex-col">
-                <Link href={"/outdoor/outdoor_chair"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Outdoor Chair
-                  </span>
-                </Link>
-                <Link href={"/outdoor/coffe_table"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Coffe Table
-                  </span>
-                </Link>
-                <Link href={"/outdoor/swings"}>
-                  <span className="text-sm text-gray-700 hover:text-orange-500 cursor-pointer">
-                    Swings
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
 
         <Link href='/blog'>
           <li className="relative cursor-pointer group">

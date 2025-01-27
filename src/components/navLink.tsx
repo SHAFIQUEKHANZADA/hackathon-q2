@@ -42,7 +42,7 @@ const MobileMenuBar = () => {
 
             {/* Main Menu Drawer */}
             {isMenuOpen && (
-                <div className="fixed inset-0 z-50 h-[90%] w-full mt-14 text-black">
+                <div className="fixed inset-0 z-50 w-full mt-14 text-black">
                     <div
                         className={`relative bg-white p-4 h-full flex flex-col items-start overflow-hidden transition-transform duration-500 ${activeSubMenu ? "-translate-x-full" : "translate-x-0"
                             }`}
@@ -217,7 +217,7 @@ const MobileMenuBar = () => {
                                     <FiUser /> Signup
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/account/profile" className="text-[16px] font-medium  py-2">
+                                <Link href="/account/profile" className="text-[16px] font-medium flex items-center gap-1 py-2">
                                     <HiOutlineUserCircle /> Your Profile
                                 </Link>
 
