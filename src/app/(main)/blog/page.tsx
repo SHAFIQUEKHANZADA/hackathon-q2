@@ -8,9 +8,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaTag } from 'react-icons/fa6';
-import { FiSearch } from 'react-icons/fi';
 import imageUrlBuilder from '@sanity/image-url';
 import { client } from '@/sanity/lib/client';
+import Pagination from '@/components/Pagination';
+import SearchBlog from '@/components/searchBlogs';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
@@ -29,6 +30,9 @@ const BlogPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [categoryCounts, setCategoryCounts] = useState<CategoryCounts>({});
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 3;
 
     useEffect(() => {
         console.log("Fetching blogs...");
@@ -50,6 +54,15 @@ const BlogPage = () => {
 
         fetchBlogs();
     }, []);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const displayedBlogs = blogs.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -101,7 +114,6 @@ const BlogPage = () => {
             </div>
 
             <div className='flex md:flex-row flex-col min-h-screen lg:px-[50px] md:px-6 px-5 py-10 md:gap-[4vw] gap-10'>
-
                 <div className='md:w-[70%] space-y-10'>
 
                     {loading ? (
@@ -133,7 +145,7 @@ const BlogPage = () => {
                         <div className="text-red-500 text-center">{error}</div>
                     ) : (
                         <div className="flex flex-col items-center gap-10">
-                            {(blogs || []).map((blog: Blogtypes) => (
+                            {(displayedBlogs || []).map((blog: Blogtypes) => (
                                 <Link key={blog.slug.current} href={`/blog/${blog.category}/${blog.slug.current}`}>
                                     <div className='flex flex-col gap-4'>
                                         <div className='lg:w-[817px] lg:h-[500px] md:h-[40vw]'>
@@ -187,15 +199,7 @@ const BlogPage = () => {
                 </div>
 
                 <div className='md:w-[30%]'>
-                    <div className="relative">
-                        <input
-                            type="text"
-                            className="border border-gray-600 rounded-[10px] pl-4 pr-10 py-2 w-full focus:outline-none"
-                        />
-                        <FiSearch
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none"
-                        />
-                    </div>
+                    <SearchBlog />
 
 
                     <div>
@@ -285,7 +289,7 @@ const BlogPage = () => {
                             <p>{error}</p>
                         ) : (
                             <div className="space-y-4">
-                                {blogs.map((post, index) => (
+                                {displayedBlogs.map((post, index) => (
                                     <Link key={index} href={`/blog/${post.category}/${post.slug.current}`}>
                                         <div className="flex gap-3 items-center">
                                             <div className="flex sm:items-center mb-4">
@@ -312,6 +316,13 @@ const BlogPage = () => {
 
                 </div>
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalItems={blogs.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+            />
 
             <PreFooter />
         </div>

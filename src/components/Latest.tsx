@@ -205,14 +205,14 @@ const Latest = () => {
                       <h2 className="text-[#3A3A3A] font-semibold overflow-hidden whitespace-nowrap text-ellipsis text-[14px] sm:text-[18px]">
                         {product.title}
                       </h2>
-                      <p className="text-[#3A3A3A] font-semibold text-[14px] sm:text-[18px] flex flex-row-reverse items-center justify-end gap-2">
+                      <p className="text-[#3A3A3A] font-semibold  flex flex-row-reverse items-center justify-end sm:gap-2 gap-1">
                         {product.salePrice ? (
                           <>
                             <span className="line-through text-[#B0B0B0] font-light text-[11px] sm:text-[16px]">
                               ${product.price.toFixed(2)}
-                            </span>{" "}
-                            <br />
-                            <span>${product.salePrice.toFixed(2)}</span>
+                            </span> 
+                             
+                            <span className="font-light text-[11px] sm:text-[16px]">${product.salePrice.toFixed(2)}</span>
                           </>
                         ) : (
                           `$${product.price.toFixed(2)}`

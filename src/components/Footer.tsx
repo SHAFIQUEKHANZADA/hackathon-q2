@@ -4,7 +4,7 @@ import Link from "next/link";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 const Footer = () => {
     return (
-        <div className={`${poppins.className} md:h-[490px] md:p-20 p-5 bg-white`}>
+        <div className={`${poppins.className} md:h-[490px] lg:p-20 md:p-10 p-5 bg-white`}>
             <div className="flex flex-col">
                 <div className="md:h-[312px] flex md:flex-row flex-col gap-10 md:gap-0">
                     <div className="flex-1">
@@ -12,7 +12,7 @@ const Footer = () => {
                         <p className="text-[16px] text-[#9F9F9F]">400 University Drive Suite 200 Coral Gables,
                             FL 33134 USA</p>
                     </div>
-                    <div className="flex-1 lg:ml-10">
+                    <div className="flex-1 md:pl-2 lg:ml-10">
                         <h1 className="text-[16px] md:mb-10 mb-4 font-semibold text-[#9F9F9F]">Links</h1>
                         <ul className="flex flex-col md:gap-10 gap-3 text-black">
                             <Link href={"/"}><li className="text-[16px] font-semibold">Home</li></Link>

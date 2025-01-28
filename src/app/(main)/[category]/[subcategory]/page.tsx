@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { urlFor } from '@/sanity/lib/image';
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/app/store/cartSlice";
+import Pagination from '@/components/Pagination';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -22,8 +23,9 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
   const [view, setView] = useState<'grid' | 'list'>('grid');
   const dispatch = useDispatch();
   console.log(view)
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const itemsPerPage = 16;
+ 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   const { category, subcategory } = params;
 
@@ -31,15 +33,6 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
     setView(viewType);
   };
 
-  // const handlePageChange = (page: number) => {
-  //   setCurrentPage(page);
-  // };
-
-  // Pagination logic
-  // const paginatedProducts = products.slice(
-  //   (currentPage - 1) * itemsPerPage,
-  //   currentPage * itemsPerPage
-  // );
 
   useEffect(() => {
     const fetchCategoryProducts = async () => {
@@ -66,6 +59,15 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
     fetchCategoryProducts();
   }, [category, subcategory]);
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const displayedProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const handleAddToCart = (product: ProductType) => {
     if (product) {
       const imageUrl = product.images?.[0]?.asset?.url ||
@@ -85,7 +87,7 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
     }
   };
 
- 
+
 
   if (error) return <p>Error: {error}</p>;
   return (
@@ -211,7 +213,7 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 md:gap-8 gap-4 lg:px-[45px]">
-            {products.map((product, id) => (
+            {displayedProducts.map((product, id) => (
               <Link key={id} href={`/${product.category}/${product.subcategory}/${product.slug.current}`}>
                 <div className="relative bg-[#F4F5F7] flex flex-col justify-between lg:w-[285px] lg:h-[446px] md:h-[36vw] h-[67vw] group">
                   <div className="relative lg:w-[285px] h-[75%]">
@@ -245,7 +247,7 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
                     )}
                   </div>
                   <div className="md:my-4 my-3 sm:px-4 px-2">
-                    <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.8vw] lg:mb-2 line-clamp-2">{product.title}</h1>
+                    <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.9vw] lg:mb-2 line-clamp-2">{product.title}</h1>
                     <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px]">
                       {product.salePrice ? (
                         <>
@@ -278,12 +280,12 @@ const Category = ({ params }: { params: { category: string; subcategory: string 
       </div>
 
 
-      <div className='flex md:gap-10 gap-4 justify-center my-14'>
-        <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#B88E2F] text-white flex justify-center items-center'>1</div>
-        <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>2</div>
-        <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>3</div>
-        <div className='md:w-[98px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>Next</div>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalItems={products.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
 
       <PreFooter />
     </div>

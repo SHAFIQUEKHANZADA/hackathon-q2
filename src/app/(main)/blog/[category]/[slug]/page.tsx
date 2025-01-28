@@ -7,11 +7,11 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaTag } from 'react-icons/fa6';
-import { FiSearch } from 'react-icons/fi';
 import imageUrlBuilder from '@sanity/image-url';
 import { client } from '@/sanity/lib/client';
 import { Blogtypes } from '@/components/types';
 import { PortableText, PortableTextComponents } from 'next-sanity';
+import SearchBlog from '@/components/searchBlogs';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
@@ -23,7 +23,7 @@ function urlFor(source: { asset: { _ref: string } }) {
 }
 
 type CategoryCounts = {
-    [key: string]: number;  
+    [key: string]: number;
 };
 
 const BlogPage = ({ params }: { params: { category: string; slug: string } }) => {
@@ -95,13 +95,13 @@ const BlogPage = ({ params }: { params: { category: string; slug: string } }) =>
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch("/api/blog");  
+                const res = await fetch("/api/blog");
                 const data = await res.json();
-                setCategoryCounts(data.blogLength);  
-                setLoading(false);  
+                setCategoryCounts(data.blogLength);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching categories:", error);
-                setLoading(false);  
+                setLoading(false);
             }
         };
 
@@ -179,9 +179,7 @@ const BlogPage = ({ params }: { params: { category: string; slug: string } }) =>
                 </div>
             </div>
 
-
             <div className='flex md:flex-row flex-col min-h-screen lg:px-[50px] md:px-6 px-5 py-10 md:gap-[4vw] gap-10'>
-
                 <div className='md:w-[70%] space-y-10'>
 
                     {loading ? (
@@ -251,67 +249,58 @@ const BlogPage = ({ params }: { params: { category: string; slug: string } }) =>
                 </div>
 
                 <div className='md:w-[30%]'>
-                <div className="relative">
-                        <input
-                            type="text"
-                            className="border border-gray-600 rounded-[10px] pl-4 pr-10 py-2 w-full focus:outline-none"
-                        />
-                        <FiSearch
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none"
-                        />
-                    </div>
-
+                    <SearchBlog />
                     <div>
                         <h1 className="text-[24px] font-medium py-7">Categories</h1>
 
                         {loading ? (
-                           <div className="flex flex-col space-y-4">
-                           <div className="flex gap-2 space-y-4 w-full">
-                               <div className='w-full flex items-center gap-5'>
-                                   <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                                   <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                               </div>
+                            <div className="flex flex-col space-y-4">
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
 
-                           </div>
-                           <div className="flex gap-2 space-y-4 w-full">
-                               <div className='w-full flex items-center gap-5'>
-                                   <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                                   <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                               </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
 
-                           </div>
-                           <div className="flex gap-2 space-y-4 w-full">
-                               <div className='w-full flex items-center gap-5'>
-                                   <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                                   <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                               </div>
-                           </div>
-                           <div className="flex gap-2 space-y-4 w-full">
-                               <div className='w-full flex items-center gap-5'>
-                                   <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                                   <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                               </div>
-                           </div>
-                           <div className="flex gap-2 space-y-4 w-full">
-                               <div className='w-full flex items-center gap-5'>
-                                   <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                                   <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
-                               </div>
-                           </div>
-                       </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                                <div className="flex gap-2 space-y-4 w-full">
+                                    <div className='w-full flex items-center gap-5'>
+                                        <div className="w-[80%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                        <div className="w-[20%] h-5 bg-gray-200 animate-pulse rounded"></div>
+                                    </div>
+                                </div>
+                            </div>
                         ) : error ? (
                             <p>{error}</p>
                         ) : (
-                        <div className="flex flex-col gap-6">
-                            {Object.entries(categoryCounts).map(([category, count]) => (
-                                <Link key={category} href={`/blog/${category}`}>
-                                    <div className="flex items-center justify-between text-[16px] text-[#9F9F9F]">
-                                        <span>{category}</span>
-                                        <span>{count}</span>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
+                            <div className="flex flex-col gap-6">
+                                {Object.entries(categoryCounts).map(([category, count]) => (
+                                    <Link key={category} href={`/blog/${category}`}>
+                                        <div className="flex items-center justify-between text-[16px] text-[#9F9F9F]">
+                                            <span>{category}</span>
+                                            <span>{count}</span>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
                         )}
                     </div>
 

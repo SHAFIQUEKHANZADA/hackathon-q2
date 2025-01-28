@@ -219,26 +219,33 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                 </ul>
             </div>
 
-            <div className="flex md:flex-row flex-col gap-10 md:p-12 p-4 mt-3 sm:mt-0">
+            <div className="flex md:flex-row flex-col gap-10 lg:p-12 md:p-[3vw] p-4 mt-3 sm:mt-0">
 
-                <div className="md:w-[52%] flex lg:gap-4 gap-2 md:sticky md:top-0 md:h-[500px]">
+                <div className="md:w-[52%] flex sm:flex-row flex-col-reverse lg:gap-4 gap-2 md:sticky md:top-0 md:h-[500px]">
                     {/* Side Images */}
-                    <div className="lg:flex hidden flex-col gap-3">
+                    <div className="flex sm:flex-col flex-row gap-3 overflow-x-auto md:overflow-visible no-scrollbar">
                         {images?.map((image, index) => {
                             const sideImageUrl = image.asset._ref
                                 ? urlFor(image.asset._ref).url()
                                 : image.asset.url || "/placeholder.png";
 
                             return (
-                                <Image
+                                <div
                                     key={index}
-                                    src={sideImageUrl}
-                                    alt={image.alt || "Side image"}
-                                    width={80}
-                                    height={100}
-                                    className={`cursor-pointer rounded-[8px] border ${activeImageIndex === index ? "border-black" : "border-gray-300"}`}
-                                    onClick={() => handleImageSelect(index)}
-                                />
+                                    className="lg:w-[80px] w-[60px] h-[60px] sm:h-fit flex-shrink-0"
+                                >
+                                    <Image
+                                        src={sideImageUrl}
+                                        alt={image.alt || "Side image"}
+                                        width={80}
+                                        height={100}
+                                        className={`cursor-pointer lg:w-[80px] sm:w-[60px] w-full h-full object-cover rounded-[8px] border ${activeImageIndex === index
+                                                ? "border-black"
+                                                : "border-gray-300"
+                                            }`}
+                                        onClick={() => handleImageSelect(index)}
+                                    />
+                                </div>
                             );
                         })}
                     </div>
@@ -248,7 +255,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                         <Swiper
                             modules={[Navigation]}
                             navigation
-                            className="xl:w-[500px] md:w-[45vw] w-[91vw] h-[95vw] sm:h-[500px] md-[500px] rounded-[10px]"
+                            className="xl:w-[500px] md:w-[40vw] sm:w-[50vw] w-[91vw] h-[95vw] sm:h-[400px] lg:h-[500px] md-[500px] rounded-[10px]"
                             onSlideChange={(swiper) => setActiveImageIndex(swiper.activeIndex)}
                             initialSlide={activeImageIndex}
                             ref={swiperRef}
@@ -266,7 +273,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                                             alt={image.alt || "Main image"}
                                             width={520}
                                             height={650}
-                                            className="relative xl:w-[500px] md:w-[45vw] w-[91vw] h-[95vw] sm:h-[500px] md-[500px] rounded-[10px]"
+                                            className="relative xl:w-[500px] md:w-[40vw] sm:w-[50vw] w-[91vw] h-[95vw] sm:h-[400px] lg:h-[500px] md-[500px] rounded-[10px]"
                                         />
 
                                         {salePrice && (
@@ -371,7 +378,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                         ) : ("")}
                     </div>
 
-                    <div className='flex md:flex-row flex-col gap-3 items-end pt-6'>
+                    <div className='flex lg:flex-row flex-col gap-3 items-end pt-6'>
                         <QuantitySelector />
                         {stockStatus === "outOfStock" ? (
                             <div className="space-y-5">
@@ -545,10 +552,10 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
 
                     {/* Images */}
                     <div className="flex md:flex-row flex-col gap-5 justify-center items-center">
-                        <div className="md:w-[605px] md:h-[348px] rounded-md">
+                        <div className="  rounded-md">
                             <Image src={"/images/t1.png"} alt="sofa" width={605} height={348} />
                         </div>
-                        <div className="md:w-[605px] md:h-[348px] rounded-md bg-[#F9F1E6]">
+                        <div className="  rounded-md  bg-[#F9F1E6]">
                             <Image src={"/images/t2.png"} alt="sofa" width={605} height={348} />
                         </div>
                     </div>

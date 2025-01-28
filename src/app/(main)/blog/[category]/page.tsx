@@ -8,9 +8,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import { BsCalendarDateFill } from 'react-icons/bs';
 import { FaTag } from 'react-icons/fa6';
-import { FiSearch } from 'react-icons/fi';
 import imageUrlBuilder from '@sanity/image-url';
 import { client } from '@/sanity/lib/client';
+import SearchBlog from '@/components/searchBlogs';
+import Pagination from '@/components/Pagination';
 
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
@@ -30,6 +31,9 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [categoryCounts, setCategoryCounts] = useState<CategoryCounts>({});
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 3;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,6 +74,15 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
 
         fetchCategories();
     }, []);
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const displayedBlogs = blogs.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
 
     if (error) {
@@ -152,7 +165,7 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                         <div className="text-red-500 text-center">{error}</div>
                     ) : (
                         <div className="flex flex-col items-center gap-10">
-                            {(blogs || []).map((blog: Blogtypes) => (
+                            {(displayedBlogs || []).map((blog: Blogtypes) => (
                                 <Link key={blog.slug.current} href={`/blog/${blog.category}/${blog.slug.current}`}>
                                     <div className='flex flex-col gap-4'>
                                         <div className='lg:w-[817px] lg:h-[500px] md:h-[40vw]'>
@@ -204,16 +217,7 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                 </div>
 
                 <div className='md:w-[30%]'>
-                    <div className="relative">
-                        <input
-                            type="text"
-                            className="border border-gray-600 rounded-[10px] pl-4 pr-10 py-2 w-full focus:outline-none"
-                        />
-                        <FiSearch
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 pointer-events-none"
-                        />
-                    </div>
-
+                    <SearchBlog />
 
                     <div>
                         <h1 className="text-[24px] font-medium py-7">Categories</h1>
@@ -301,7 +305,7 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                             <p>{error}</p>
                         ) : (
                             <div className="space-y-4">
-                                {blogs.map((post, index) => (
+                                {displayedBlogs.map((post, index) => (
                                     <Link key={index} href={`/blog/${post.category}/${post.slug.current}`}>
                                         <div className="flex gap-3 items-center">
                                             <div className="flex sm:items-center mb-4">
@@ -329,12 +333,12 @@ const BlogCategory = ({ params }: { params: { category: string } }) => {
                 </div>
             </div>
 
-            <div className='flex md:gap-10 gap-4 justify-center my-14'>
-                <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#B88E2F] text-white flex justify-center items-center'>1</div>
-                <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>2</div>
-                <div className='md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>3</div>
-                <div className='md:w-[98px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] bg-[#F9F1E7] text-black flex justify-center items-center'>Next</div>
-            </div>
+            <Pagination
+                currentPage={currentPage}
+                totalItems={blogs.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={handlePageChange}
+            />
 
             <PreFooter />
         </div>

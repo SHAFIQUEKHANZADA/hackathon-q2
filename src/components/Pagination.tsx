@@ -1,77 +1,80 @@
-"use client"
-import { useEffect, useState } from "react";
+import React from "react";
 
-interface FetchResult<T> {
-    data: T[];  
-    total: number; 
-  }
-  
-  interface PaginationProps<T> {
-    itemsPerPage: number;
-    fetchData: (currentPage: number, itemsPerPage: number) => Promise<FetchResult<T>>;
-    renderItem: (item: T) => JSX.Element;
-  }
-  
-  const Pagination = <T,>({
-    itemsPerPage,
-    fetchData,
-    renderItem,
-  }: PaginationProps<T>) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [data, setData] = useState<T[]>([]);
-    const [totalItems, setTotalItems] = useState(0);
-  
-    useEffect(() => {
-      const loadPageData = async () => {
-        const fetchedData = await fetchData(currentPage, itemsPerPage);
-        setData(fetchedData.data);  
-        setTotalItems(fetchedData.total);  
-      };
-  
-      loadPageData();
-    }, [currentPage, itemsPerPage, fetchData]);
-  
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-  
-    const handleNext = () => {
-      if (currentPage < totalPages) {
-        setCurrentPage((prev) => prev + 1);
-      }
-    };
-  
-    const handlePrevious = () => {
-      if (currentPage > 1) {
-        setCurrentPage((prev) => prev - 1);
-      }
-    };
-  
-    return (
-      <div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {data.map(renderItem)}
-        </div>
-        <div className="flex justify-between items-center mt-4">
-          <button
-            onClick={handlePrevious}
-            disabled={currentPage === 1}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50"
-          >
-            Previous
-          </button>
-          <p>
-            Page {currentPage} of {totalPages}
-          </p>
-          <button
-            onClick={handleNext}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
-      </div>
-    );
+interface PaginationProps {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (page: number) => void;
+}
+
+const Pagination: React.FC<PaginationProps> = ({
+  currentPage,
+  totalItems,
+  itemsPerPage,
+  onPageChange,
+}) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const maxVisiblePages = 3; // Number of visible page numbers
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
   };
-  
-  export default Pagination;
-  
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
+  const getPageNumbers = () => {
+    const startPage = Math.max(
+      1,
+      Math.min(
+        currentPage - Math.floor(maxVisiblePages / 2),
+        totalPages - maxVisiblePages + 1
+      )
+    );
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
+  };
+
+  return (
+    <div className="flex sm:gap-4 gap-2 justify-center my-14">
+      <button
+        onClick={handlePrevious}
+        className={`md:w-[98px] w-[55px] md:h-[60px] h-[45px] rounded-[10px] flex justify-center items-center text-[12px] sm:text-[16px] ${
+          currentPage === 1 ? "bg-[#F9F1E7] text-gray-400" : "bg-[#F9F1E7] hover:bg-gray-200 text-black"
+        }`}
+        disabled={currentPage === 1}
+      >
+        Prev
+      </button>
+
+      {getPageNumbers().map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`md:w-[60px] w-[45px] md:h-[60px] h-[45px] rounded-[10px] flex justify-center items-center text-[12px] sm:text-[16px] ${
+            currentPage === page ? "bg-[#B88E2F] text-white" : "bg-[#F9F1E7] text-black hover:bg-gray-200"
+          }`}
+        >
+          {page}
+        </button>
+      ))}
+
+      <button
+        onClick={handleNext}
+        className={`md:w-[98px] w-[55px] md:h-[60px] h-[45px] rounded-[10px] flex justify-center items-center text-[12px] sm:text-[16px] ${
+          currentPage === totalPages ? "bg-[#F9F1E7] text-gray-400" : "bg-[#F9F1E7] hover:bg-gray-200 text-black"
+        }`}
+        disabled={currentPage === totalPages}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
+export default Pagination;

@@ -33,7 +33,7 @@ const BeautifulProduct = () => {
     });
   }, []);
   return (
-    <div className='bg-[#FCF8F3] py-10 md:py-0'>
+    <div className='bg-[#FCF8F3] py-10 md:py-0 my-5'>
       <div className={`${poppins.className} md:h-[670px] lg:pl-20 md:pl-5 flex md:flex-row flex-col items-center`}>
         <div className='md:w-[422px] py-10 px-5 md:px-0'>
           <h1 className='text-[40px] font-bold text-[#3A3A3A]'>50+ Beautiful rooms

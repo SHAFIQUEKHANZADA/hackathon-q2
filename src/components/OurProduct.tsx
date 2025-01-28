@@ -75,7 +75,7 @@ const OurProduct = () => {
 
 
   return (
-    <div className={`${poppins.className} px-5 flex flex-col gap-10 py-10 bg-white`}>
+    <div className={`${poppins.className} px-5 flex flex-col gap-10 sm:py-10 pb-10  bg-white`}>
       <h1 className="text-[40px] font-bold text-center py-5 text-[#3A3A3A]">Our Products</h1>
 
       <div className="w-full">
@@ -142,8 +142,8 @@ const OurProduct = () => {
                     )}
                   </div>
                   <div className="md:my-4 my-3 sm:px-4 px-2">
-                    <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.8vw] lg:mb-2 line-clamp-2">{product.title}</h1>
-                    <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px]">
+                    <h1 className="text-[#3A3A3A] font-semibold lg:text-[20px] sm:text-[16px] text-[2.9vw] lg:mb-2 line-clamp-2">{product.title}</h1>
+                    <div className="flex flex-row-reverse justify-end items-center lg:gap-2 gap-1 lg:mt-4 text-[11px] lg:text-[16px] line-clamp-2">
                       {product.salePrice ? (
                         <>
                           <span className="line-through text-[#B0B0B0] font-light text-[11px] lg:text-[16px]">
