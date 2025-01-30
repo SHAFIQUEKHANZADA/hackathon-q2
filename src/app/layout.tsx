@@ -5,6 +5,8 @@ import Navbar from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/components/ReduxProvider";
 import Chat from "@/components/chat";
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,21 +24,25 @@ export const metadata: Metadata = {
   description: "This is UI/UX hackathon",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvider>
-          <Navbar />
-          {children}
-          <Chat />
-          <Footer />
+          <NextIntlClientProvider messages={messages}>
+            <Navbar />
+            {children}
+            <Chat />
+            <Footer />
+          </NextIntlClientProvider>
         </ReduxProvider>
       </body>
     </html>

@@ -10,6 +10,7 @@ import { Montserrat } from "next/font/google";
 import { CiLogin } from "react-icons/ci";
 import { FiUser } from "react-icons/fi";
 import { HiOutlineUserCircle } from "react-icons/hi2";
+import { useTranslations } from "next-intl";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -33,6 +34,7 @@ const MobileMenuBar = () => {
         setIsMenuOpen(false);  
         setActiveSubMenu(null);  
     };
+    const t = useTranslations('navLink');
 
     return (
         <div className={`${montserrat.className} md:hidden`}>
@@ -60,7 +62,7 @@ const MobileMenuBar = () => {
                             className="flex items-center justify-between w-full"
                         >
                             <Link href="#" className="text-[16px] font-medium py-[10px]">
-                                SHOP
+                                {t("SHOP")}
                             </Link>
                             <Image
                                 src="/svg/arrow-right.svg"
@@ -80,7 +82,7 @@ const MobileMenuBar = () => {
                             className="flex items-center justify-between w-full"
                         >
                             <Link href="#" className="text-[16px] font-medium py-[10px]">
-                                CATEGORY
+                                {t("CATEGORY")}
                             </Link>
                             <Image
                                 src="/svg/arrow-right.svg"
@@ -100,7 +102,7 @@ const MobileMenuBar = () => {
                             className="flex items-center justify-between w-full"
                         >
                             <Link href="#" className="text-[16px] font-medium py-[10px]">
-                                ACCOUNT
+                                {t("ACCOUNT")}
                             </Link>
                             <Image
                                 src="/svg/arrow-right.svg"
@@ -120,7 +122,7 @@ const MobileMenuBar = () => {
                             className="flex items-center justify-between w-full"
                         >
                             <Link href="#" className="text-[16px] font-medium py-[10px]">
-                                ABOUT FURNIRO
+                                {t("ABOUT FURNIRO")}
                             </Link>
                             <Image
                                 src="/svg/arrow-right.svg"
@@ -148,18 +150,18 @@ const MobileMenuBar = () => {
                         </div>
                         {activeSubMenu === "SHOP" && (
                             <>
-                                <h1 className="py-4 text-[19px] font-semibold uppercase">SHOP</h1>
+                                <h1 className="py-4 text-[19px] font-semibold uppercase">{t("SHOP")}</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/home_furniture" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Home Furniture
+                                    {t("Home Furniture")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/office" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Office
+                                    {t("Office")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/outdoor" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Outdoor
+                                    {t("Outdoor")}
                                 </Link>
                             </>
                         )}
@@ -167,46 +169,46 @@ const MobileMenuBar = () => {
                             <div className="h-[90vh] overflow-auto w-full">
                                 {/* <h1 className="py-4 text-[19px] font-semibold uppercase">CATEGORY</h1> */}
 
-                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Home Furniture</h3>
+                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">{t("Home Furniture")}</h3>
                                 <Link href={"/home_furniture/bed"} className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Bed
+                                    {t("Bed")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/home_furniture/sofa"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Sofa
+                                    {t("Sofa")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/home_furniture/dining_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Dinning Table
+                                    {t("Dinning Table")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
 
-                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Office</h3>
+                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">{t("Office")}</h3>
                                 <Link href={"/office/office_chair"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Office Chair
+                                    {t("Office Chair")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/office/meeting_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Meeting Table
+                                    {t("Meeting Table")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/office/bookshelves"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Bookshelves
+                                    {t("Bookshelves")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
 
-                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]">Outdoor</h3>
+                                <h3 className="font-semibold text-black py-2 flex justify-center text-[18px]"> {t("Outdoor")}</h3>
 
                                 <Link href={"/outdoor/outdoor_chair"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Outdoor Chair
+                                    {t("Outdoor Chair")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/outdoor/coffe_table"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Coffe Table
+                                    {t("Coffee Table")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-4"></div>
                                 <Link href={"/outdoor/swings"} className="text-[16px] font-medium py-3" onClick={handleLinkClick}>
-                                    Swings
+                                    {t("Swings")}
                                 </Link>
                             </div>
                         )}
@@ -215,37 +217,33 @@ const MobileMenuBar = () => {
                                 <h1 className="py-4 text-[19px] font-semibold uppercase">ACCOUNT</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/account/login" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
-                                    <CiLogin /> Login
+                                    <CiLogin /> {t("Login")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/account/signup" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
-                                    <FiUser /> Signup
+                                    <FiUser /> {t("Signup")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/account/profile" className="text-[16px] font-medium flex items-center gap-1 py-2" onClick={handleLinkClick}>
-                                    <HiOutlineUserCircle /> Your Profile
+                                    <HiOutlineUserCircle /> {t("Your Profile")}
                                 </Link>
 
                             </>
                         )}
                         {activeSubMenu === "ABOUT_ROBIZ" && (
                             <>
-                                <h1 className="py-4 text-[19px] font-semibold uppercase">ABOUT FURNIRO</h1>
+                                <h1 className="py-4 text-[19px] font-semibold uppercase">{t("ABOUT FURNIRO")}</h1>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/blog" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Our Blogs
-                                </Link>
-                                <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
-                                <Link href="/lookbook" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    LOOKBOOK
+                                    {t("Our Blogs")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/about" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    ABOUT US
+                                    {t("About Us")}
                                 </Link>
                                 <div className="w-full h-[0.1px] bg-[#7B7B7B] my-2"></div>
                                 <Link href="/contact" className="text-[16px] font-medium py-2" onClick={handleLinkClick}>
-                                    Contact Us
+                                    {t("Contact Us")}
                                 </Link>
                             </>
                         )} 

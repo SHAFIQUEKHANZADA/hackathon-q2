@@ -18,7 +18,7 @@ const Filter: React.FC<FilterProps> = ({
   currentPage,
   itemsPerPage,
   totalItems,
-  defaultItemsPerPage = 16,
+  defaultItemsPerPage = 4,
   onItemsPerPageChange,
   onSortChange,
   onViewChange,
@@ -31,23 +31,23 @@ const Filter: React.FC<FilterProps> = ({
   const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.max(1, parseInt(e.target.value, 10) || 1);
     setItemsPerPageInput(value);
-  
-    // Explicit function calls, ensuring no unused expressions
+
+
     if (onItemsPerPageChange) {
       onItemsPerPageChange(value);
     }
   };
-  
+
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     setSortOption(value);
-  
+
     if (onSortChange) {
       onSortChange(value);
     }
   };
-  
+
 
   const handleViewToggle = (viewType: 'grid' | 'list') => {
     setView(viewType);
@@ -55,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
       onViewChange(viewType);
     }
   };
-  
+
 
   return (
     <div className="flex justify-between items-center mb-8 lg:px-12 px-5 sm:h-[100px] h-[70px] bg-[#F9F1E7]">
@@ -133,28 +133,27 @@ const Filter: React.FC<FilterProps> = ({
           <span className="lg:text-[20px] text-[14px]">Show</span>
           <input
             type="number"
-            className="w-16 sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-16 sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-[#3A3A3A]"
             value={itemsPerPageInput}
             min={1}
             onChange={handleItemsPerPageChange}
           />
         </label>
 
-        {/* Sort By */}
         <label className="flex items-center gap-[10px]">
           <span className="lg:text-[20px] text-[14px]">Sort by</span>
           <select
-            className="sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-[20px] text-[14px]"
+            className="sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-[#3A3A3A] lg:text-[20px] text-[14px]"
             value={sortOption}
             onChange={handleSortChange}
           >
             <option value="default" disabled>
               Default
             </option>
-            <option value="name">Name</option>
-            <option value="price">Price</option>
-            <option value="popularity">Popularity</option>
-            <option value="rating">Rating</option>
+            <option value="name">Alphabet (A to Z)</option>
+            <option value="name2">Alphabet (Z to A)</option>
+            <option value="high">High to Low</option>
+            <option value="low">Low to High</option>
           </select>
         </label>
       </div>

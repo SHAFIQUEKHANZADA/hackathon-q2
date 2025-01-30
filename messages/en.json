@@ -1,0 +1,126 @@
+{
+  "navbar": {
+    "Furniro": "Furniro",
+    "home": "Home",
+    "categories": "Categories",
+    "blog": "Blog",
+    "contact": "Contact",
+    "mainTitleOne": "Home Furniture",
+    "descOne": "Comfortable and stylish furniture for your home.",
+    "mainTitleTwo": "Office",
+    "descTwo": "Efficient and ergonomic furniture for your workspace.",
+    "mainTitleThree": "Outdoor",
+    "descThree": "Durable and stylish furniture for your outdoor spaces.",
+    "subTone": "Bed",
+    "subTTwo": "Sofa",
+    "subTThree": "Dining Table",
+    "subT2One": "Office Chair",
+    "subT2Two": "Meeting Table",
+    "subT2Three": "Bookshelves",
+    "subT3one": "Outdoor Chair",
+    "subT3Two": "Coffee Table",
+    "subT3Three": "Swings",
+    "subDesc1one": "Find the perfect bed for a restful sleep.",
+    "subDesc1Two": "Cozy and modern sofas for your living space.",
+    "subDesc1Three": "Elegant dining tables for every home.",
+    "subDesc2one": "Chairs designed for comfort and productivity.",
+    "subDesc2Two": "Tables to foster collaboration and discussion.",
+    "subDesc2Three": "Organize your books and files stylishly.",
+    "subDesc3one": "Comfortable seating for your garden or patio.",
+    "subDesc3Two": "Perfect tables for outdoor gatherings.",
+    "subDesc3Three": "Relax and unwind with our sturdy swings."
+  },
+  "navLink": {
+    "SHOP": "SHOP",
+    "CATEGORY": "CATEGORY",
+    "ACCOUNT": "ACCOUNT",
+    "ABOUT FURNIRO": "ABOUT FURNIRO",
+    "Home Furniture": "Home Furniture",
+    "Office": "Office",
+    "Outdoor": "Outdoor",
+
+    "Bed": "Bed",
+    "Sofa": "Sofa",
+    "Dinning Table": "Dining Table",
+    "Office Chair": "Office Chair",
+    "Meeting Table": "Meeting Table",
+    "Bookshelves": "Bookshelves",
+    "Outdoor Chair": "Outdoor Chair",
+    "Coffee Table": "Coffee Table",
+    "Swings": "Swings",
+
+    "Login": "Login",
+    "Signup": "Signup",
+    "Your Profile": "Your Profile",
+
+    "Our Blogs": "Our Blogs",
+    "About Us": "About Us",
+    "Contact Us": "Contact Us"
+  },
+  "hero": {
+    "New Arrival": "New Arrival",
+    "h11": " Discover Our",
+    "h12": " New Collection",
+    "p": "  Explore the finest trends of the season with our exclusive collection, designed to bring elegance to your wardrobe.",
+    "button": "BUY NOW"
+  },
+  "range": {
+    "mainH1": "Browse The Range",
+    "para": "Explore our wide selection of premium products crafted to meet your style and needs",
+    "h-one": "Office",
+    "h-two": "Outdoor",
+    "h-three": "Bedroom"
+  },
+  "ourProducts": {
+    "mainH1": "Our Products",
+    "newArrivalTag": "New",
+    "saleTag": "Sale",
+    "AddToCart": "Add to Cart",
+    "sp1": "Share",
+    "sp2": "Compare",
+    "sp3": "Like",
+    "Show More": "Show More"
+  },
+  "BeautifulProduct": {
+    "h1": "50+ Beautiful rooms inspiration",
+    "p1": "Our designer already made a lot of beautiful prototipe of rooms that inspire you",
+    "button": "Explore More",
+    "Bed Room": "Bed Room",
+    "Inner Peace": "Inner Peace"
+  },
+  "Latest-Product": {
+    "New Arrival": "New Arrival",
+    "Best Seller": "Best Seller",
+    "Featured": "Featured",
+    "Special Offer": "Special Offer",
+    "h1": "Latest Products",
+    "sale": "Sale",
+    "newArrivalTag": "New",
+    "AddToCart": "Add to Cart",
+    "sp1": "Share",
+    "sp2": "Compare",
+    "sp3": "Like",
+    "Show More": "Show More"
+  },
+  "furnio-furniture": {
+    "h1-a": "Share your setup with",
+    "h1-b": "#FuniroFurniture"
+  },
+  "footer": {
+    "Furniro": "Furniro.",
+    "para-one": "400 University Drive Suite 200 Coral Gables, FL 33134 USA",
+    "Links": "Links",
+    "Home": "Home",
+    "Shop": "Shop",
+    "About": "About",
+    "Contact": "Contact",
+    "Help": "Help",
+    "Payment Options": "Payment Options",
+    "Returns": "Returns",
+    "Privacy Policies": "Privacy Policies",
+    "Newsletter": "Newsletter",
+    "button": "SUBSCRIBE",
+    "h1-last": "2023 furino. All rights reverved",
+    "placeHolder": "Enter Your Email Address"
+  }
+}

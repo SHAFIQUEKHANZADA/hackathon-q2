@@ -25,7 +25,9 @@ const Category = ({ params }: { params: { category: string } }) => {
   const pathname = usePathname();
   const category = pathname.split("/").pop();
   const dispatch = useDispatch();
-  
+  const [sortOption, setSortOption] = useState<string>('default');
+
+  console.log(sortOption)
 
   const itemsPerPage = 4;
 
@@ -82,6 +84,28 @@ const Category = ({ params }: { params: { category: string } }) => {
     fetchCategoryProducts();
   }, [category]);
 
+  const handleSortChange = (value: string) => {
+    setSortOption(value);
+    const sortedProducts = [...products];
+    switch (value) {
+      case 'name':
+        sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'name2':
+        sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case 'high':
+        sortedProducts.sort((a, b) => (b.salePrice ?? b.price) - (a.salePrice ?? a.price));
+        break;
+      case 'low':
+        sortedProducts.sort((a, b) => (a.salePrice ?? a.price) - (b.salePrice ?? b.price));
+        break;
+      default:
+        break;
+    }
+    setProducts(sortedProducts);
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -126,61 +150,13 @@ const Category = ({ params }: { params: { category: string } }) => {
         </div>
       </div>
 
-      {/* Filter Section */}
-      {/* <div className="flex justify-between items-center mb-8 lg:px-12 px-5 sm:h-[100px] h-[70px] bg-[#F9F1E7]">
-        <div className="text-[16px] flex items-center lg:gap-5 gap-3">
-
-          <div className='flex items-center gap-2'>
-            <div className='w-[20px] h-[20px]'><Image src={"/svg/filter.svg"} alt='filter' width={100} height={100} /></div>
-            <h1 className='lg:text-[20px] text-[14px]'>Filter</h1>
-          </div>
-
-          <div className='w-[17px] h-[17px]'><Image src={"/svg/grid.svg"} alt='filter' width={100} height={100} /></div>
-
-          <div className='w-[19px] h-[17px]'><Image src={"/svg/acc.svg"} alt='filter' width={100} height={100} /></div>
-
-          <div className='h-10 w-[2px] bg-[#9F9F9F] sm:block hidden'></div>
-
-          <div className='lg:text-[16px] text-[14px] sm:block hidden'>Showing {((currentPage - 1) * itemsPerPage) + 1} - {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems} results</div>
-        </div>
-
-
-        <div className="flex items-center lg:gap-5 gap-3">
-          <label className="sm:flex hidden items-center gap-[10px]">
-            <span className='lg:text-[20px] text-[14px]'>Show</span>
-            <input
-              type="number"
-              className="w-16 sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              defaultValue={16}
-              min={1}
-            />
-          </label>
-
-          <label className="flex items-center gap-[10px]">
-            <span className='lg:text-[20px] text-[14px]'>Short by</span>
-            <select
-              className="sm:p-2 p-1 focus:outline-none focus:ring-2 focus:ring-blue-500 lg:text-[20px] text-[14px]"
-              defaultValue="default"
-            >
-              <option value="default" disabled>
-                Default
-              </option>
-              <option value="name">Name</option>
-              <option value="price">Price</option>
-              <option value="popularity">Popularity</option>
-              <option value="rating">Rating</option>
-            </select>
-          </label>
-        </div>
-
-      </div> */}
       <Filter
         currentPage={1}
-        itemsPerPage={16}
-        totalItems={100}
+        itemsPerPage={itemsPerPage}
+        totalItems={products.length}
         onViewChange={handleViewChange}
         onItemsPerPageChange={(value) => console.log('Items per page:', value)}
-        onSortChange={(value) => console.log('Sort by:', value)}
+        onSortChange={handleSortChange}
       />
 
       <div className="w-full sm:mt-20 mt-10 px-5">

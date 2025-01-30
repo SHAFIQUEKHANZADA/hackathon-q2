@@ -1,4 +1,5 @@
 "use client"
+
 import Image from "next/image";
 import { Montserrat, Poppins } from "next/font/google";
 import Link from "next/link";
@@ -14,83 +15,88 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from "./LanguageSwitcher";
 
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
-const categories = [
-  {
-    title: "Home Furniture",
-    href: "/home_furniture",
-    description: "Comfortable and stylish furniture for your home.",
-    subcategories: [
-      {
-        title: "Bed",
-        href: "/home_furniture/bed",
-        description: "Find the perfect bed for a restful sleep.",
-      },
-      {
-        title: "Sofa",
-        href: "/home_furniture/sofa",
-        description: "Cozy and modern sofas for your living space.",
-      },
-      {
-        title: "Dining Table",
-        href: "/home_furniture/dining_table",
-        description: "Elegant dining tables for every home.",
-      },
-    ],
-  },
-  {
-    title: "Office",
-    href: "/office",
-    description: "Efficient and ergonomic furniture for your workspace.",
-    subcategories: [
-      {
-        title: "Office Chair",
-        href: "/office/office_chair",
-        description: "Chairs designed for comfort and productivity.",
-      },
-      {
-        title: "Meeting Table",
-        href: "/office/meeting_table",
-        description: "Tables to foster collaboration and discussion.",
-      },
-      {
-        title: "Bookshelves",
-        href: "/office/bookshelves",
-        description: "Organize your books and files stylishly.",
-      },
-    ],
-  },
-  {
-    title: "Outdoor",
-    href: "/outdoor",
-    description: "Durable and stylish furniture for your outdoor spaces.",
-    subcategories: [
-      {
-        title: "Outdoor Chair",
-        href: "/outdoor/outdoor_chair",
-        description: "Comfortable seating for your garden or patio.",
-      },
-      {
-        title: "Coffee Table",
-        href: "/outdoor/coffee_table",
-        description: "Perfect tables for outdoor gatherings.",
-      },
-      {
-        title: "Swings",
-        href: "/outdoor/swings",
-        description: "Relax and unwind with our sturdy swings.",
-      },
-    ],
-  },
-];
+
 const Navbar = () => {
+  const t = useTranslations('navbar');
+  const categories = [
+    {
+      title: `${t("mainTitleOne")}`,
+      href: "/home_furniture",
+      description: `${t("descOne")}`,
+      subcategories: [
+        {
+          title: `${t("subTone")}`,
+          href: "/home_furniture/bed",
+          description: `${t("subDesc1one")}`,
+        },
+        {
+          title: `${t("subTTwo")}`,
+          href: "/home_furniture/sofa",
+          description: `${t("subDesc1Two")}`,
+        },
+        {
+          title: `${t("subTThree")}`,
+          href: "/home_furniture/dining_table",
+          description: `${t("subDesc1Three")}`,
+        },
+      ],
+    },
+    {
+      title: `${t("mainTitleTwo")}`,
+      href: "/office",
+      description: `${t("descTwo")}`,
+      subcategories: [
+        {
+          title: `${t("subT2One")}`,
+          href: "/office/office_chair",
+          description: `${t("subDesc2one")}`,
+        },
+        {
+          title: `${t("subT2Two")}`,
+          href: "/office/meeting_table",
+          description: `${t("subDesc2Two")}`,
+        },
+        {
+          title: `${t("subT2Three")}`,
+          href: "/office/bookshelves",
+          description: `${t("subDesc2Three")}`,
+        },
+      ],
+    },
+    {
+      title: `${t("mainTitleThree")}`,
+      href: "/outdoor",
+      description: `${t("descThree")}`,
+      subcategories: [
+        {
+          title: `${t("subT3one")}`,
+          href: "/outdoor/outdoor_chair",
+          description: `${t("subDesc3one")}`,
+        },
+        {
+          title: `${t("subT3Two")}`,
+          href: "/outdoor/coffee_table",
+          description: `${t("subDesc3Two")}`,
+        },
+        {
+          title: `${t("subT3Three")}`,
+          href: "/outdoor/swings",
+          description: `${t("subDesc3Three")}`,
+        },
+      ],
+    },
+  ];
+ 
   return (
     <nav
-      className={`${poppins.className} overflow md:h-[100px] h-[60px] bg-maincolor text-black flex items-center justify-between lg:px-[65px] md:px-[3vw] px-3`}
+      className={`${poppins.className} overflow md:h-[100px] h-[60px] bg-maincolor text-black flex items-center justify-between lg:px-[65px] md:px-[2.8vw] px-3`}
     >
       {/* Logo */}
       <Link href={"/"}>
@@ -105,16 +111,16 @@ const Navbar = () => {
           <h1
             className={`${montserrat.className} text-black sm:text-[34px] text-[30px] font-bold`}
           >
-            Furniro
+            {t('Furniro')}
           </h1>
         </div>
       </Link>
 
-      <ul className={`${poppins.className} text-[16px] font-medium hidden lg:gap-[48px] gap-6 md:flex`}>
+      <ul className={`${poppins.className} text-[16px] font-medium hidden lg:gap-[48px] gap-4 md:flex`}>
         <Link href='/'>
           <li className="relative cursor-pointer group">
             <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
-              Home
+              {t('home')}
               <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
@@ -123,7 +129,7 @@ const Navbar = () => {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger className="p-0 font-medium text-[16px]">Categories</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="p-0 font-medium text-[16px]"> {t('categories')}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="flex p-6 gap-5 max-h-[80vh] w-[45vw] overflow-hidden">
                   {categories.map((category) => (
@@ -164,7 +170,7 @@ const Navbar = () => {
         <Link href='/blog'>
           <li className="relative cursor-pointer group">
             <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
-              Blog
+              {t('blog')}
               <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
@@ -172,7 +178,7 @@ const Navbar = () => {
         <Link href='/contact'>
           <li className="relative cursor-pointer group">
             <span className="group-hover:text-[#B88E2F] transition-all duration-300 inline-block relative">
-              Contact
+              {t('contact')}
               <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-[2px] bg-[#B88E2F] transition-all duration-300"></div>
             </span>
           </li>
@@ -181,12 +187,15 @@ const Navbar = () => {
 
 
       {/* Desktop Icons */}
-      <div className="hidden md:flex lg:gap-8 md:gap-4">
+      <div className="hidden md:flex lg:gap-8 md:gap-3 items-center">
         <Link href={"/account/login"}><FiUser className="text-[24px]" /></Link>
         <Search />
         <LikedProducts />
         <CartPopup />
+       <LanguageSwitcher /> 
       </div>
+
+     
 
 
       <div className="flex md:hidden items-center gap-4">

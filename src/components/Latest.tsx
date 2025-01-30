@@ -16,6 +16,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoMdHeartEmpty, IoMdShare } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -28,6 +29,7 @@ const Latest = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   // const [windowWidth, setWindowWidth] = useState<number | null>(null);  
   const router = useRouter();
+  const t = useTranslations('Latest-Product');
 
   const handleShowMore = () => {
     if (selectedTag) {
@@ -96,10 +98,10 @@ const Latest = () => {
   }
 
   const headings = [
-    { tag: "newarrival", label: "New Arrival" },
-    { tag: "bestSeller", label: "Best Seller" },
-    { tag: "featured", label: "Featured" },
-    { tag: "specialoffer", label: "Special Offer" },
+    { tag: "newarrival", label: `${t("New Arrival")}` },
+    { tag: "bestSeller", label: `${t("Best Seller")}` },
+    { tag: "featured", label: `${t("Featured")}` },
+    { tag: "specialoffer", label: `${t("Special Offer")}` },
   ];
 
   return (
@@ -107,7 +109,7 @@ const Latest = () => {
       <div className="flex flex-col items-center gap-3 py-7">
         {/* Main Heading */}
         <h1 className="text-[42px] text-center font-bold text-[#3A3A3A]">
-          Latest Products
+        {t("h1")}
         </h1>
         {/* Sub Headings */}
         <div className="flex md:text-[18px] text-[14px] items-center md:gap-10 gap-3">
@@ -195,7 +197,7 @@ const Latest = () => {
                       )}
                       {product.salePrice && product.price && (
                         <span className="absolute top-4 right-4 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] sm:text-[12px] text-[9px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
-                          Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
+                          {t("sale")} -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
                         </span>
                       )}
                     </div>
@@ -224,12 +226,12 @@ const Latest = () => {
                       <button
                         className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]"
                       >
-                        Add to Cart
+                        {t("AddToCart")}
                       </button>
                       <div className="flex md:flex-row flex-col items-center gap-3 text-white text-[16px] font-medium">
-                        <span className="flex items-center gap-1"><IoMdShare /> Share</span>
-                        <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
-                        <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                        <span className="flex items-center gap-1"><IoMdShare /> {t("sp1")} </span>
+                        <span className="flex items-center gap-1"><FaExchangeAlt /> {t("sp2")}</span>
+                        <span className="flex items-center gap-1"><IoMdHeartEmpty /> {t("sp3")}</span>
                       </div>
                     </div>
                   </div>
@@ -244,7 +246,7 @@ const Latest = () => {
         <button
           onClick={handleShowMore}
           className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px]">
-          Show More
+          {t("Show More")}
         </button>
       </div>
     </div>

@@ -1,14 +1,16 @@
+import { useTranslations } from 'next-intl';
 import { Poppins } from 'next/font/google';
 import Image from 'next/image';
 
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 const Furniture = () => {
+    const t = useTranslations('furnio-furniture');
     return (
         <div className={`${poppins.className} flex flex-col py-14 bg-white`}>
             <div className='flex flex-col items-center text-center'>
-                <h1 className='text-[20px] font-semibold text-[#616161]'>Share your setup with</h1>
-                <h1 className='text-[40px] font-bold text-[#3A3A3A]'>#FuniroFurniture</h1>
+                <h1 className='text-[20px] font-semibold text-[#616161]'>{t("h1-a")}</h1>
+                <h1 className='text-[40px] font-bold text-[#3A3A3A]'>{t("h1-b")}</h1>
             </div>
 
             <div className="flex md:flex-row flex-col justify-between items-center w-full md:px-0 px-3">

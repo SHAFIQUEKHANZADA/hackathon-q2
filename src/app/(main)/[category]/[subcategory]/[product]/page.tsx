@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { addToCompare } from "@/app/store/compareProduct";
 import { toast, ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import RecommendedProducts from "@/components/Recommended";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
@@ -240,8 +241,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                                         width={80}
                                         height={100}
                                         className={`cursor-pointer lg:w-[80px] sm:w-[60px] w-full h-full object-cover rounded-[8px] border ${activeImageIndex === index
-                                                ? "border-black"
-                                                : "border-gray-300"
+                                            ? "border-black"
+                                            : "border-gray-300"
                                             }`}
                                         onClick={() => handleImageSelect(index)}
                                     />
@@ -566,6 +567,12 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
             <div className="md:px-[70px] px-5">
                 <RelatedProducts category={category} subcategory={subcategory} excludeSlug={product} />
             </div>
+
+            {/* <RecommendedProducts
+                category={productDetails.category.current}
+                subcategory={productDetails.subcategory.current}
+                excludeSlug={productDetails.slug.current}
+            /> */}
         </div>
     );
 };

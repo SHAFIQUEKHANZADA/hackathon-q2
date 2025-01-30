@@ -6,6 +6,7 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 import TeamCarousel from './Cerocel';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslations } from 'next-intl';
 
 const Cards = [
   {
@@ -27,6 +28,7 @@ const Cards = [
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
 const BeautifulProduct = () => {
+  const t = useTranslations('BeautifulProduct');
   useEffect(() => {
     AOS.init({
   
@@ -36,10 +38,9 @@ const BeautifulProduct = () => {
     <div className='bg-[#FCF8F3] py-10 md:py-0 my-5'>
       <div className={`${poppins.className} md:h-[670px] lg:pl-20 md:pl-5 flex md:flex-row flex-col items-center`}>
         <div className='md:w-[422px] py-10 px-5 md:px-0'>
-          <h1 className='text-[40px] font-bold text-[#3A3A3A]'>50+ Beautiful rooms
-            inspiration</h1>
-          <p className='text-[16px] font-medium text-[#616161]'>Our designer already made a lot of beautiful prototipe of rooms that inspire you</p>
-          <button className='text-[16px] font-semibold  px-[44px] py-[12px] mt-5 bg-[#B88E2F]  text-white hover:text-[#B88E2F] hover:bg-transparent border duration-300 hover:border hover:border-[#B88E2F]'>Explore More</button>
+          <h1 className='text-[40px] font-bold text-[#3A3A3A]'>{t('h1')}</h1>
+          <p className='text-[16px] font-medium text-[#616161]'>{t('p1')}</p>
+          <button className='text-[16px] font-semibold  px-[44px] py-[12px] mt-5 bg-[#B88E2F]  text-white hover:text-[#B88E2F] hover:bg-transparent border duration-300 hover:border hover:border-[#B88E2F]'>{t('button')}</button>
         </div>
 
         <div className='md:w-[404px] md:h-[582px] relative overflow-hidden'>
@@ -51,8 +52,8 @@ const BeautifulProduct = () => {
             src={"/images/bannerTwo.png"} alt='banner' width={404} height={582} className='transform transition-transform duration-500 hover:scale-110' />
           <div className='absolute flex items-end bottom-10 left-8'>
             <div className='w-[217px] h-[130px] p-5 bg-white/60 flex flex-col justify-center items-center'>
-              <h1 className='text-[16px] font-medium text-[#616161]'><span>01</span> - <span>Bed Room</span></h1>
-              <h1 className='text-[28px] font-semibold text-[#3A3A3A]'>Inner Peace</h1>
+              <h1 className='text-[16px] font-medium text-[#616161]'><span>01</span> - <span>{t('Bed Room')}</span></h1>
+              <h1 className='text-[28px] font-semibold text-[#3A3A3A]'>{t('Inner Peace')}</h1>
             </div>
             <button className='h-[48px] w-[48px] bg-[#B88E2F] text-white flex justify-center items-center'><FaArrowRightLong /></button>
           </div>

@@ -1,4 +1,4 @@
- import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";  
 import { groq } from "next-sanity";
 import { ProductType } from "@/components/types";

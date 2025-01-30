@@ -1,0 +1,126 @@
+{
+  "navbar": {
+    "Furniro": "富尼罗",
+    "home": "主页",
+    "categories": "类别",
+    "blog": "博客",
+    "contact": "联系我们",
+    "mainTitleOne": "家居家具",
+    "descOne": "为您的家提供舒适且时尚的家具。",
+    "mainTitleTwo": "办公室",
+    "descTwo": "为您的工作空间提供高效且符合人体工程学的家具。",
+    "mainTitleThree": "户外",
+    "descThree": "为您的户外空间提供耐用且时尚的家具。",
+    "subTone": "床",
+    "subTTwo": "沙发",
+    "subTThree": "餐桌",
+    "subT2One": "办公椅",
+    "subT2Two": "会议桌",
+    "subT2Three": "书架",
+    "subT3one": "户外椅",
+    "subT3Two": "咖啡桌",
+    "subT3Three": "秋千",
+    "subDesc1one": "找到适合舒适睡眠的床。",
+    "subDesc1Two": "为您的客厅提供舒适和现代的沙发。",
+    "subDesc1Three": "适合每个家庭的优雅餐桌。",
+    "subDesc2one": "为舒适和生产力设计的椅子。",
+    "subDesc2Two": "促进合作和讨论的桌子。",
+    "subDesc2Three": "时尚地整理您的书籍和文件。",
+    "subDesc3one": "为您的花园或露台提供舒适的座椅。",
+    "subDesc3Two": "适合户外聚会的桌子。",
+    "subDesc3Three": "用我们的坚固秋千放松身心。"
+  },
+  "navLink": {
+    "SHOP": "购物",
+    "CATEGORY": "类别",
+    "ACCOUNT": "账户",
+    "ABOUT FURNIRO": "关于 Furniro",
+    "Home Furniture": "家居家具",
+    "Office": "办公",
+    "Outdoor": "户外",
+
+    "Bed": "床",
+    "Sofa": "沙发",
+    "Dinning Table": "餐桌",
+    "Office Chair": "办公椅",
+    "Meeting Table": "会议桌",
+    "Bookshelves": "书架",
+    "Outdoor Chair": "户外椅",
+    "Coffee Table": "咖啡桌",
+    "Swings": "秋千",
+
+    "Login": "登录",
+    "Signup": "注册",
+    "Your Profile": "您的个人资料",
+
+    "Our Blogs": "我们的博客",
+    "About Us": "关于我们",
+    "Contact Us": "联系我们"
+  },
+  "hero": {
+    "New Arrival": "新品到达",
+   "h11": "发现我们的",
+    "h12": "新系列",
+    "p": "探索本季最流行的趋势，我们的独家系列旨在为您的衣橱增添优雅。",
+    "button": "立即购买"
+  },
+  "range": {
+    "mainH1": "浏览系列",
+    "para": "探索我们精心打造的高端产品，以满足您的风格和需求",
+    "h-one": "办公室",
+    "h-two": "户外",
+    "h-three": "卧室"
+  },
+  "ourProducts": {
+    "mainH1": "我们的产品",
+    "newArrivalTag": "新品",
+    "saleTag": "特卖",
+    "AddToCart": "添加到购物车",
+    "sp1": "分享",
+    "sp2": "比较",
+    "sp3": "喜欢",
+    "Show More": "查看更多"
+  },
+  "BeautifulProduct": {
+    "h1": "50+ 美丽的房间灵感",
+    "p1": "我们的设计师已经制作了许多美丽的房间原型，激发您的灵感",
+    "button": "探索更多",
+    "Bed Room": "卧室",
+    "Inner Peace": "内心的平静"
+  },
+  "Latest-Product": {
+    "New Arrival": "新品到货",
+    "Best Seller": "畅销商品",
+    "Featured": "精选",
+    "Special Offer": "特别优惠",
+    "h1": "最新产品",
+    "sale": "特卖",
+    "newArrivalTag": "新品",
+    "AddToCart": "添加到购物车",
+    "sp1": "分享",
+    "sp2": "比较",
+    "sp3": "喜欢",
+    "Show More": "查看更多"
+  },
+  "furnio-furniture": {
+    "h1-a": "分享您的设置与",
+    "h1-b": "#福尼罗家具"
+  },
+  "footer": {
+    "Furniro": "富尼罗。",
+    "para-one": "美国佛罗里达州科勒尔盖布尔斯大学大街400号，200套房，邮政编码33134",
+    "Links": "链接",
+    "Home": "主页",
+    "Shop": "商店",
+    "About": "关于我们",
+    "Contact": "联系我们",
+    "Help": "帮助",
+    "Payment Options": "支付选项",
+    "Returns": "退货",
+    "Privacy Policies": "隐私政策",
+    "Newsletter": "新闻简报",
+    "button": "订阅",
+    "h1-last": "2023 富尼罗。版权所有",
+    "placeHolder": "请输入您的电子邮件地址"
+  }
+}

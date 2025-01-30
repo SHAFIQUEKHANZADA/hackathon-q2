@@ -9,6 +9,7 @@ import { ProductType } from "./types";
 import { urlFor } from "@/sanity/lib/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/app/store/cartSlice";
+import { useTranslations } from "next-intl";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -16,6 +17,7 @@ const OurProduct = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations('ourProducts');
 
   const dispatch = useDispatch();
 
@@ -76,7 +78,7 @@ const OurProduct = () => {
 
   return (
     <div className={`${poppins.className} px-5 flex flex-col gap-10 sm:py-10 pb-10  bg-white`}>
-      <h1 className="text-[40px] font-bold text-center py-5 text-[#3A3A3A]">Our Products</h1>
+      <h1 className="text-[40px] font-bold text-center py-5 text-[#3A3A3A]">{t('mainH1')}</h1>
 
       <div className="w-full">
         {loading ? (
@@ -132,12 +134,12 @@ const OurProduct = () => {
                     )}
                     {product.specialTag && product.specialTag.includes("newarrival") && (
                       <div className="absolute sm:top-4 top-2 sm:right-4 right-2 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] bg-[#2EC1AC] flex justify-center items-center text-white sm:text-[12px] text-[9px] font-medium px-2 py-1 rounded-full">
-                        New
+                        {t('newArrivalTag')}
                       </div>
                     )}
                     {product.salePrice && product.price && (
                       <span className="absolute sm:top-4 top-2 sm:right-4 right-2 sm:h-[48px] sm:w-[48px] h-[37px] w-[37px] sm:text-[12px] text-[9px] bg-[#E97171] flex justify-center items-center text-white font-medium px-2 py-1 rounded-full">
-                        Sale -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
+                        {t('saleTag')} -{Math.round(((product.price - product.salePrice) / product.price) * 100)}%
                       </span>
                     )}
                   </div>
@@ -159,12 +161,12 @@ const OurProduct = () => {
                   </div>
                   <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 lg:w-[285px] w-full h-full lg:h-[446px] left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <button onClick={() => handleAddToCart(product)} className="bg-white text-[#C19C49] lg:w-[202px] lg:px-0 px-2 h-[48px]">
-                      Add to Cart
+                      {t('AddToCart')}
                     </button>
                     <div className="flex lg:flex-row flex-col items-center lg:gap-3 md:gap-1 gap-3 text-white text-[16px] font-medium">
-                      <span className="flex items-center gap-1"><IoMdShare /> Share</span>
-                      <span className="flex items-center gap-1"><FaExchangeAlt /> Compare</span>
-                      <span className="flex items-center gap-1"><IoMdHeartEmpty /> Like</span>
+                      <span className="flex items-center gap-1"><IoMdShare />{t('sp1')}</span>
+                      <span className="flex items-center gap-1"><FaExchangeAlt />{t('sp2')}</span>
+                      <span className="flex items-center gap-1"><IoMdHeartEmpty />{t('sp3')}</span>
                     </div>
                   </div>
                 </div>
@@ -177,7 +179,7 @@ const OurProduct = () => {
 
       <div className="flex justify-center">
         <button className="bg-white text-[#B88E2F] border border-[#B88E2F] hover:border-transparent hover:bg-[#B88E2F] hover:text-white duration-300 text-[16px] font-semibold px-[44px] py-[12px]">
-          Show More
+          {t('Show More')}
         </button>
       </div>
     </div>
