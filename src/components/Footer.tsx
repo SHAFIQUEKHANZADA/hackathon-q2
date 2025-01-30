@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 const Footer = () => {
@@ -48,17 +47,12 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-
+                
             </div>
             <div className="flex flex-col md:gap-10 gap-3 mt-20 md:mt-0">
-                <div className="bg-[#000000] opacity-[30%]  h-[1px] w-full" />
+            <div className="bg-[#000000] opacity-[30%]  h-[1px] w-full" />
 
-                <div className="flex items-center justify-between">
-                    <h1>{t("h1-last")}</h1>
-                    <div  >
-                    <LanguageSwitcher />
-                    </div>
-                </div>
+            <h1>{t("h1-last")}</h1>
             </div>
         </div>
 
