@@ -17,6 +17,8 @@ import Link from "next/link";
 import { IoMdHeartEmpty, IoMdShare } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/store/cartSlice";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500"] });
 
@@ -33,13 +35,15 @@ const Latest = () => {
 
   const handleShowMore = () => {
     if (selectedTag) {
-      router.push(`/${selectedTag}`);  
+      router.push(`/${selectedTag}`);
     }
   };
 
   console.log(activeIndex)
 
   const [windowWidth, setWindowWidth] = useState<number>(0);
+
+  const dispatch = useDispatch();
 
   // Handle window resize
   useEffect(() => {
@@ -104,12 +108,31 @@ const Latest = () => {
     { tag: "specialoffer", label: `${t("Special Offer")}` },
   ];
 
+  const handleAddToCart = (product: ProductType) => {
+    if (product) {
+      const imageUrl = product.images?.[0]?.asset?.url ||
+        "/default-image.png";
+
+      console.log("Generated Image URL:", imageUrl);
+
+      const cartItem = {
+        id: product.slug.current,
+        name: product.title,
+        price: product.salePrice || product.price,
+        quantity: 1,
+        image: [imageUrl],
+      };
+
+      dispatch(addToCart(cartItem));
+    }
+  };
+
   return (
     <div className={`${poppins.className} bg-white my-6`}>
       <div className="flex flex-col items-center gap-3 py-7">
         {/* Main Heading */}
         <h1 className="text-[42px] text-center font-bold text-[#3A3A3A]">
-        {t("h1")}
+          {t("h1")}
         </h1>
         {/* Sub Headings */}
         <div className="flex md:text-[18px] text-[14px] items-center md:gap-10 gap-3">
@@ -131,27 +154,27 @@ const Latest = () => {
       {/* Product Grid */}
       <div className="xl:px-16 px-4 pt-12 flex flex-row items-center justify-center relative">
         {loading ? (
-           <div className="flex gap-2 justify-center">
-           {([...Array(itemsToShow)]).map((_, index) => (
-             <div
-               key={index}
-               className="mb-10 lg:w-[22vw] lg:h-[456px] md:h-[36vw] h-[70vw] sm:h-[40vw] flex flex-col bg-white overflow-hidden group relative animate-pulse"
-             >
-               {/* Product Image Loader */}
-               <div className="relative h-[300px] w-full overflow-hidden">
-                 <div className="bg-gray-200 animate-pulse w-full h-full absolute flex justify-center items-center">
-                  <div><Image src={"/images/logo.png"} alt="logo" width={100} height={100} className="sm:w-[60px] w-[50px] h-full"/></div>
-                 </div>
-               </div>
-     
-               {/* Product Details Loader */}
-               <div className="flex flex-col py-2 gap-3">
-                 <div className="bg-gray-200 w-full h-4 animate-pulse"></div>
-                 <div className="bg-gray-200 w-[80%] h-4 animate-pulse"></div>
-               </div>
-             </div>
-           ))}
-         </div>
+          <div className="flex gap-2 justify-center">
+            {([...Array(itemsToShow)]).map((_, index) => (
+              <div
+                key={index}
+                className="mb-10 lg:w-[22vw] lg:h-[456px] md:h-[36vw] h-[70vw] sm:h-[40vw] flex flex-col bg-white overflow-hidden group relative animate-pulse"
+              >
+                {/* Product Image Loader */}
+                <div className="relative h-[300px] w-full overflow-hidden">
+                  <div className="bg-gray-200 animate-pulse w-full h-full absolute flex justify-center items-center">
+                    <div><Image src={"/images/logo.png"} alt="logo" width={100} height={100} className="sm:w-[60px] w-[50px] h-full" /></div>
+                  </div>
+                </div>
+
+                {/* Product Details Loader */}
+                <div className="flex flex-col py-2 gap-3">
+                  <div className="bg-gray-200 w-full h-4 animate-pulse"></div>
+                  <div className="bg-gray-200 w-[80%] h-4 animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <Swiper
             modules={[Navigation, Pagination]}
@@ -212,8 +235,8 @@ const Latest = () => {
                           <>
                             <span className="line-through text-[#B0B0B0] font-light text-[11px] sm:text-[16px]">
                               ${product.price.toFixed(2)}
-                            </span> 
-                             
+                            </span>
+
                             <span className="font-light text-[11px] sm:text-[16px]">${product.salePrice.toFixed(2)}</span>
                           </>
                         ) : (
@@ -224,6 +247,7 @@ const Latest = () => {
 
                     <div className="absolute sm:flex hidden flex-col space-y-4 justify-center items-center bg-black/50 w-full h-full left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <button
+                        onClick={() => handleAddToCart(product)}
                         className="bg-white text-[#C19C49] md:w-[202px] md:px-0 px-[8vw] h-[48px]"
                       >
                         {t("AddToCart")}

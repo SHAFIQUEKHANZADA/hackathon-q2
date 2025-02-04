@@ -55,7 +55,7 @@ export default function LanguageSwitcher() {
               height={25}
               className="rounded-full"
             />
-            <MdKeyboardArrowDown className="text-[24px]"/>
+            <MdKeyboardArrowDown/>
 
           </Button>
         </DropdownMenuTrigger>

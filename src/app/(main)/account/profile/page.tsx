@@ -1,11 +1,14 @@
 "use client";
 
 import axios from "axios";
+import { Poppins } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+
+const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
 type User = {
   username: string;
@@ -43,7 +46,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`${poppins.className} min-h-screen bg-gray-50`}>
       {/* Main Banner */}
       <div className="relative">
         <div className="w-full">

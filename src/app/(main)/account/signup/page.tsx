@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useRouter } from 'next/navigation';
 import { Poppins } from 'next/font/google';
+import PreFooter from '@/components/PreFooter';
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 
@@ -212,6 +213,8 @@ const SignUpPage = () => {
           </p>
         </div>
       </div>
+
+      <PreFooter/>
     </div>
   );
 };

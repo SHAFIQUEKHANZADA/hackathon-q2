@@ -20,7 +20,7 @@ const QuantitySelector = () => {
     };
 
     return (
-        <div className="flex lg:w-[125px] sm:w-[100px] w-[165px] h-[48px] border border-[#9F9F9F] rounded-[10px]">
+        <div className="flex lg:w-[125px] sm:w-[100px] w-[165px] h-[46px] border border-[#9F9F9F] rounded-[10px]">
             {/* Decrease Button */}
             <div
                 className={`grid rounded-[10px] lg:text-[25px] text-[20px] justify-center items-center cursor-pointer 

@@ -81,7 +81,6 @@ const CheckoutPage = () => {
             setIsSubmitting(false);
         }
     };
-
     return (
         <div className={`${poppins.className} flex flex-col gap-10`}>
 
@@ -383,7 +382,7 @@ const CheckoutPage = () => {
                                 className="md:w-[318px] flex justify-center w-full bg-transparent text-black border border-black text-[20px] px-[78px] font-medium py-[16px] rounded-[15px] mt-4"
                                 onClick={() => {
                                     if (validateBillingDetails()) {
-                                        handlePlaceOrder();  
+                                        handlePlaceOrder();
                                     }
                                 }}
                                 disabled={isSubmitting}

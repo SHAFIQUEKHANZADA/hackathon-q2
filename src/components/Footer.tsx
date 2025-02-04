@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400"] });
 const Footer = () => {
@@ -13,6 +14,8 @@ const Footer = () => {
                         <h1 className="text-[24px] font-bold text-black md:mb-10 mb-4">{t('Furniro')}</h1>
                         <p className="text-[16px] text-[#9F9F9F]">{t('para-one')}</p>
                     </div>
+
+                    <div className="md:hidden block"><LanguageSwitcher /> </div>
                     <div className="flex-1 md:pl-2 lg:ml-10">
                         <h1 className="text-[16px] md:mb-10 mb-4 font-semibold text-[#9F9F9F]">{t('Links')}</h1>
                         <ul className="flex flex-col md:gap-10 gap-3 text-black">

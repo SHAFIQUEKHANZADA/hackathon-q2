@@ -1,5 +1,6 @@
 "use client";
 
+import PreFooter from "@/components/PreFooter";
 import axios from "axios";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
@@ -185,6 +186,8 @@ const LogInPage = () => {
           </form>
         </div>
       </div>
+
+      <PreFooter/>
     </div>
   );
 };

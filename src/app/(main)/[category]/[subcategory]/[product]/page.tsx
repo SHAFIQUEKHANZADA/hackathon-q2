@@ -379,7 +379,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                         ) : ("")}
                     </div>
 
-                    <div className='flex lg:flex-row flex-col gap-3 items-end pt-6'>
+                    <div className='flex lg:flex-row flex-col gap-2 items-end pt-6'>
                         <QuantitySelector />
                         {stockStatus === "outOfStock" ? (
                             <div className="space-y-5">
@@ -389,17 +389,17 @@ const ProductPage: React.FC<ProductPageProps> = ({ params }) => {
                             </div>
 
                         ) : (
-                            <div className="flex sm:gap-3 gap-1">
+                            <div className="flex sm:gap-2 gap-1">
                                 <button
                                     onClick={handleAddToCart}
-                                    className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 lg:text-[20px] w-fit">
+                                    className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 lg:text-[18px] w-fit">
                                     Add to Cart
                                 </button>
                                 <ToastContainer />
 
                                 <button
                                     onClick={handleCompareClick}
-                                    className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 flex sm:gap-4 gap-1 text-center justify-center items-center lg:text-[20px] w-fit"
+                                    className="text-black hover:text-white hover:bg-[#E70000] hover:border-transparent duration-200 border border-black rounded-[15px] py-2 px-4 flex sm:gap-4 gap-1 text-center justify-center items-center lg:text-[18px] w-fit"
                                 >
                                     <span>+</span> Compare
                                 </button>
